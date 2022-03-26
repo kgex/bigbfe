@@ -222,7 +222,7 @@ export const UserReports = (props) => {
                         onChange={formik.handleChange}
                         value={formik.values.full_name}
                         multiline
-                        rows={10}
+                        rows={5}
                         variant="outlined"
                         />
             </Box>
