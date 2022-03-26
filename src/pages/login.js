@@ -5,11 +5,9 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Box, Button, Container, Grid, Link, TextField, Typography } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Facebook as FacebookIcon } from '../icons/facebook';
-import { Google as GoogleIcon } from '../icons/google';
-import { ImportExport } from '@mui/icons-material';
 import api from "../utils/api";
 import qs from 'qs';
+import { useEffect } from 'react';
 
 function parseJwt (token) {
   var base64Url = token.split('.')[1];
@@ -23,6 +21,15 @@ function parseJwt (token) {
 
 const Login = () => {
   const router = useRouter();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if (token != null) {
+      router.push('/dashboard');
+    }
+  });
+
   const formik = useFormik({
     initialValues: {
       // full_name : "",
@@ -58,7 +65,7 @@ const Login = () => {
           // console.log(res.data.access_token)
           localStorage.setItem("token", res.data.access_token);
           localStorage.setItem("user", parseJwt(res.data.access_token));
-          router.push('/');
+          router.push('/dashboard');
           
       })
     }

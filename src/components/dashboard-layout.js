@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { DashboardNavbar } from './dashboard-navbar';
 import { DashboardSidebar } from './dashboard-sidebar';
+import { useRouter } from 'next/router';
 
 const DashboardLayoutRoot = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -17,6 +18,22 @@ const DashboardLayoutRoot = styled('div')(({ theme }) => ({
 export const DashboardLayout = (props) => {
   const { children } = props;
   const [isSidebarOpen, setSidebarOpen] = useState(true);
+  const [token, setToken] = useState(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setToken(token);
+    console.log("im here")
+
+    if (token == null) {
+      router.push('/');
+    }
+  });
+
+  if (token == null) {
+    return null;
+  }
 
   return (
     <>
