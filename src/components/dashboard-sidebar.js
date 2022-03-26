@@ -48,14 +48,9 @@ const items = [
     title: 'Settings'
   },
   {
-    href: '/login',
+    href: '/logout',
     icon: (<LockIcon fontSize="small" />),
-    title: 'Login'
-  },
-  {
-    href: '/register',
-    icon: (<UserAddIcon fontSize="small" />),
-    title: 'Register'
+    title: 'Logout'
   },
   {
     href: '/404',
@@ -77,7 +72,10 @@ export const DashboardSidebar = (props) => {
   useEffect(
     () => {
 
-      setUser(JSON.parse(localStorage.getItem('user')));
+      const user = localStorage.getItem('user');
+      if (user != null){
+        setUser(JSON.parse(user));
+      }
       if (!router.isReady) {
         return;
       }
