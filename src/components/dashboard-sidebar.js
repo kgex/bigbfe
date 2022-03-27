@@ -59,6 +59,9 @@ const items = [
   }
 ];
 
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 export const DashboardSidebar = (props) => {
   const { open, onClose } = props;
   const router = useRouter();
@@ -125,20 +128,21 @@ export const DashboardSidebar = (props) => {
                 borderRadius: 1
               }}
             >
-              <div>
+              <Box >
                 <Typography
                   color="inherit"
                   variant="subtitle1"
                 >
-                  {user.full_name}
+                  {capitalizeFirstLetter(user.full_name)}
                 </Typography>
                 <Typography
                   color="neutral.400"
                   variant="body2"
+                  fontSize="10px"
                 >
                   {user.email}
                 </Typography>
-              </div>
+              </Box>
               <SelectorIcon
                 sx={{
                   color: 'neutral.500',

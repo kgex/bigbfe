@@ -19,6 +19,8 @@ import {
   TableRow,
   Typography,
   Collapse,
+  TableContainer,
+  Paper
 } from '@mui/material';
 
 
@@ -31,11 +33,11 @@ function Row(props) {
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
       
       
-        <TableCell align="right">{row.task_type}</TableCell>
-        <TableCell align="right">{row.title}</TableCell>
-        <TableCell align="right">{row.start_time}</TableCell>
-        <TableCell align="right">{row.stop_time}</TableCell>
-        <TableCell>
+        <TableCell align="center">{row.task_type}</TableCell>
+        <TableCell align="center">{row.title}</TableCell>
+        <TableCell align="center">{row.start_time}</TableCell>
+        <TableCell align="center">{row.stop_time}</TableCell>
+        <TableCell align="center">
           <IconButton
             aria-label="expand row"
             size="small"
@@ -46,7 +48,7 @@ function Row(props) {
         </TableCell>
       </TableRow>
 
-      <TableRow>
+      <TableRow> 
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
@@ -118,7 +120,9 @@ export const ReportListResults = ({ reports, ...rest }) => {
   return (
     <Card {...rest}>
       <PerfectScrollbar>
+      <TableContainer component={Paper}>
       <Box sx={{ minWidth: 1050 }}>
+      
           <Table>
             <TableHead>
               <TableRow>
@@ -133,19 +137,19 @@ export const ReportListResults = ({ reports, ...rest }) => {
                     onChange={handleSelectAll}
                   />
                 </TableCell> */}
-                <TableCell>
+                <TableCell align="center">
                   Type
                 </TableCell>
-                <TableCell>
+                <TableCell align="center">
                   Title
                 </TableCell>
-                <TableCell>
+                <TableCell align="center">
                   Start Time
                 </TableCell>
-                <TableCell>
+                <TableCell align="center">
                   Stop Time
                 </TableCell>
-                <TableCell>
+                <TableCell align="center">
                 Description
                 </TableCell>
               </TableRow>
@@ -160,7 +164,9 @@ export const ReportListResults = ({ reports, ...rest }) => {
               
             </TableBody>
           </Table>
+          
         </Box>
+        </TableContainer>
       </PerfectScrollbar>
       <TablePagination
         component="div"

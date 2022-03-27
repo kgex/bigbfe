@@ -34,11 +34,6 @@ export const UserReports = (props) => {
           
         },
         validationSchema: Yup.object({
-            task_type: Yup
-            .string()
-            .max(255)
-            .required(
-              'title is required'),
             title: Yup
             .string()
             .max(255)
@@ -71,10 +66,9 @@ export const UserReports = (props) => {
       });
 
     const task_types = [
-   
         {
           value: 'learning',
-          label: 'Leaning'
+          label: 'Learning'
         },
         {
           value: 'project',
@@ -106,6 +100,8 @@ export const UserReports = (props) => {
               xs={12}
             >
                <TextField
+               defaultValue="learning"
+               
                 error={Boolean(formik.touched.task_type && formik.errors.task_type)}
                 fullWidth
                 helperText={formik.touched.task_type && formik.errors.task_type}
