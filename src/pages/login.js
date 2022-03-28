@@ -3,11 +3,11 @@ import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Box, Button, Container, Grid, Link, TextField, Typography } from '@mui/material';
+import { Box, Button, Container, Grid, Link, TextField, Typography,Dialog,DialogActions,DialogContent,DialogContentText,DialogTitle } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import api from "../utils/api";
 import qs from 'qs';
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
 
 function parseJwt (token) {
   var base64Url = token.split('.')[1];
@@ -20,7 +20,13 @@ function parseJwt (token) {
 };
 
 const Login = () => {
+  const [open,setOpen] = useState(false)
   const router = useRouter();
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -57,20 +63,27 @@ const Login = () => {
     }),
     onSubmit: values => {
       console.log(JSON.stringify(values))
-      api.post(
-        `token/`, qs.stringify(values))
-          .then(res => {
-          console.log(res);
-          console.log(res.data);  
-          // console.log(res.data.access_token)
-          localStorage.setItem("token", res.data.access_token);
-          localStorage.setItem("user", parseJwt(res.data.access_token));
-          router.push('/dashboard');
+        api.post(
+          `token/`, qs.stringify(values))
+            .then(res => {
+            console.log(res);
+            console.log(res.data);  
+            // console.log(res.data.access_token)
+            localStorage.setItem("token", res.data.access_token);
+            localStorage.setItem("user", parseJwt(res.data.access_token));
+            router.push('/dashboard');
+            
+        }).catch((error) =>{
+          setOpen(!open)
+          console.log("dasdasdasdasdasdas",error)
+        }
           
-      })
+        )
+      
+      
     }
   });
-
+  console.log("Hellooooo, Im  the  erooorrrr" , open )
   return (
     <>
 
@@ -154,8 +167,10 @@ const Login = () => {
               value={formik.values.password}
               variant="outlined"
             />
+
             <Box sx={{ py: 2 }}>
               <Button
+               
                 color="primary"
                 disabled={formik.isSubmitting}
                 fullWidth
@@ -166,6 +181,28 @@ const Login = () => {
                 Sign In Now
               </Button>
             </Box>
+            <Dialog
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle id="alert-dialog-title">
+                {"Authentication Failed"}
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                  Enter a valid email or password
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose}>Disagree</Button>
+                <Button onClick={handleClose} autoFocus>
+                  Agree
+                </Button>
+              </DialogActions>
+            </Dialog>
+
             <Typography
               color="textSecondary"
               variant="body2"

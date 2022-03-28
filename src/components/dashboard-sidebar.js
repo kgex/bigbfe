@@ -28,6 +28,11 @@ const items = [
     title: 'Reports'
   },
   {
+    href: '/projects',
+    icon: (<UsersIcon fontSize="small" />),
+    title: 'Projects'
+  },
+  {
     href: '/customers',
     icon: (<UsersIcon fontSize="small" />),
     title: 'Customers'
