@@ -38,8 +38,8 @@ const Login = () => {
 
   const formik = useFormik({
     initialValues: {
-      username: "s@mail.com",
-      password: "123"
+      username: "",
+      password: ""
     },
     validationSchema: Yup.object({
       username: Yup
@@ -58,7 +58,7 @@ const Login = () => {
     onSubmit: values => {
       console.log(JSON.stringify(values))
         api.post(
-          `token/`, qs.stringify(values))
+          `token`, qs.stringify(values))
             .then(res => {
             console.log(res);
             console.log(res.data);  
@@ -71,6 +71,7 @@ const Login = () => {
           setOpen(true)
           console.log("dasdasdasdasdasdas",error)
           console.log("Hellooooo, Im  the  erooorrrr" , open )
+          formik.resetForm();
         }
           
         )
