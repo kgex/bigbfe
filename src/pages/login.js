@@ -38,16 +38,10 @@ const Login = () => {
 
   const formik = useFormik({
     initialValues: {
-      // full_name : "",
-      username: "s@mail.com",
-      password: "123"
+      username: "",
+      password: ""
     },
     validationSchema: Yup.object({
-      // full_name: Yup
-      //   .string()
-      //   .max(255)
-      //   .required(
-      //     'First name is required'),
       username: Yup
         .string()
         .email(
@@ -64,7 +58,7 @@ const Login = () => {
     onSubmit: values => {
       console.log(JSON.stringify(values))
         api.post(
-          `token/`, qs.stringify(values))
+          `token`, qs.stringify(values))
             .then(res => {
             console.log(res);
             console.log(res.data);  
@@ -74,16 +68,16 @@ const Login = () => {
             router.push('/dashboard');
             
         }).catch((error) =>{
-          setOpen(!open)
+          setOpen(true)
           console.log("dasdasdasdasdasdas",error)
+          console.log("Hellooooo, Im  the  erooorrrr" , open )
+          formik.resetForm();
         }
           
         )
       
-      
     }
   });
-  console.log("Hellooooo, Im  the  erooorrrr" , open )
   return (
     <>
 

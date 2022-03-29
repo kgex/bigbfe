@@ -26,7 +26,7 @@ export const UserReports = (props) => {
 
     const formik = useFormik({
         initialValues: {
-          task_type: '',
+          task_type: 'learning',
           title: '',
           start_time : '',
           stop_time : '',
@@ -86,7 +86,7 @@ export const UserReports = (props) => {
           
         <Card>
           <CardHeader
-            title="Profile"
+            title="Report Details"
           />
           <Divider />
           <CardContent>
@@ -134,7 +134,7 @@ export const UserReports = (props) => {
                 error={Boolean(formik.touched.title && formik.errors.title)}
                 fullWidth
                 helperText={formik.touched.title && formik.errors.title}
-                label="title"
+                label="Title"
                 name="title"
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
@@ -213,7 +213,7 @@ export const UserReports = (props) => {
                         helperText={formik.touched.description && formik.errors.description}
                         id="outlined-multiline-static"
                         name="description"
-                        label="description"
+                        label="Description"
                         onBlur={formik.handleBlur}
                         onChange={formik.handleChange}
                         value={formik.values.full_name}

@@ -37,11 +37,6 @@ const Register = () => {
         .max(255)
         .required(
           'First name is required'),
-      // lastName: Yup
-      //   .string()
-      //   .max(255)
-      //   .required(
-      //     'Last name is required'),
       password: Yup
         .string()
         .max(255)
@@ -49,12 +44,14 @@ const Register = () => {
           'Password is required'),
       }),  
     onSubmit: values => {
-      console.log(JSON.stringify(values))
+      console.log(JSON.stringify({...values, role : "student"}))
+
       api.post(
-        `users/`,values)
+        `users/`,{...values, role : "student"})
           .then(res => {
           console.log(res);
           console.log(res.data);  
+          router.push('/login');
       })
     }
   });
