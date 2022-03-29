@@ -19,26 +19,31 @@ import {
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-export const UserReports = (props) => {
+export const UserProjects = (props) => {
 
   const [id, setId] = useState("");
   console.log(id)
 
     const formik = useFormik({
         initialValues: {
-          task_type: '',
-          title: '',
+          name: '',
+          project_status: '',
           start_time : '',
           stop_time : '',
           description: '',
           
         },
         validationSchema: Yup.object({
-            title: Yup
+            name: Yup
             .string()
             .max(255)
             .required(
-              'title is required'),
+              'name is required'),
+            project_status: Yup
+            .string()
+            .max(255)
+            .required(
+              'project status is required'),
             start_time: Yup
             .string()
             .max(255)
@@ -65,20 +70,20 @@ export const UserReports = (props) => {
         }
       });
 
-    const task_types = [
-        {
-          value: 'learning',
-          label: 'Learning'
-        },
-        {
-          value: 'project',
-          label: 'Projects'
-        },
-        {
-          value: 'others',
-          label: 'Others'
-        }
-      ];
+    // const task_types = [
+    //     {
+    //       value: 'learning',
+    //       label: 'Learning'
+    //     },
+    //     {
+    //       value: 'project',
+    //       label: 'Projects'
+    //     },
+    //     {
+    //       value: 'others',
+    //       label: 'Others'
+    //     }
+    //   ];
     // <form onSubmit={formik.handleSubmit}>
     return (
       <form
@@ -86,7 +91,7 @@ export const UserReports = (props) => {
           
         <Card>
           <CardHeader
-            title="Profile"
+            title="Project"
           />
           <Divider />
           <CardContent>
@@ -99,30 +104,17 @@ export const UserReports = (props) => {
               md={6}
               xs={12}
             >
-               <TextField
-               defaultValue="learning"
-               
-                error={Boolean(formik.touched.task_type && formik.errors.task_type)}
+              <TextField
+                error={Boolean(formik.touched.name && formik.errors.name)}
                 fullWidth
-                helperText={formik.touched.task_type && formik.errors.task_type}
-                label="Task type"
-                name="task_type"
+                helperText={formik.touched.name && formik.errors.name}
+                label="name"
+                name="name"
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
-                select
-                SelectProps={{ native: true }}
-                value={formik.values.task_type}
+                value={formik.values.name}
                 variant="outlined"
-              >
-                {task_types.map((option) => (
-                  <option
-                    key={option.value}
-                    value={option.value}
-                  >
-                    {option.label}
-                  </option>
-                ))}
-              </TextField>
+              />
 
             </Grid>
             <Grid
@@ -131,14 +123,14 @@ export const UserReports = (props) => {
               xs={12}
             >
               <TextField
-                error={Boolean(formik.touched.title && formik.errors.title)}
+                error={Boolean(formik.touched.project_status && formik.errors.project_status)}
                 fullWidth
-                helperText={formik.touched.title && formik.errors.title}
-                label="title"
-                name="title"
+                helperText={formik.touched.project_status && formik.errors.project_status}
+                label="project status"
+                name="project_status"
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
-                value={formik.values.title}
+                value={formik.values.project_status}
                 variant="outlined"
               />
                
@@ -216,7 +208,7 @@ export const UserReports = (props) => {
                         label="description"
                         onBlur={formik.handleBlur}
                         onChange={formik.handleChange}
-                        value={formik.values.full_name}
+                        value={formik.values.description}
                         multiline
                         rows={5}
                         variant="outlined"
