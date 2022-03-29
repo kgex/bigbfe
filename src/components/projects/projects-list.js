@@ -24,6 +24,7 @@ import {
 } from '@mui/material';
 
 
+
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
@@ -33,8 +34,8 @@ function Row(props) {
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
       
       
-        <TableCell align="center">{row.task_type}</TableCell>
-        <TableCell align="center">{row.title}</TableCell>
+        <TableCell align="center">{row.name}</TableCell>
+        <TableCell align="center">{row.project_status}</TableCell>
         <TableCell align="center">{row.start_time}</TableCell>
         <TableCell align="center">{row.stop_time}</TableCell>
         <TableCell align="center">
@@ -65,10 +66,10 @@ function Row(props) {
 }
 
 
-export const ReportListResults = ({ reports, ...rest }) => {
+export const ProjectList = ({ projects, ...rest }) => {
   const [open, setOpen] = useState(false);
 
-  reports.map(item =>{
+  projects.map(item =>{
     console.log(item.title)
   })
 
@@ -138,10 +139,10 @@ export const ReportListResults = ({ reports, ...rest }) => {
                   />
                 </TableCell> */}
                 <TableCell align="center">
-                  Type
+                  Project Name
                 </TableCell>
                 <TableCell align="center">
-                  Title
+                  Project Status
                 </TableCell>
                 <TableCell align="center">
                   Start Time
@@ -156,11 +157,11 @@ export const ReportListResults = ({ reports, ...rest }) => {
             </TableHead>
 
             <TableBody>
-              {reports.slice(0, limit).map((item, index) => (     
+              {projects.slice(0, limit).map((item, index) => (     
 
                 <Row key={index} row={item} />
 
-              ))}
+              ))} 
               
             </TableBody>
           </Table>
@@ -170,7 +171,7 @@ export const ReportListResults = ({ reports, ...rest }) => {
       </PerfectScrollbar>
       <TablePagination
         component="div"
-        count={reports.length}
+        count={projects.length}
         onPageChange={handlePageChange}
         onRowsPerPageChange={handleLimitChange}
         page={page}
