@@ -75,7 +75,7 @@ export const DashboardSidebar = (props) => {
     noSsr: false
   });
 
-  const [user, setUser] = useState({'full_name': ' ', 'email': ' '});
+  const [user, setUser] = useState({'full_name': ' ', 'email': ' ', 'role': 'student'});
 
   useEffect(
     () => {

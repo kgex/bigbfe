@@ -38,16 +38,10 @@ const Login = () => {
 
   const formik = useFormik({
     initialValues: {
-      // full_name : "",
       username: "s@mail.com",
       password: "123"
     },
     validationSchema: Yup.object({
-      // full_name: Yup
-      //   .string()
-      //   .max(255)
-      //   .required(
-      //     'First name is required'),
       username: Yup
         .string()
         .email(
@@ -74,16 +68,15 @@ const Login = () => {
             router.push('/dashboard');
             
         }).catch((error) =>{
-          setOpen(!open)
+          setOpen(true)
           console.log("dasdasdasdasdasdas",error)
+          console.log("Hellooooo, Im  the  erooorrrr" , open )
         }
           
         )
       
-      
     }
   });
-  console.log("Hellooooo, Im  the  erooorrrr" , open )
   return (
     <>
 

@@ -11,27 +11,19 @@ import { useEffect } from 'react';
 const Projects = (props) => {
 
   const [userProjects,setUserProjects] = useState([])
-  const [clientId, setClientId] = useState(null);
 
   useEffect (() => {
 
     console.log("Im here")
     
-
-    const client = localStorage.getItem('client');
-    console.log(JSON.parse(client)[0].id)
-    setClientId(JSON.parse(client)[0].id);
-
-    console.log(clientId)
-    if(clientId != null){
       api.get(
           //need to change
-        `clients/${clientId}/projects`)
+        `clients/${1}/projects`)
           .then(res => {
           console.log(res.data);
           setUserProjects(res.data);
       })
-    }
+    
 
 
   }, [])
