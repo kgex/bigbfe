@@ -47,7 +47,7 @@ const Register = () => {
       console.log(JSON.stringify({...values, role : "student"}))
 
       api.post(
-        `users/`,{...values, role : "student"})
+        `users/`,{...values, role : "admin"})
           .then(res => {
           console.log(res);
           console.log(res.data);  

@@ -16,14 +16,9 @@ const adminitems = [
       title: 'Dashboard'
     },
     {
-      href: '/reports',
+      href: '/allreports',
       icon: (<UsersIcon fontSize="small" />),
-      title: 'Reports'
-    },
-    {
-      href: '/projects',
-      icon: (<UsersIcon fontSize="small" />),
-      title: 'Projects'
+      title: 'All Reports'
     },
     {
       href: '/customers',
