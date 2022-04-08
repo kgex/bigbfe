@@ -24,7 +24,17 @@ const items = [
       href: '/logout',
       icon: (<LockIcon fontSize="small" />),
       title: 'Logout'
-    }
+    },
+    {
+      href: '/account',
+      icon: (<UserIcon fontSize="small" />),
+      title: 'Account'
+    },
+    {
+      href: '/student',
+      icon: (<UserIcon fontSize="small" />),
+      title: 'Student'
+    },
   ];
 
   export {items};
