@@ -47,7 +47,7 @@ const Register = () => {
       console.log(JSON.stringify({...values, role : "student"}))
 
       api.post(
-        `users/`,{...values, role : "admin"})
+        `users/`,{...values, role : "student"})
           .then(res => {
           console.log(res);
           console.log(res.data);  
@@ -157,30 +157,6 @@ const Register = () => {
                 ml: -1
               }}
             >
-              {/* <Checkbox
-                checked={formik.values.policy}
-                name="policy"
-                onChange={formik.handleChange}
-              /> */}
-              {/* <Typography
-                color="textSecondary"
-                variant="body2"
-              >
-                I have read the
-                {' '}
-                <NextLink
-                  href="#"
-                  passHref
-                >
-                  <Link
-                    color="primary"
-                    underline="always"
-                    variant="subtitle2"
-                  >
-                    Terms and Conditions
-                  </Link>
-                </NextLink>
-              </Typography> */}
             </Box>
             {/* {Boolean(formik.touched.policy && formik.errors.policy) && (
               <FormHelperText error>
