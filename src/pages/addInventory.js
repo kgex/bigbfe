@@ -6,8 +6,9 @@ import {UserReports} from "../components/reports/user-reports"
 import { DashboardLayout } from '../components/dashboard-layout';
 import React, { useState, useEffect } from 'react';
 import api from '../utils/api';
+import { UserInventory } from 'src/components/inventory/user-inventory';
 
-const Report = () => {
+const addInventory = () => {
   const router = useRouter();
 
   const [userId, setUserId] = useState(null);
@@ -16,21 +17,18 @@ const Report = () => {
     console.log(values)
     console.log(userId)
 
-    api.post(
-      `users/${userId}/report`,values)
-        .then(res => {
-        console.log(res);
-        console.log(res.data);
-        router.push('/reports');  
-    })
+    // api.post(
+    //   `users/${userId}/report`,values)
+    //     .then(res => {
+    //     console.log(res);
+    //     console.log(res.data);
+    //     router.push('/reports');  
+    // })
   }
 
   useEffect (() => {
 
-    console.log("Im here")
 
-    const user = localStorage.getItem('user');
-    setUserId(JSON.parse(user).user_id);
 
 
   }, [])
@@ -39,7 +37,7 @@ const Report = () => {
   <>
     <Head>
       <title>
-        Report | KGXperience
+        Add Inventory | KGXperience
       </title>
     </Head>
     <Box
@@ -54,7 +52,7 @@ const Report = () => {
           sx={{ mb: 3 }}
           variant="h4"
         >
-          Add Report
+          Add Inventory
         </Typography>
         <Grid
           container
@@ -67,19 +65,19 @@ const Report = () => {
             md={6}
             xs={12}
           >
-            <UserReports getData={getData}/>
           </Grid>
         </Grid>
+        <UserInventory/>
       </Container>
     </Box>
   </>
 )
 }
 
-Report.getLayout = (page) => (
+addInventory.getLayout = (page) => (
   <DashboardLayout>
     {page}
   </DashboardLayout>
 );
 
-export default Report;
+export default addInventory;
