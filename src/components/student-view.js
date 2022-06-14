@@ -21,6 +21,11 @@ const items = [
       title: 'Reports'
     },
     {
+      href: '/inventory',
+      icon: (<UsersIcon fontSize="small" />),
+      title: 'Inventory'
+    },
+    {
       href: '/logout',
       icon: (<LockIcon fontSize="small" />),
       title: 'Logout'

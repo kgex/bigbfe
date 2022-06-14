@@ -86,7 +86,7 @@ export const StudentProfileDetails = (props) => {
 
   const formik = useFormik({
     initialValues: {
-      firstName: '',
+      firstName: props.name,
       email: '',
       phone: '',
       dob : "",
@@ -191,7 +191,6 @@ export const StudentProfileDetails = (props) => {
                 error={Boolean(formik.touched.firstName && formik.errors.firstName)}
                 fullWidth
                 helperText={formik.touched.firstName && formik.errors.firstName}
-                helperText="Please specify the first name"
                 label="Full name"
                 name="firstName"
                 onBlur={formik.handleBlur}
@@ -210,7 +209,6 @@ export const StudentProfileDetails = (props) => {
                error={Boolean(formik.touched.email && formik.errors.email)}
                fullWidth
                helperText={formik.touched.email && formik.errors.email}
-                fullWidth
                 label="Email Address"
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}

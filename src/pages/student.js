@@ -12,25 +12,9 @@ const Student = () => {
   const [fullName, setFullname] = useState("");
   const [email,setEmail] = useState("")
 
-  useEffect (() => {
 
-    console.log("Im here")
-
-    const token = localStorage.getItem('token');
-    console.log(token);
-
-    api.get(
-      `users/me/`, {headers: {  
-        'Authorization': `bearer ${token}` 
-      }}).then(res => {
-        console.log(res);
-        console.log(res.data);  
-        setFullname(res.data.full_name);
-        setEmail(res.data.email)
-        console.log("#######", fullName);
-    })
-
-  })
+  const user = JSON.parse(localStorage.getItem('user'));
+  console.log(user)
 
   return (
   <>
@@ -63,7 +47,7 @@ const Student = () => {
             md={6}
             xs={12}
           >
-            <StudentProfile name={fullName} email={email} />
+            <StudentProfile name={user.full_name} email={email} />
           </Grid>
           <Grid
             item
@@ -71,7 +55,7 @@ const Student = () => {
             md={6}
             xs={12}
           >
-            <StudentProfileDetails name={fullName} email={email} />
+            <StudentProfileDetails name={user.full_name} email={email} />
           </Grid>
         </Grid>
         
