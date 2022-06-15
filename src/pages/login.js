@@ -8,6 +8,10 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import api from "../utils/api";
 import qs from 'qs';
 import { useEffect,useState } from 'react';
+import ShowHidePassword from 'src/components/showHidePassword';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+
 
 function parseJwt (token) {
   var base64Url = token.split('.')[1];
@@ -19,7 +23,10 @@ function parseJwt (token) {
   return jsonPayload;
 };
 
+
 const Login = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
   const [open,setOpen] = useState(false)
   const router = useRouter();
 
@@ -42,19 +49,24 @@ const Login = () => {
       password: ""
     },
     validationSchema: Yup.object({
+      
       username: Yup
         .string()
         .email(
           'Must be a valid email')
         .max(255)
         .required(
-          'Email is required'),
+          'Email is required')
+          .matches(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[kgkite]+(?:\.[ac.in]+)*$/, 'Use your college email only!'),
+      
       password: Yup
         .string()
         .max(255)
         .required(
-          'Password is required')
+          'Password is required'),
     }),
+    
+
     onSubmit: values => {
       console.log(JSON.stringify(values))
         api.post(
@@ -62,7 +74,6 @@ const Login = () => {
             .then(res => {
             console.log(res);
             console.log(res.data);  
-            // console.log(res.data.access_token)
             localStorage.setItem("token", res.data.access_token);
             localStorage.setItem("user", parseJwt(res.data.access_token));
             router.push('/dashboard');
@@ -122,19 +133,6 @@ const Login = () => {
               </Typography>
             </Box>
  
-  
-            {/* <TextField
-              error={Boolean(formik.touched.full_name && formik.errors.full_name)}
-              fullWidth
-              helperText={formik.touched.full_name && formik.errors.full_name}
-              label="First Name"
-              margin="normal"
-              name="full_name"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              value={formik.values.full_name}
-              variant="outlined"
-            /> */}
             <TextField
               error={Boolean(formik.touched.username && formik.errors.username)}
               fullWidth
@@ -148,20 +146,29 @@ const Login = () => {
               value={formik.values.username}
               variant="outlined"
             />
-            <TextField
-              error={Boolean(formik.touched.password && formik.errors.password)}
-              fullWidth
-              helperText={formik.touched.password && formik.errors.password}
-              label="Password"
-              margin="normal"
-              name="password"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              type="password"
-              value={formik.values.password}
-              variant="outlined"
-            />
-
+            
+              <TextField
+                fullWidth
+                type={showPassword ? 'text' : 'password'}
+                label="Password"
+                {...formik.getFieldProps('password')}
+                sx={{
+                  // marginBottom: 2,
+                  marginTop: 2
+                }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton edge="end" onClick={() => setShowPassword((prev) => !prev)}>
+                        <ShowHidePassword />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+                error={Boolean(formik.touched.password && formik.errors.password)}
+                helperText={formik.touched.password && formik.errors.password}
+              />
+            
             <Box sx={{ py: 2 }}>
               <Button
                
@@ -182,17 +189,17 @@ const Login = () => {
               aria-describedby="alert-dialog-description"
             >
               <DialogTitle id="alert-dialog-title">
-                {"Authentication Failed"}
+                {"Authentication Failed!"}
               </DialogTitle>
               <DialogContent>
                 <DialogContentText id="alert-dialog-description">
-                  Enter a valid email or password
+                   ⚠ Incorrect Password.
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
-                <Button onClick={handleClose}>Disagree</Button>
+                {/* <Button onClick={handleClose}>Disagree</Button> */}
                 <Button onClick={handleClose} autoFocus>
-                  Agree
+                  OK
                 </Button>
               </DialogActions>
             </Dialog>
@@ -201,7 +208,7 @@ const Login = () => {
               color="textSecondary"
               variant="body2"
             >
-              Don&apos;t have an account?
+              Don't have an account?
               {' '}
               <NextLink
                 href="/register"
