@@ -3,6 +3,7 @@ import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import qs from 'qs';
 import {
   Box,
   Button,
@@ -15,8 +16,18 @@ import {
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import api from '../utils/api';
+import Verify from 'src/components/verify';
+import { useState } from 'react';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';  
+import ShowHidePassword from 'src/components/showHidePassword';
+
 
 const Register = () => {
+
+const [showPassword, setShowPassword] = useState(false);
+
+  const [verify , setVerify] = useState(false)
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
@@ -25,24 +36,31 @@ const Register = () => {
       password: '',
     },
     validationSchema: Yup.object({
+      
       email: Yup
         .string()
         .email(
           'Must be a valid email')
         .max(255)
-        .required(
-          'Email is required'),
-      full_name: Yup
+        .required('Email is required')
+        // .matches(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, 'Must be a valid email'),
+        .matches(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[kgkite]+(?:\.[ac.in]+)*$/, 'Use your college email only!'),
+      
+        full_name: Yup
         .string()
         .max(255)
-        .required(
-          'First name is required'),
-      password: Yup
+        .required('First name is required'),
+      
+        password: Yup
         .string()
         .max(255)
-        .required(
-          'Password is required'),
+        .required('Password is required')
+        .matches(
+          /^(?=.*[A-Za-z0-9])(?=.*\d)(?=.*[-_+=,.@$!%*#?&])[A-Za-z0-9\d-_+=,.@$!%*#?&]{8,}$/,
+          "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+        ),
       }),  
+
     onSubmit: values => {
       console.log(JSON.stringify({...values, role : "student"}))
 
@@ -50,11 +68,26 @@ const Register = () => {
         `users/`,{...values, role : "student"})
           .then(res => {
           console.log(res);
-          console.log(res.data);  
-          router.push('/login');
+          console.log(res.data); 
+          setVerify(true)
       })
     }
   });
+
+
+  const getData = (values) => {
+        //http://bigbbe.herokuapp.com/verify?email=hello%40gmail.com&otp=53
+      console.log(qs.stringify(values))
+        api.post(
+          `verify?${qs.stringify(values)}`,values)
+            .then(res => {
+            console.log(res);
+            console.log(res.data); 
+        })
+      router.push('/login')
+
+  }
+
 
   return (
     <>
@@ -63,6 +96,9 @@ const Register = () => {
           Register | KGXperience
         </title>
       </Head>
+      {
+        verify == false ? 
+
       <Box
         component="main"
         sx={{
@@ -100,6 +136,7 @@ const Register = () => {
                 Use your email to create a new account
               </Typography>
             </Box>
+            
             <TextField
               error={Boolean(formik.touched.full_name && formik.errors.full_name)}
               fullWidth
@@ -112,18 +149,7 @@ const Register = () => {
               value={formik.values.full_name}
               variant="outlined"
             />
-            {/* <TextField
-              error={Boolean(formik.touched.lastName && formik.errors.lastName)}
-              fullWidth
-              helperText={formik.touched.lastName && formik.errors.lastName}
-              label="Last Name"
-              margin="normal"
-              name="lastName"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              value={formik.values.lastName}
-              variant="outlined"
-            /> */}
+            
             <TextField
               error={Boolean(formik.touched.email && formik.errors.email)}
               fullWidth
@@ -137,7 +163,32 @@ const Register = () => {
               value={formik.values.email}
               variant="outlined"
             />
-            <TextField
+
+              <TextField
+                fullWidth
+                // autoComplete="current-password"
+                type={showPassword ? 'text' : 'password'}
+                label="Password"
+                {...formik.getFieldProps('password')}
+                sx={{
+                  // marginBottom: 2,
+                  marginTop: 2
+                }}
+
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton edge="end" onClick={() => setShowPassword((prev) => !prev)}>
+                        <ShowHidePassword />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+                error={Boolean(formik.touched.password && formik.errors.password)}
+                helperText={formik.touched.password && formik.errors.password}
+              />
+
+            {/* <TextField
               error={Boolean(formik.touched.password && formik.errors.password)}
               fullWidth
               helperText={formik.touched.password && formik.errors.password}
@@ -149,7 +200,9 @@ const Register = () => {
               type="password"
               value={formik.values.password}
               variant="outlined"
-            />
+            /> */}
+
+
             <Box
               sx={{
                 alignItems: 'center',
@@ -158,11 +211,7 @@ const Register = () => {
               }}
             >
             </Box>
-            {/* {Boolean(formik.touched.policy && formik.errors.policy) && (
-              <FormHelperText error>
-                {formik.errors.policy}
-              </FormHelperText>
-            )} */}
+            
             <Box sx={{ py: 2 }}>
               <Button
                 color="primary"
@@ -195,7 +244,9 @@ const Register = () => {
             </Typography>
           </form>
         </Container>
-      </Box>
+      </Box> : <Verify getData = {getData}/>
+      }
+      
     </>
   );
 };
