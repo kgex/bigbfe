@@ -15,7 +15,6 @@ const StudentList = (props) => {
   useEffect(() => {
 
     console.log("Im here")
-    console.log(props.nivu)
 
     const token = localStorage.getItem('token');
     console.log(token);

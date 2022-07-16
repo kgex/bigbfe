@@ -10,48 +10,49 @@ import { useEffect } from 'react';
 
 const ReportList = (props) => {
 
-  const [userReports,setUserReports] = useState([])
+  const [userReports, setUserReports] = useState([])
 
-  useEffect (() => {
+  useEffect(() => {
 
     console.log("Im here")
-    console.log(props.nivu)
 
     const token = localStorage.getItem('token');
     console.log(token);
 
     api.get(
-      `users/1/reports`, {headers: {
-        'Authorization': `bearer ${token}` 
-      }})
-        .then(res => {
+      `users/1/reports`, {
+        headers: {
+          'Authorization': `bearer ${token}`
+        }
+    })
+      .then(res => {
         console.log(res.data);
         setUserReports(res.data);
-    })
+      })
 
   }, [])
   return (
-  <>
-    <Head>
-      <title>
-        Customers | KGXperience
-      </title>
-    </Head>
-    <Box
-      component="main"
-      sx={{
-        flexGrow: 1,
-        py: 8
-      }}
-    >
-      <Container maxWidth={false}>
-        <CustomerListToolbar />
-        <Box sx={{ mt: 3 }}>
-          <ReportListResults reports={userReports} />
-        </Box>
-      </Container>
-    </Box>
-  </>
+    <>
+      <Head>
+        <title>
+          Customers | KGXperience
+        </title>
+      </Head>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          py: 8
+        }}
+      >
+        <Container maxWidth={false}>
+          <CustomerListToolbar />
+          <Box sx={{ mt: 3 }}>
+            <ReportListResults reports={userReports} />
+          </Box>
+        </Container>
+      </Box>
+    </>
   );
 }
 

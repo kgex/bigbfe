@@ -3,22 +3,22 @@ import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Box, Button, Container, Grid, Link, TextField, Typography,Dialog,DialogActions,DialogContent,DialogContentText,DialogTitle } from '@mui/material';
+import { Box, Button, Container, Grid, Link, TextField, Typography, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import api from "../utils/api";
 import qs from 'qs';
-import { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 import ShowHidePassword from 'src/components/showHidePassword';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import LoadingButton from '@mui/lab/LoadingButton';
 
 
-function parseJwt (token) {
+function parseJwt(token) {
   var base64Url = token.split('.')[1];
   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-  var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
   }).join(''));
 
   return jsonPayload;
@@ -28,7 +28,7 @@ function parseJwt (token) {
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
-  const [open,setOpen] = useState(false)
+  const [open, setOpen] = useState(false)
   const router = useRouter();
 
   const handleClose = () => {
@@ -50,7 +50,7 @@ const Login = () => {
       password: ""
     },
     validationSchema: Yup.object({
-      
+
       username: Yup
         .string()
         .email(
@@ -58,36 +58,36 @@ const Login = () => {
         .max(50)
         .required(
           'Email is required')
-          .matches(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[kgkite]+(?:\.[ac.in]+)*$/, 'Use your college email only!'),
-      
+        .matches(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[kgkite]+(?:\.[ac.in]+)*$/, 'Use your college email only!'),
+
       password: Yup
         .string()
         .max(16)
         .required(
           'Password is required'),
     }),
-    
+
 
     onSubmit: values => {
       console.log(JSON.stringify(values))
-        api.post(
-          `token`, qs.stringify(values))
-            .then(res => {
-            console.log(res);
-            console.log(res.data);  
-            localStorage.setItem("token", res.data.access_token);
-            localStorage.setItem("user", parseJwt(res.data.access_token));
-            router.push('/dashboard');
-            
-        }).catch((error) =>{
+      api.post(
+        `token`, qs.stringify(values))
+        .then(res => {
+          console.log(res);
+          console.log(res.data);
+          localStorage.setItem("token", res.data.access_token);
+          localStorage.setItem("user", parseJwt(res.data.access_token));
+          router.push('/dashboard');
+
+        }).catch((error) => {
           setOpen(true)
-          console.log("dasdasdasdasdasdas",error)
-          console.log("Hellooooo, Im  the  erooorrrr" , open )
+          console.log("dasdasdasdasdasdas", error)
+          console.log("Hellooooo, Im  the  erooorrrr", open)
           formik.resetForm();
         }
-          
+
         )
-      
+
     }
   });
   return (
@@ -133,7 +133,7 @@ const Login = () => {
                 Sign in on the internal platform
               </Typography>
             </Box>
- 
+
             <TextField
               error={Boolean(formik.touched.username && formik.errors.username)}
               fullWidth
@@ -147,39 +147,40 @@ const Login = () => {
               value={formik.values.username}
               variant="outlined"
             />
-            
-              <TextField
-                fullWidth
-                type={showPassword ? 'text' : 'password'}
-                label="Password"
-                {...formik.getFieldProps('password')}
-                sx={{
-                  // marginBottom: 2,
-                  marginTop: 2
-                }}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton edge="end" onClick={() => setShowPassword((prev) => !prev)}>
-                        <ShowHidePassword />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-                error={Boolean(formik.touched.password && formik.errors.password)}
-                helperText={formik.touched.password && formik.errors.password}
-              />
-            
+
+            <TextField
+              fullWidth
+              type={showPassword ? 'text' : 'password'}
+              label="Password"
+              {...formik.getFieldProps('password')}
+              sx={{
+                // marginBottom: 2,
+                marginTop: 2
+              }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton edge="end"
+                      onClick={() => setShowPassword((prev) => !prev)}>
+                      <ShowHidePassword />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              error={Boolean(formik.touched.password && formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
+            />
+
             <Box sx={{ py: 2 }}>
               <LoadingButton
-               
+
                 color="primary"
                 // disabled={formik.isSubmitting}
                 fullWidth
                 size="large"
                 type="submit"
                 variant="contained"
-                loading = {formik.isSubmitting}
+                loading={formik.isSubmitting}
                 loadingPosition="center"
               >
                 Sign In Now
@@ -196,12 +197,13 @@ const Login = () => {
               </DialogTitle>
               <DialogContent>
                 <DialogContentText id="alert-dialog-description">
-                   ⚠ Incorrect Password.
+                  ⚠ Incorrect Password.
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
                 {/* <Button onClick={handleClose}>Disagree</Button> */}
-                <Button onClick={handleClose} autoFocus>
+                <Button onClick={handleClose}
+                  autoFocus>
                   OK
                 </Button>
               </DialogActions>
@@ -215,8 +217,8 @@ const Login = () => {
                 paddingTop: .5
               }}
             >
-              Don't have an account?
-              {' '}
+              {"Don't have an account?"}
+
               <NextLink
                 href="/register"
               >
@@ -235,14 +237,14 @@ const Login = () => {
 
             <Typography
               color="textSecondary"
-              variant="body2"center
+              variant="body2" center
               align='center'
               sx={{
                 paddingTop: .5
               }}
             >
               {/* Don't have an account?
-              {' '} */} 
+              {' '} */}
               <NextLink
                 href="/register"
               >

@@ -10,9 +10,9 @@ import React, { useState } from 'react';
 const Account = () => {
 
   const [fullName, setFullname] = useState("");
-  const [email,setEmail] = useState("")
+  const [email, setEmail] = useState("")
 
-  useEffect (() => {
+  useEffect(() => {
 
     console.log("Im here")
 
@@ -20,65 +20,69 @@ const Account = () => {
     console.log(token);
 
     api.get(
-      `users/me/`, {headers: {
-        'Authorization': `bearer ${token}` 
-      }}).then(res => {
-        console.log(res);
-        console.log(res.data);  
-        setFullname(res.data.full_name);
-        setEmail(res.data.email)
-        console.log("#######", fullName);
+      `users/me/`, {
+        headers: {
+          'Authorization': `bearer ${token}`
+        }
+    }).then(res => {
+      console.log(res);
+      console.log(res.data);
+      setFullname(res.data.full_name);
+      setEmail(res.data.email)
+      console.log("#######", fullName);
     })
 
   })
 
   return (
-  <>
-    <Head>
-      <title>
-        Account | KGXperience
-      </title>
-    </Head>
-    <Box
-      component="main"
-      sx={{
-        flexGrow: 1,
-        py: 8
-      }}
-    >
-      <Container maxWidth="lg">
-        <Typography
-          sx={{ mb: 3 }}
-          variant="h4"
-        >
-          Account
-        </Typography>
-        <Grid
-          container
-          spacing={3}
-        >
-          <Grid
-            item
-            lg={4}
-            md={6}
-            xs={12}
+    <>
+      <Head>
+        <title>
+          Account | KGXperience
+        </title>
+      </Head>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          py: 8
+        }}
+      >
+        <Container maxWidth="lg">
+          <Typography
+            sx={{ mb: 3 }}
+            variant="h4"
           >
-            <AccountProfile name={fullName} email={email} />
-          </Grid>
+            Account
+          </Typography>
           <Grid
-            item
-            lg={8}
-            md={6}
-            xs={12}
+            container
+            spacing={3}
           >
-            <AccountProfileDetails name={fullName} email={email} />
+            <Grid
+              item
+              lg={4}
+              md={6}
+              xs={12}
+            >
+              <AccountProfile name={fullName}
+                email={email} />
+            </Grid>
+            <Grid
+              item
+              lg={8}
+              md={6}
+              xs={12}
+            >
+              <AccountProfileDetails name={fullName}
+                email={email} />
+            </Grid>
           </Grid>
-        </Grid>
-        
-      </Container>
-    </Box>
-  </>
-)
+
+        </Container>
+      </Box>
+    </>
+  )
 }
 
 Account.getLayout = (page) => (
