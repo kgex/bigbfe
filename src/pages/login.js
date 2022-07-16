@@ -55,14 +55,14 @@ const Login = () => {
         .string()
         .email(
           'Must be a valid email')
-        .max(255)
+        .max(50)
         .required(
           'Email is required')
           .matches(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[kgkite]+(?:\.[ac.in]+)*$/, 'Use your college email only!'),
       
       password: Yup
         .string()
-        .max(255)
+        .max(16)
         .required(
           'Password is required'),
     }),

@@ -57,8 +57,6 @@ const Verify = () => {
         console.log(res.data);
         router.push('/dashboard');
       })
-    // router.push('/verify')
-
   }
 
   return (
