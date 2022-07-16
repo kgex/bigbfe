@@ -11,8 +11,6 @@ const Inventory = (props) => {
 
   useEffect (() => {
 
-    
-
 
   }, [])
 
