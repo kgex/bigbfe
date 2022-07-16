@@ -6,12 +6,11 @@ import * as Yup from 'yup';
 import {
   Box,
   Button,
-  Checkbox,
   Container,
-  FormHelperText,
   Link,
   TextField,
-  Typography
+  Typography,
+  LoadingButton
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import api from '../utils/api';
@@ -54,7 +53,7 @@ const Verify = (props) => {
       </Head>
       <Box
         component="main"
-        sx={{
+          x={{
           alignItems: 'center',
           display: 'flex',
           flexGrow: 1,
@@ -127,16 +126,18 @@ const Verify = (props) => {
             </Box>
             
             <Box sx={{ py: 2 }}>
-              <Button
+              <LoadingButton
                 color="primary"
-                disabled={formik.isSubmitting}
+                // disabled={formik.isSubmitting}
                 fullWidth
                 size="large"
                 type="submit"
                 variant="contained"
+                loading = {formik.isSubmitting}
+                loadingPosition="center"
               >
                 Submit
-              </Button>
+              </LoadingButton>
             </Box>
             <Typography
               color="textSecondary"

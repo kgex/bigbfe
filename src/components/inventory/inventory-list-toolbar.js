@@ -35,7 +35,7 @@ export const InventoryListToolbar = (props) => {
         sx={{ m: 1 }}
         variant="h4"
       >
-        Inventorys
+        Inventories
       </Typography>
       <Box sx={{ m: 1 }}>
         <Button

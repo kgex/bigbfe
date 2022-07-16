@@ -22,11 +22,13 @@ import * as Yup from 'yup';
 export const UserProjects = (props) => {
 
   const [id, setId] = useState("");
+  // const [error, setError] = React.useState(false);
   console.log(id)
 
     const formik = useFormik({
         initialValues: {
           name: '',
+          domain_name: '',
           project_status: '',
           start_time : '',
           stop_time : '',
@@ -38,12 +40,12 @@ export const UserProjects = (props) => {
             .string()
             .max(255)
             .required(
-              'name is required'),
+              'Name is required'),
             project_status: Yup
             .string()
             .max(255)
             .required(
-              'project status is required'),
+              'Project Status is required'),
             start_time: Yup
             .string()
             .max(255)
@@ -58,7 +60,7 @@ export const UserProjects = (props) => {
             .string()
             .max(500)
             .required(
-              'description is required'),
+              'Description is required'),
           }),  
 
 
@@ -70,20 +72,28 @@ export const UserProjects = (props) => {
         }
       });
 
-    // const task_types = [
-    //     {
-    //       value: 'learning',
-    //       label: 'Learning'
-    //     },
-    //     {
-    //       value: 'project',
-    //       label: 'Projects'
-    //     },
-    //     {
-    //       value: 'others',
-    //       label: 'Others'
-    //     }
-    //   ];
+    const domain_name = [
+      // {
+      //   value: 'select',
+      //   label: 'Select Your Domain'
+      // },
+      {
+        value: 'android',
+        label: 'Android Development'
+      },
+      {
+        value: 'ai',
+        label: 'Artificial Intelligence'
+      },
+      {
+        value: 'webdevelopment',
+        label: 'Web Development'
+      },
+      {
+        value: 'iot',
+        label: 'IoT'
+      }
+      ];
     // <form onSubmit={formik.handleSubmit}>
     return (
       <form
@@ -108,7 +118,7 @@ export const UserProjects = (props) => {
                 error={Boolean(formik.touched.name && formik.errors.name)}
                 fullWidth
                 helperText={formik.touched.name && formik.errors.name}
-                label="name"
+                label="Name"
                 name="name"
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
@@ -117,6 +127,39 @@ export const UserProjects = (props) => {
               />
 
             </Grid>
+
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+               <TextField
+               defaultValue="Select Your Domain"
+               
+                error={Boolean(formik.touched.domain_name && formik.errors.domain_name)}
+                fullWidth
+                helperText={formik.touched.domain_name && formik.errors.domain_name}
+                label="Pick your Domain"
+                name="domain_name"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                select
+                SelectProps={{ native: true }}
+                value={formik.values.domain_name}
+                variant="outlined"
+              >
+                {domain_name.map((option) => (
+                  <option
+                    key={option.value}
+                    value={option.value}
+                  >
+                    {option.label}
+                  </option>
+                ))}
+              </TextField>
+
+            </Grid>
+
             <Grid
               item
               md={6}
@@ -126,7 +169,7 @@ export const UserProjects = (props) => {
                 error={Boolean(formik.touched.project_status && formik.errors.project_status)}
                 fullWidth
                 helperText={formik.touched.project_status && formik.errors.project_status}
-                label="project status"
+                label="Project Status"
                 name="project_status"
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
@@ -151,7 +194,7 @@ export const UserProjects = (props) => {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}        
                     type="datetime-local"
-                    label="Start time"
+                    label="Start Time"
                     sx={{ width: "100%" }}
                     InputLabelProps={{
                       shrink: true,
@@ -175,7 +218,7 @@ export const UserProjects = (props) => {
                   onChange={formik.handleChange}
                   name="stop_time"
                   type="datetime-local"
-                  label="Stop time"
+                  label="End Time"
                   sx={{ width: "100%" }}
                   InputLabelProps={{
                     shrink: true,
@@ -205,7 +248,7 @@ export const UserProjects = (props) => {
                         helperText={formik.touched.description && formik.errors.description}
                         id="outlined-multiline-static"
                         name="description"
-                        label="description"
+                        label="Description"
                         onBlur={formik.handleBlur}
                         onChange={formik.handleChange}
                         value={formik.values.description}
@@ -234,7 +277,7 @@ export const UserProjects = (props) => {
                type="submit"
                variant="contained"
             >
-              Save details
+              Save Details
             </Button>
           </Box>
         </Card>

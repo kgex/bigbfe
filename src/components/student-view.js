@@ -26,6 +26,11 @@ const items = [
       title: 'Inventory'
     },
     {
+      href: '/projects',
+      icon: (<UserIcon fontSize="small" />),
+      title: 'Projects'
+    },
+    {
       href: '/logout',
       icon: (<LockIcon fontSize="small" />),
       title: 'Logout'
@@ -39,7 +44,7 @@ const items = [
       href: '/student',
       icon: (<UserIcon fontSize="small" />),
       title: 'Student'
-    },
+    }
   ];
 
   export {items};

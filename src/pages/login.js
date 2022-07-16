@@ -11,6 +11,7 @@ import { useEffect,useState } from 'react';
 import ShowHidePassword from 'src/components/showHidePassword';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
+import LoadingButton from '@mui/lab/LoadingButton';
 
 
 function parseJwt (token) {
@@ -170,17 +171,19 @@ const Login = () => {
               />
             
             <Box sx={{ py: 2 }}>
-              <Button
+              <LoadingButton
                
                 color="primary"
-                disabled={formik.isSubmitting}
+                // disabled={formik.isSubmitting}
                 fullWidth
                 size="large"
                 type="submit"
                 variant="contained"
+                loading = {formik.isSubmitting}
+                loadingPosition="center"
               >
                 Sign In Now
-              </Button>
+              </LoadingButton>
             </Box>
             <Dialog
               open={open}
@@ -207,6 +210,10 @@ const Login = () => {
             <Typography
               color="textSecondary"
               variant="body2"
+              align='center'
+              sx={{
+                paddingTop: .5
+              }}
             >
               Don't have an account?
               {' '}
@@ -225,6 +232,33 @@ const Login = () => {
                 </Link>
               </NextLink>
             </Typography>
+
+            <Typography
+              color="textSecondary"
+              variant="body2"center
+              align='center'
+              sx={{
+                paddingTop: .5
+              }}
+            >
+              {/* Don't have an account?
+              {' '} */} 
+              <NextLink
+                href="/register"
+              >
+                <Link
+                  to="/register"
+                  variant="subtitle2"
+                  underline="hover"
+                  sx={{
+                    cursor: 'pointer'
+                  }}
+                >
+                  Forgot Password?
+                </Link>
+              </NextLink>
+            </Typography>
+
           </form>
         </Container>
       </Box>

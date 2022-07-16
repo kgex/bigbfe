@@ -33,7 +33,7 @@ const Projects = (props) => {
   <>
     <Head>
       <title>
-        Reports | KGXperience
+        Projects | KGXperience
       </title>
     </Head>
     <Box
