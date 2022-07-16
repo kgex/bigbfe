@@ -62,6 +62,7 @@ export const UserReports = (props) => {
           console.log(values)
           props.getData(values);
           
+          
         }
       });
 
@@ -79,7 +80,6 @@ export const UserReports = (props) => {
           label: 'Others'
         }
       ];
-    // <form onSubmit={formik.handleSubmit}>
     return (
       <form
         onSubmit={formik.handleSubmit}>
