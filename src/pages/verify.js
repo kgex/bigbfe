@@ -4,35 +4,27 @@ import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import qs from 'qs';
 import {
   Box,
   Button,
-  Checkbox,
   Container,
-  FormHelperText,
   Link,
   TextField,
-  Typography
+  Typography,
+  LoadingButton
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import api from '../utils/api';
-import InputAdornment from '@mui/material/InputAdornment';
-import IconButton from '@mui/material/IconButton';
-import ShowHidePassword from 'src/components/showHidePassword';
-import LoadingButton from '@mui/lab/LoadingButton';
 
 const Register = () => {
 
-  const [showPassword, setShowPassword] = useState(false);
-
   const router = useRouter();
+
   const formik = useFormik({
     initialValues: {
       email: '',
       otp: '',
-    },  
-
+    },
     validationSchema: Yup.object({
       email: Yup
         .string()
@@ -46,6 +38,15 @@ const Register = () => {
         .max(16)
         .required(
           'Otp is required'),
+        .required('Email is required')
+        // .matches(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, 'Must be a valid email'),
+        .matches(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[kgkite]+(?:\.[ac.in]+)*$/, 'Use your college email only!'),
+
+      otp: Yup
+        .string()
+        .max(16)
+        .required('Otp is required'),
+    }),
 
     }),
     onSubmit: values => {
@@ -57,11 +58,11 @@ const Register = () => {
         console.log(res.data);
         router.push('/login');
       })
-      
+      getData(values)
     }
   });
 
-
+  
   return (
     <>
       <Head>
@@ -145,8 +146,8 @@ const Register = () => {
               }}
             >
             </Box>
-
-            <Box sx={{ py: 2 }}>
+            
+             <Box sx={{ py: 2 }}>
             <LoadingButton
                   color="primary"
                   // disabled={formik.isSubmitting}
@@ -166,7 +167,6 @@ const Register = () => {
               variant="body2"
             >
               Have an account?
-              {' '}
               <NextLink
                 href="/login"
                 passHref
@@ -186,6 +186,6 @@ const Register = () => {
 
     </>
   );
-};
+            };
 
 export default Register;
