@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {IconButton} from "@mui/material";
+import { IconButton } from "@mui/material";
 import React from "react";
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import PropTypes from 'prop-types';
@@ -28,12 +28,12 @@ function Row(props) {
 
   return (
     <React.Fragment>
-       
-    
+
+
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-      
-      
-        <TableCell align="center">{row.task_type}</TableCell>
+
+
+        <TableCell align="center">{row.full_name}</TableCell>
         <TableCell align="center">{row.title}</TableCell>
         <TableCell align="center">{row.start_time}</TableCell>
         <TableCell align="center">{row.stop_time}</TableCell>
@@ -48,28 +48,28 @@ function Row(props) {
         </TableCell>
       </TableRow>
 
-      <TableRow> 
+      <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6" gutterBottom component="div">
-              {row.description}
+                {row.description}
               </Typography>
-           
+
             </Box>
           </Collapse>
         </TableCell>
       </TableRow>
-   
+
     </React.Fragment>
   );
 }
 
 
-export const ReportListResults = ({ reports, ...rest }) => {
+export const StudentListResults = ({ students, ...rest }) => {
   const [open, setOpen] = useState(false);
 
-  reports.map(item =>{
+  students.map(item => {
     console.log(item.title)
   })
 
@@ -117,24 +117,24 @@ export const ReportListResults = ({ reports, ...rest }) => {
     setPage(newPage);
   };
 
-  
+
   return (
-    <Card {...rest} 
+    <Card {...rest}
       style={
         {
-          overflowX:"auto"
+          overflowX: "auto"
         }
 
       }
     >
       <PerfectScrollbar>
-      <Paper className={reports.root}>
-      <Box sx={{ minWidth: 1050 }}>
-      
-          <Table>
-            <TableHead>
-              <TableRow>
-                {/* <TableCell padding="checkbox">
+        <Paper className={students.root}>
+          <Box sx={{ minWidth: 1050 }}>
+
+            <Table>
+              <TableHead>
+                <TableRow>
+                  {/* <TableCell padding="checkbox">
                   <Checkbox
                     checked={selectedCustomerIds.length === customers.length}
                     color="primary"
@@ -145,50 +145,50 @@ export const ReportListResults = ({ reports, ...rest }) => {
                     onChange={handleSelectAll}
                   />
                 </TableCell> */}
-                <TableCell align="center">
-                  Type
-                </TableCell>
-                <TableCell align="center">
-                  Title
-                </TableCell>
-                <TableCell align="center">
-                  Start Time
-                </TableCell>
-                <TableCell align="center">
-                  Stop Time
-                </TableCell>
-                <TableCell align="center">
-                Description
-                </TableCell>
-              </TableRow>
-            </TableHead>
+                  <TableCell align="center">
+                    Type
+                  </TableCell>
+                  <TableCell align="center">
+                    Title
+                  </TableCell>
+                  <TableCell align="center">
+                    Start Time
+                  </TableCell>
+                  <TableCell align="center">
+                    Stop Time
+                  </TableCell>
+                  <TableCell align="center">
+                    Description
+                  </TableCell>
+                </TableRow>
+              </TableHead>
 
-            <TableBody>
-              {reports.slice(0, limit).map((item, index) => (     
+              <TableBody>
+                {students.slice(0, limit).map((item, index) => (
 
-                <Row key={index} row={item} />
+                  <Row key={index} row={item} />
 
-              ))}
-              
-            </TableBody>
-          </Table>
-           
-      <TablePagination
-        style={{
-         
-        }}
-        component="div"
-        count={reports.length}
-        onPageChange={handlePageChange}
-        onRowsPerPageChange={handleLimitChange}
-        page={page}
-        rowsPerPage={limit}
-        rowsPerPageOptions={[5, 10, 25]}
-      />
-        </Box>
+                ))}
+
+              </TableBody>
+            </Table>
+
+            <TablePagination
+              style={{
+
+              }}
+              component="div"
+              count={students.length}
+              onPageChange={handlePageChange}
+              onRowsPerPageChange={handleLimitChange}
+              page={page}
+              rowsPerPage={limit}
+              rowsPerPageOptions={[5, 10, 25]}
+            />
+          </Box>
         </Paper>
-    
-       </PerfectScrollbar>
+
+      </PerfectScrollbar>
     </Card>
   );
 };

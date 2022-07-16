@@ -21,9 +21,29 @@ const items = [
       title: 'Reports'
     },
     {
+      href: '/inventory',
+      icon: (<UsersIcon fontSize="small" />),
+      title: 'Inventory'
+    },
+    {
+      href: '/projects',
+      icon: (<UserIcon fontSize="small" />),
+      title: 'Projects'
+    },
+    {
       href: '/logout',
       icon: (<LockIcon fontSize="small" />),
       title: 'Logout'
+    },
+    {
+      href: '/account',
+      icon: (<UserIcon fontSize="small" />),
+      title: 'Account'
+    },
+    {
+      href: '/student',
+      icon: (<UserIcon fontSize="small" />),
+      title: 'Student'
     }
   ];
 

@@ -1,29 +1,26 @@
 import {
-    Box,
-    Button,
-    Card,
-    CardContent,
-    TextField,
-    InputAdornment,
-    SvgIcon, Typography
-  } from '@mui/material';
-  import { Search as SearchIcon } from '../../icons/search';
-  import { Upload as UploadIcon } from '../../icons/upload';
-  import { Download as DownloadIcon } from '../../icons/download';
-  import AddIcon from '@mui/icons-material/Add';
-  import DeleteIcon from '@mui/icons-material/Delete';
-  import EditIcon from '@mui/icons-material/Edit';
-  import router from 'next/router';
-  
-  export const ProjectListToolbar = (props) => {
-  
-    function onClickHandle(e) {
-      router.push('/project');
-      console.log('You clicked');
-    }
-  
-  
-    return (
+  Box,
+  Button,
+  Card,
+  CardContent,
+  TextField,
+  InputAdornment,
+  SvgIcon, Typography
+} from '@mui/material';
+import { Search as SearchIcon } from '../../icons/search';
+import { Upload as UploadIcon } from '../../icons/upload';
+import { Download as DownloadIcon } from '../../icons/download';
+import router from 'next/router';
+
+export const StudentListToolbar = (props) => {
+
+  function onClickHandle(e) {
+    router.push('/student');
+    console.log('You clicked');
+  }
+
+
+  return (
     <Box {...props}>
       <Box
         sx={{
@@ -38,39 +35,32 @@ import {
           sx={{ m: 1 }}
           variant="h4"
         >
-          Projects
+          Students
         </Typography>
         <Box sx={{ m: 1 }}>
           <Button
-            // color="primary"
-            // variant="contained"
-            // onClick={onClickHandle}
-            startIcon={(<EditIcon fontSize="small" />)}
+            startIcon={(<UploadIcon fontSize="small" />)}
             sx={{ mr: 1 }}
           >
-           Edit
+            Import
           </Button>
           <Button
-            // color="primary"
-            // variant="outlined"
-            onClick={onClickHandle}
-            startIcon={(<DeleteIcon fontSize="small" />)}
+            startIcon={(<DownloadIcon fontSize="small" />)}
             sx={{ mr: 1 }}
           >
-            Delete
+            Export
           </Button>
-  
-  
+
+
           <Button
             color="primary"
             variant="contained"
             onClick={onClickHandle}
-            startIcon={(<AddIcon fontSize='small' />)}
           >
-            Add Project
+            Add Students
           </Button>
-  
-  
+
+
         </Box>
       </Box>
       <Box sx={{ mt: 3 }}>
@@ -91,7 +81,7 @@ import {
                     </InputAdornment>
                   )
                 }}
-                placeholder="Search report"
+                placeholder="Search student"
                 variant="outlined"
               />
             </Box>
@@ -100,5 +90,4 @@ import {
       </Box>
     </Box>
   );
-              }
-  
+}

@@ -66,7 +66,7 @@ function Row(props) {
 }
 
 
-export const ReportListResults = ({ reports, ...rest }) => {
+export const AllReportList = ({ reports, ...rest }) => {
   const [open, setOpen] = useState(false);
 
   reports.map(item =>{

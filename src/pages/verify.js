@@ -2,6 +2,7 @@ import Head from 'next/head';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
+import { useState } from 'react';
 import * as Yup from 'yup';
 import qs from 'qs';
 import {
@@ -21,7 +22,7 @@ import IconButton from '@mui/material/IconButton';
 import ShowHidePassword from 'src/components/showHidePassword';
 import LoadingButton from '@mui/lab/LoadingButton';
 
-const Register = () => {
+const Verify = () => {
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -75,7 +76,7 @@ const Register = () => {
     <>
       <Head>
         <title>
-          Register | KGXperience
+          Verify | KGXperience
         </title>
       </Head>
 
@@ -222,4 +223,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Verify;

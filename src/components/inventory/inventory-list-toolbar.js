@@ -10,16 +10,12 @@ import {
 import { Search as SearchIcon } from '../../icons/search';
 import { Upload as UploadIcon } from '../../icons/upload';
 import { Download as DownloadIcon } from '../../icons/download';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AddIcon from '@mui/icons-material/Add';
 import router from 'next/router';
 
-
-export const ReportListToolbar = (props) => {
+export const InventoryListToolbar = (props) => {
 
   function onClickHandle(e) {
-    router.push('/report');
+    router.push('/addInventory');
     console.log('You clicked');
   }
 
@@ -39,10 +35,10 @@ export const ReportListToolbar = (props) => {
         sx={{ m: 1 }}
         variant="h4"
       >
-        Reports
+        Inventories
       </Typography>
       <Box sx={{ m: 1 }}>
-        {/* <Button
+        <Button
           startIcon={(<UploadIcon fontSize="small" />)}
           sx={{ mr: 1 }}
         >
@@ -53,35 +49,15 @@ export const ReportListToolbar = (props) => {
           sx={{ mr: 1 }}
         >
           Export
-        </Button> */}
-
-        <Button
-          // color="primary"
-          // variant="contained"
-          onClick={onClickHandle}
-          startIcon={(<EditIcon fontSize='small' />)}
-          sx={{ mr: 1 }}
-        >
-          Edit
         </Button>
 
-        <Button
-          // color="primary"
-          // variant="outlined"
-          onClick={onClickHandle}
-          startIcon={(<DeleteIcon fontSize='small' />)}
-          sx={{ mr: 1 }}  
-        >
-          Delete
-        </Button>
 
         <Button
           color="primary"
           variant="contained"
           onClick={onClickHandle}
-          startIcon={(<AddIcon fontSize="small" />)}
         >
-          Add Reports
+          Add Inventory
         </Button>
 
 

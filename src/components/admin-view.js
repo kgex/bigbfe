@@ -16,15 +16,11 @@ const adminitems = [
       title: 'Dashboard'
     },
     {
-      href: '/reports',
+      href: '/allreports',
       icon: (<UsersIcon fontSize="small" />),
-      title: 'Reports'
+      title: 'All Reports'
     },
-    {
-      href: '/projects',
-      icon: (<UsersIcon fontSize="small" />),
-      title: 'Projects'
-    },
+ 
     {
       href: '/customers',
       icon: (<UsersIcon fontSize="small" />),
@@ -54,7 +50,7 @@ const adminitems = [
       href: '/404',
       icon: (<XCircleIcon fontSize="small" />),
       title: 'Error'
-    }
+    },
   ];
 
   export {adminitems};

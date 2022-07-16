@@ -33,10 +33,10 @@ function Row(props) {
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
       
       
-        <TableCell align="center">{row.task_type}</TableCell>
-        <TableCell align="center">{row.title}</TableCell>
-        <TableCell align="center">{row.start_time}</TableCell>
-        <TableCell align="center">{row.stop_time}</TableCell>
+        <TableCell align="center">{}</TableCell>
+        <TableCell align="center">{}</TableCell>
+        <TableCell align="center">{}</TableCell>
+        <TableCell align="center">{}</TableCell>
         <TableCell align="center">
           <IconButton
             aria-label="expand row"
@@ -66,48 +66,14 @@ function Row(props) {
 }
 
 
-export const ReportListResults = ({ reports, ...rest }) => {
+export const InventoryListResults = () => {
   const [open, setOpen] = useState(false);
-
-  reports.map(item =>{
-    console.log(item.title)
-  })
 
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
 
-  // const handleSelectAll = (event) => {
-  //   let newSelectedCustomerIds;
 
-  //   if (event.target.checked) {
-  //     newSelectedCustomerIds = customers.map((customer) => customer.id);
-  //   } else {
-  //     newSelectedCustomerIds = [];
-  //   }
-
-  //   setSelectedCustomerIds(newSelectedCustomerIds);
-  // };
-
-  // const handleSelectOne = (event, id) => {
-  //   const selectedIndex = selectedCustomerIds.indexOf(id);
-  //   let newSelectedCustomerIds = [];
-
-  //   if (selectedIndex === -1) {
-  //     newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds, id);
-  //   } else if (selectedIndex === 0) {
-  //     newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds.slice(1));
-  //   } else if (selectedIndex === selectedCustomerIds.length - 1) {
-  //     newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds.slice(0, -1));
-  //   } else if (selectedIndex > 0) {
-  //     newSelectedCustomerIds = newSelectedCustomerIds.concat(
-  //       selectedCustomerIds.slice(0, selectedIndex),
-  //       selectedCustomerIds.slice(selectedIndex + 1)
-  //     );
-  //   }
-
-  //   setSelectedCustomerIds(newSelectedCustomerIds);
-  // };
 
   const handleLimitChange = (event) => {
     setLimit(event.target.value);
@@ -119,7 +85,7 @@ export const ReportListResults = ({ reports, ...rest }) => {
 
   
   return (
-    <Card {...rest} 
+    <Card  
       style={
         {
           overflowX:"auto"
@@ -128,23 +94,12 @@ export const ReportListResults = ({ reports, ...rest }) => {
       }
     >
       <PerfectScrollbar>
-      <Paper className={reports.root}>
+      <Paper>
       <Box sx={{ minWidth: 1050 }}>
       
           <Table>
             <TableHead>
               <TableRow>
-                {/* <TableCell padding="checkbox">
-                  <Checkbox
-                    checked={selectedCustomerIds.length === customers.length}
-                    color="primary"
-                    indeterminate={
-                      selectedCustomerIds.length > 0
-                      && selectedCustomerIds.length < customers.length
-                    }
-                    onChange={handleSelectAll}
-                  />
-                </TableCell> */}
                 <TableCell align="center">
                   Type
                 </TableCell>
@@ -164,11 +119,11 @@ export const ReportListResults = ({ reports, ...rest }) => {
             </TableHead>
 
             <TableBody>
-              {reports.slice(0, limit).map((item, index) => (     
+              {/* {reports.slice(0, limit).map((item, index) => (     
 
                 <Row key={index} row={item} />
 
-              ))}
+              ))} */}
               
             </TableBody>
           </Table>
@@ -178,7 +133,7 @@ export const ReportListResults = ({ reports, ...rest }) => {
          
         }}
         component="div"
-        count={reports.length}
+        // count={}
         onPageChange={handlePageChange}
         onRowsPerPageChange={handleLimitChange}
         page={page}

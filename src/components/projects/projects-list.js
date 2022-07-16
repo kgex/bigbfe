@@ -119,9 +119,15 @@ export const ProjectList = ({ projects, ...rest }) => {
 
   
   return (
-    <Card {...rest}>
+    <Card {...rest}
+    style={
+      {
+        overflowX:"auto"
+      }
+
+    }>
       <PerfectScrollbar>
-      <TableContainer component={Paper}>
+   
       <Box sx={{ minWidth: 1050 }}>
       
           <Table>
@@ -165,11 +171,7 @@ export const ProjectList = ({ projects, ...rest }) => {
               
             </TableBody>
           </Table>
-          
-        </Box>
-        </TableContainer>
-      </PerfectScrollbar>
-      <TablePagination
+          <TablePagination
         component="div"
         count={projects.length}
         onPageChange={handlePageChange}
@@ -178,6 +180,10 @@ export const ProjectList = ({ projects, ...rest }) => {
         rowsPerPage={limit}
         rowsPerPageOptions={[5, 10, 25]}
       />
+        </Box>
+    
+      </PerfectScrollbar>
+     
     </Card>
   );
 };
