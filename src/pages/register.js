@@ -16,18 +16,18 @@ import {
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import api from '../utils/api';
-import Verify from 'src/components/verify';
+import { Verify } from 'src/components/verify';
 import { useState } from 'react';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';  
 import ShowHidePassword from 'src/components/showHidePassword';
-
+import LoadingButton from '@mui/lab/LoadingButton';
 
 const Register = () => {
 
 const [showPassword, setShowPassword] = useState(false);
 
-  const [verify , setVerify] = useState(false)
+  const [validAccount , setValidAccount] = useState("no")
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
@@ -67,9 +67,10 @@ const [showPassword, setShowPassword] = useState(false);
       api.post(
         `users/`,{...values, role : "student"})
           .then(res => {
+            setValidAccount("yes");
           console.log(res);
           console.log(res.data); 
-          setVerify(true)
+        
       })
     }
   });
@@ -84,7 +85,7 @@ const [showPassword, setShowPassword] = useState(false);
             console.log(res);
             console.log(res.data); 
         })
-      router.push('/login')
+      // router.push('/verify')
 
   }
 
@@ -97,7 +98,7 @@ const [showPassword, setShowPassword] = useState(false);
         </title>
       </Head>
       {
-        verify == false ? 
+        validAccount == "no" ? 
 
       <Box
         component="main"
@@ -188,21 +189,6 @@ const [showPassword, setShowPassword] = useState(false);
                 helperText={formik.touched.password && formik.errors.password}
               />
 
-            {/* <TextField
-              error={Boolean(formik.touched.password && formik.errors.password)}
-              fullWidth
-              helperText={formik.touched.password && formik.errors.password}
-              label="Password"
-              margin="normal"
-              name="password"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              type="password"
-              value={formik.values.password}
-              variant="outlined"
-            /> */}
-
-
             <Box
               sx={{
                 alignItems: 'center',
@@ -213,16 +199,21 @@ const [showPassword, setShowPassword] = useState(false);
             </Box>
             
             <Box sx={{ py: 2 }}>
-              <Button
+              <LoadingButton
+
+                loading = {formik.isSubmitting}
+                loadingPosition = "center"
                 color="primary"
-                disabled={formik.isSubmitting}
+                // disabled={formik.isSubmitting}
                 fullWidth
                 size="large"
                 type="submit"
                 variant="contained"
               >
+
                 Sign Up Now
-              </Button>
+                
+              </LoadingButton>
             </Box>
             <Typography
               color="textSecondary"

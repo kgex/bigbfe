@@ -10,6 +10,9 @@ import {
   import { Search as SearchIcon } from '../../icons/search';
   import { Upload as UploadIcon } from '../../icons/upload';
   import { Download as DownloadIcon } from '../../icons/download';
+  import AddIcon from '@mui/icons-material/Add';
+  import DeleteIcon from '@mui/icons-material/Delete';
+  import EditIcon from '@mui/icons-material/Edit';
   import router from 'next/router';
   
   export const ProjectListToolbar = (props) => {
@@ -35,20 +38,26 @@ import {
           sx={{ m: 1 }}
           variant="h4"
         >
-          Reports
+          Projects
         </Typography>
         <Box sx={{ m: 1 }}>
           <Button
-            startIcon={(<UploadIcon fontSize="small" />)}
+            // color="primary"
+            // variant="contained"
+            // onClick={onClickHandle}
+            startIcon={(<EditIcon fontSize="small" />)}
             sx={{ mr: 1 }}
           >
-            Import
+           Edit
           </Button>
           <Button
-            startIcon={(<DownloadIcon fontSize="small" />)}
+            // color="primary"
+            // variant="outlined"
+            onClick={onClickHandle}
+            startIcon={(<DeleteIcon fontSize="small" />)}
             sx={{ mr: 1 }}
           >
-            Export
+            Delete
           </Button>
   
   
@@ -56,6 +65,7 @@ import {
             color="primary"
             variant="contained"
             onClick={onClickHandle}
+            startIcon={(<AddIcon fontSize='small' />)}
           >
             Add Project
           </Button>

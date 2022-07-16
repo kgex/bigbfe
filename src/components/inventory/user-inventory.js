@@ -28,30 +28,72 @@ export const UserInventory = (props) => {
         initialValues: {
           item_name: '',
           category: '',
+          department: '',
+          college: '',
+          item_condition:'',
+          purchase_price:'',
+          quantity:'',
+          image:'',
+          thumbnail:'',
           description: '',
           
         },
         validationSchema: Yup.object({
-            title: Yup
+            item_name: Yup
             .string()
             .max(255)
             .required(
-              'title is required'),
-            start_time: Yup
+              'Item Name is required'),
+            category: Yup
             .string()
             .max(255)
             .required(
-              'Start Time is required'),
+              'Category is required'),
+            department: Yup
+            .string()
+            .max(255)
+            .required(
+              'Department is required'),
+            college: Yup
+            .string()
+            .max(255)
+            .required(
+              'College is required'),
             purchase_date: Yup
             .string()
             .max(255)
             .required(
-              'Stop Time is required'),
+              'Purchase Date is required'),
+            item_condition: Yup
+            .string()
+            .max(255)
+            .required(
+              'Item Condition is required'),
+            purchase_price: Yup
+            .string()
+            .max(255)
+            .required(
+              'Purchase Price is required'),
+            quantity: Yup
+            .string()
+            .max(255)
+            .required(
+              'Quantity is required'),
+            image: Yup
+            .string()
+            .max(255)
+            .required(
+              'Image is required'),
+            thumbnail: Yup
+            .string()
+            .max(255)
+            .required(
+              'Thumbnail is required'),
             description: Yup
             .string()
             .max(500)
             .required(
-              'description is required'),
+              'Description is required'),
           }),  
 
 
@@ -62,6 +104,21 @@ export const UserInventory = (props) => {
           
         }
       });
+
+      const college = [
+        {
+          value: 'select',
+          label: 'Select Your College'
+        },
+        {
+          value: 'kite',
+          label: 'KG KITE'
+        },
+        {
+          value: 'cas',
+          label: 'KG CAS'
+        }
+        ];  
     // <form onSubmit={formik.handleSubmit}>
     return (
       <form
@@ -83,9 +140,9 @@ export const UserInventory = (props) => {
               xs={12}
             >
                <TextField               
-                        error={Boolean(formik.touched.item_name && formik.errors.item_name)}
-                        fullWidth
-                        helperText={formik.touched.item_name && formik.errors.item_name}
+                error={Boolean(formik.touched.item_name && formik.errors.item_name)}
+                fullWidth
+                helperText={formik.touched.item_name && formik.errors.item_name}
                 label="Item Name"
                 name="item_name"
                 onBlur={formik.handleBlur}
@@ -94,8 +151,7 @@ export const UserInventory = (props) => {
                 variant="outlined"  
               
               />
-            
-
+    
             </Grid>
             <Grid
               item
@@ -140,6 +196,8 @@ export const UserInventory = (props) => {
               xs={12}
             >
               <TextField
+               defaultValue="Select College"
+               
                 error={Boolean(formik.touched.college && formik.errors.college)}
                 fullWidth
                 helperText={formik.touched.college && formik.errors.college}
@@ -147,9 +205,20 @@ export const UserInventory = (props) => {
                 name="college"
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
+                select
+                SelectProps={{ native: true }}
                 value={formik.values.college}
                 variant="outlined"
-              />
+              >
+                {college.map((option) => (
+                  <option
+                    key={option.value}
+                    value={option.value}
+                  >
+                    {option.label}
+                  </option>
+                ))}
+              </TextField>
                
             </Grid>
 
@@ -232,9 +301,6 @@ export const UserInventory = (props) => {
                
             </Grid>
 
-
-           
-
             <Grid
               item
               md={6}
@@ -242,14 +308,14 @@ export const UserInventory = (props) => {
             >
               Image
                <TextField               
-                error={Boolean(formik.touched.purchase_price && formik.errors.purchase_price)}
+                error={Boolean(formik.touched.image && formik.errors.image)}
                 fullWidth
                 type="file"
-                helperText={formik.touched.purchase_price && formik.errors.purchase_price}
-                name="purchase_price"
+                helperText={formik.touched.image && formik.errors.image}
+                name="image"
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
-                value={formik.values.purchase_price}
+                value={formik.values.image}
                 variant="outlined"  
               >
               </TextField>
@@ -262,23 +328,19 @@ export const UserInventory = (props) => {
             >
               Thumbnail
               <TextField
-                error={Boolean(formik.touched.quantity && formik.errors.quantity)}
+                error={Boolean(formik.touched.thumbnail && formik.errors.thumbnail)}
                 fullWidth
-                helperText={formik.touched.quantity && formik.errors.quantity}
-                name="quantity"
+                helperText={formik.touched.thumbnail && formik.errors.thumbnail}
+                name="thumbnail"
                 type="file"
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
-                value={formik.values.quantity}
+                value={formik.values.thumbnail}
                 variant="outlined"
               />
                
             </Grid>
             </Grid> 
-
-         
-
-            
 
             <Grid
                 container
@@ -329,7 +391,7 @@ export const UserInventory = (props) => {
                type="submit"
                variant="contained"
             >
-              Saved  etails
+              Saved details
             </Button>
           </Box>
         </Card>

@@ -7,9 +7,9 @@ export default function ShowHidePassword() {
     const [showPassword, setShowPassword] = useState(false);
 
     if (showPassword) {
-        return <VisibilityOffIcon onClick={() => setShowPassword(false)} />;
+        return <VisibilityIcon onClick={() => setShowPassword(false)} />;
     } else {
-        return <VisibilityIcon onClick={() => setShowPassword(true)} />;
+        return <VisibilityOffIcon onClick={() => setShowPassword(true)} />;
     }
 };
 

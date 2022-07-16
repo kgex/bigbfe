@@ -22,6 +22,7 @@ const Home = () => {
       <Head>
         <title>Home | KGXperience</title>
       </Head>
+      
       <Box
         component="main"
         sx={{
@@ -64,12 +65,13 @@ const Home = () => {
             
           >
             <Button
-              
+
               variant="contained"
               sx={{marginLeft:"12%", backgroundColor:"text.primary"}}
               startIcon={<VpnKeyOutlined fontSize="small" />}
             >
               Sign In
+
             </Button>
           </NextLink>
 
