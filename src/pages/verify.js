@@ -1,4 +1,4 @@
-import {useState} from "react"
+import { useState } from "react"
 import Head from 'next/head';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
@@ -36,33 +36,25 @@ const Register = () => {
       otp: Yup
         .string()
         .max(16)
-        .required(
-          'Otp is required'),
-        .required('Email is required')
-        // .matches(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, 'Must be a valid email'),
+        .required('Otp is required')
         .matches(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[kgkite]+(?:\.[ac.in]+)*$/, 'Use your college email only!'),
-
-      otp: Yup
-        .string()
-        .max(16)
-        .required('Otp is required'),
+      // .matches(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, 'Must be a valid email')
     }),
 
-    }),
     onSubmit: values => {
       console.log(qs.stringify(values))
       api.post(
         `verify?${qs.stringify(values)}`, values)
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-        router.push('/login');
-      })
+        .then(res => {
+          console.log(res);
+          console.log(res.data);
+          router.push('/login');
+        })
       getData(values)
     }
   });
 
-  
+
   return (
     <>
       <Head>
@@ -146,22 +138,22 @@ const Register = () => {
               }}
             >
             </Box>
-            
-             <Box sx={{ py: 2 }}>
-            <LoadingButton
-                  color="primary"
-                  // disabled={formik.isSubmitting}
-                  fullWidth
-                  size="large"
-                  type="submit"
-                  variant="contained"
-                  loading={formik.isSubmitting}
-                  loadingPosition="center"
-                >
-                  Submit
-            </LoadingButton>
+
+            <Box sx={{ py: 2 }}>
+              <LoadingButton
+                color="primary"
+                // disabled={formik.isSubmitting}
+                fullWidth
+                size="large"
+                type="submit"
+                variant="contained"
+                loading={formik.isSubmitting}
+                loadingPosition="center"
+              >
+                Submit
+              </LoadingButton>
             </Box>
-            
+
             <Typography
               color="textSecondary"
               variant="body2"
@@ -186,6 +178,6 @@ const Register = () => {
 
     </>
   );
-            };
+};
 
 export default Register;

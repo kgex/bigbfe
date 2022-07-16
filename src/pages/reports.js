@@ -10,13 +10,12 @@ import { useEffect } from 'react';
 
 const ReportList = (props) => {
 
-  const [userReports,setUserReports] = useState([])
+  const [userReports, setUserReports] = useState([])
   const [userId, setUserId] = useState(null);
 
-  useEffect (() => {
+  useEffect(() => {
 
     console.log("Im here")
-    console.log(props.nivu)
 
     const token = localStorage.getItem('token');
     console.log(token);
@@ -25,42 +24,44 @@ const ReportList = (props) => {
     setUserId(JSON.parse(user).user_id);
 
     console.log(userId)
-    if(userId != null){
+    if (userId != null) {
       api.get(
-        `users/${userId}/reports`, {headers: {
-          'Authorization': `bearer ${token}` 
-        }})
-          .then(res => {
+        `users/${userId}/reports`, {
+          headers: {
+            'Authorization': `bearer ${token}`
+          }
+      })
+        .then(res => {
           console.log(res.data);
           setUserReports(res.data);
-      })
+        })
     }
 
 
   }, [userId])
 
   return (
-  <>
-    <Head>
-      <title>
-        Reports | KGXperience
-      </title>
-    </Head>
-    <Box
-      component="main"
-      sx={{
-        flexGrow: 1,
-        py: 8
-      }}
-    >
-      <Container maxWidth={false}>
-        <ReportListToolbar />
-        <Box sx={{ mt: 3 }}>
-          <ReportListResults reports={userReports} />
-        </Box>
-      </Container>
-    </Box>
-  </>
+    <>
+      <Head>
+        <title>
+          Reports | KGXperience
+        </title>
+      </Head>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          py: 8
+        }}
+      >
+        <Container maxWidth={false}>
+          <ReportListToolbar />
+          <Box sx={{ mt: 3 }}>
+            <ReportListResults reports={userReports} />
+          </Box>
+        </Container>
+      </Box>
+    </>
   );
 }
 
