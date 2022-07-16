@@ -237,7 +237,8 @@ const Login = () => {
 
             <Typography
               color="textSecondary"
-              variant="body2" center
+              variant="body2"
+              center
               align='center'
               sx={{
                 paddingTop: .5
