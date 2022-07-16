@@ -160,7 +160,8 @@ const Register = () => {
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <IconButton edge="end" onClick={() => setShowPassword((prev) => !prev)}>
+                    <IconButton edge="end"
+                      onClick={() => setShowPassword((prev) => !prev)}>
                       <ShowHidePassword />
                     </IconButton>
                   </InputAdornment>
