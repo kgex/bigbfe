@@ -16,18 +16,15 @@ import {
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import api from '../utils/api';
-import { Verify } from 'src/components/verify';
-import { useState } from 'react';
 import InputAdornment from '@mui/material/InputAdornment';
-import IconButton from '@mui/material/IconButton';  
+import IconButton from '@mui/material/IconButton';
 import ShowHidePassword from 'src/components/showHidePassword';
 import LoadingButton from '@mui/lab/LoadingButton';
 
 const Register = () => {
 
-const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
-  const [validAccount , setValidAccount] = useState("no")
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
@@ -36,59 +33,43 @@ const [showPassword, setShowPassword] = useState(false);
       password: '',
     },
     validationSchema: Yup.object({
-      
+
       email: Yup
         .string()
         .email(
           'Must be a valid email')
-        .max(255)
+        .max(50)
         .required('Email is required')
         // .matches(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, 'Must be a valid email'),
         .matches(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[kgkite]+(?:\.[ac.in]+)*$/, 'Use your college email only!'),
-      
-        full_name: Yup
+
+      full_name: Yup
         .string()
-        .max(255)
+        .max(50)
         .required('First name is required'),
-      
-        password: Yup
+
+      password: Yup
         .string()
-        .max(255)
+        .max(16)
         .required('Password is required')
         .matches(
           /^(?=.*[A-Za-z0-9])(?=.*\d)(?=.*[-_+=,.@$!%*#?&])[A-Za-z0-9\d-_+=,.@$!%*#?&]{8,}$/,
           "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
         ),
-      }),  
+    }),
 
     onSubmit: values => {
-      console.log(JSON.stringify({...values, role : "student"}))
+      console.log(JSON.stringify({ ...values, role: "student" }))
 
       api.post(
-        `users/`,{...values, role : "student"})
-          .then(res => {
-            setValidAccount("yes");
+        `users/`, { ...values, role: "student" })
+        .then(res => {
           console.log(res);
-          console.log(res.data); 
-        
-      })
+          console.log(res.data);
+          router.push('/verify');
+        })
     }
   });
-
-
-  const getData = (values) => {
-        //http://bigbbe.herokuapp.com/verify?email=hello%40gmail.com&otp=53
-      console.log(qs.stringify(values))
-        api.post(
-          `verify?${qs.stringify(values)}`,values)
-            .then(res => {
-            console.log(res);
-            console.log(res.data); 
-        })
-      // router.push('/verify')
-
-  }
-
 
   return (
     <>
@@ -97,8 +78,6 @@ const [showPassword, setShowPassword] = useState(false);
           Register | KGXperience
         </title>
       </Head>
-      {
-        validAccount == "no" ? 
 
       <Box
         component="main"
@@ -121,6 +100,7 @@ const [showPassword, setShowPassword] = useState(false);
               Dashboard
             </Button>
           </NextLink>
+
           <form onSubmit={formik.handleSubmit}>
             <Box sx={{ my: 3 }}>
               <Typography
@@ -137,7 +117,7 @@ const [showPassword, setShowPassword] = useState(false);
                 Use your email to create a new account
               </Typography>
             </Box>
-            
+
             <TextField
               error={Boolean(formik.touched.full_name && formik.errors.full_name)}
               fullWidth
@@ -150,7 +130,7 @@ const [showPassword, setShowPassword] = useState(false);
               value={formik.values.full_name}
               variant="outlined"
             />
-            
+
             <TextField
               error={Boolean(formik.touched.email && formik.errors.email)}
               fullWidth
@@ -165,29 +145,29 @@ const [showPassword, setShowPassword] = useState(false);
               variant="outlined"
             />
 
-              <TextField
-                fullWidth
-                // autoComplete="current-password"
-                type={showPassword ? 'text' : 'password'}
-                label="Password"
-                {...formik.getFieldProps('password')}
-                sx={{
-                  // marginBottom: 2,
-                  marginTop: 2
-                }}
+            <TextField
+              fullWidth
+              // autoComplete="current-password"
+              type={showPassword ? 'text' : 'password'}
+              label="Password"
+              {...formik.getFieldProps('password')}
+              sx={{
+                // marginBottom: 2,
+                marginTop: 2
+              }}
 
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton edge="end" onClick={() => setShowPassword((prev) => !prev)}>
-                        <ShowHidePassword />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-                error={Boolean(formik.touched.password && formik.errors.password)}
-                helperText={formik.touched.password && formik.errors.password}
-              />
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton edge="end" onClick={() => setShowPassword((prev) => !prev)}>
+                      <ShowHidePassword />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              error={Boolean(formik.touched.password && formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
+            />
 
             <Box
               sx={{
@@ -197,12 +177,12 @@ const [showPassword, setShowPassword] = useState(false);
               }}
             >
             </Box>
-            
+
             <Box sx={{ py: 2 }}>
               <LoadingButton
 
-                loading = {formik.isSubmitting}
-                loadingPosition = "center"
+                loading={formik.isSubmitting}
+                loadingPosition="center"
                 color="primary"
                 // disabled={formik.isSubmitting}
                 fullWidth
@@ -212,7 +192,7 @@ const [showPassword, setShowPassword] = useState(false);
               >
 
                 Sign Up Now
-                
+
               </LoadingButton>
             </Box>
             <Typography
@@ -235,9 +215,9 @@ const [showPassword, setShowPassword] = useState(false);
             </Typography>
           </form>
         </Container>
-      </Box> : <Verify getData = {getData}/>
-      }
-      
+      </Box>
+
+
     </>
   );
 };
