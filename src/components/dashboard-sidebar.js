@@ -111,7 +111,8 @@ export const DashboardSidebar = (props) => {
           }}
         />
         <Box sx={{ flexGrow: 1 }}>
-          { user.role === "student" ? 
+          {/* { user.role === "student" ?  */}
+          {
           items.map((item) => (
             <NavItem
               key={item.title}
@@ -119,14 +120,18 @@ export const DashboardSidebar = (props) => {
               href={item.href}
               title={item.title}
             />
-          )) : adminitems.map((item) => (
-            <NavItem
-              key={item.title}
-              icon={item.icon}
-              href={item.href}
-              title={item.title}
-            />
+
           ))}
+
+          {/* // )) : adminitems.map((item) => (
+          //   <NavItem
+          //     key={item.title}
+          //     icon={item.icon}
+          //     href={item.href}
+          //     title={item.title}
+          //   />
+          // ))} */}
+          
         </Box>
       </Box>
     </>
