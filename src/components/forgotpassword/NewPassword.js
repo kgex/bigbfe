@@ -17,29 +17,27 @@ export default function NewPassword(props) {
   const [showNewPassword, setShowNewPassword] = useState(false);
 
   const [showConfirmPassword, setConfirmShowPassword] = useState(false);
+  
+  const [showOtp, setShowOtp] = useState(false);
 
 
   const formik = useFormik({
     initialValues: {
-      oldPassword: "",
+      otp : "",
       newPassword: "",
       confirmPassword: "",
 
     },
     validationSchema: Yup.object({
-      oldPassword: Yup
-        .string()
-        .max(16)
-        .required(
-          'Old Password is required'),
-          newPassword: Yup
-          .string()
-          .max(16)
-          .required('New Password is required')
-          .matches(
-            /^(?=.*[A-Za-z0-9])(?=.*\d)(?=.*[-_+=,.@$!%*#?&])[A-Za-z0-9\d-_+=,.@$!%*#?&]{8,}$/,
-            "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
-          ),
+      otp :
+       Yup.string()
+       .max(8).
+       required('Otp is required'),
+       newPassword: Yup
+            .string()
+            .max(16)
+            .required(
+              'Password is required'),
             confirmPassword: Yup
             .string()
             .max(16)
@@ -49,7 +47,7 @@ export default function NewPassword(props) {
     }),
     onSubmit: (values) => {
       if(values.newPassword === values.confirmPassword){
-        props.verifyEmail({oldPassword : values.oldPassword,newPassword : values.newPassword});
+        props.passwordData({otp : values.otp , password : values.newPassword});
       }
     },
   });
@@ -97,19 +95,28 @@ export default function NewPassword(props) {
               </Typography>
             </Box>
 
-            
             <TextField
               fullWidth
-              label="Old Password"
-              {...formik.getFieldProps('oldPassword')}
+              label="OTP"
+              type={showOtp ? 'text' : 'otp'}
+              {...formik.getFieldProps('otp')}
               sx={{
                 // marginBottom: 2,
                 marginTop: 2
               }}
-              error={Boolean(formik.touched.oldPassword && formik.errors.oldPassword)}
-              helperText={formik.touched.oldPassword && formik.errors.oldPassword}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton edge="end"
+                      onClick={() => setShowOtp((prev) => !prev)}>
+                      <ShowHidePassword />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              error={Boolean(formik.touched.otp && formik.errors.otp)}
+              helperText={formik.touched.otp && formik.errors.otp}
             />
-
             
             <TextField
               fullWidth
@@ -158,10 +165,11 @@ export default function NewPassword(props) {
               helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
             />
 
+
             <Box sx={{ py: 2 }}>
               <LoadingButton
                 color="primary"
-                // disabled={formik.isSubmitting}
+                disabled={formik.isSubmitting}
                 fullWidth
                 size="large"
                 type="submit"
