@@ -632,8 +632,7 @@ const Register = () => {
 
             <Box sx={{ py: 2 }}>
               <LoadingButton
-
-                loading={false}
+                loading={formik.isSubmitting}
                 loadingPosition="center"
                 fullWidth
                 color="primary"
@@ -654,7 +653,6 @@ const Register = () => {
               variant="body2"
             >
               Have an account?
-              {' '}
               <NextLink
                 href="/login"
                 passHref
