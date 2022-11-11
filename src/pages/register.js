@@ -460,7 +460,7 @@ const Register = () => {
                   error={Boolean(formik.touched.register_num && formik.errors.register_num)}
                   fullWidth
                   helperText={formik.touched.register_num && formik.errors.register_num}
-                  label="Register No."
+                  label="Roll No."
                   margin="normal"
                   name="register_num"
                   onBlur={formik.handleBlur}
