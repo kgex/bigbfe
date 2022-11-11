@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { CacheProvider } from '@emotion/react';
+import { useState, createContext, useContext } from "react";
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { CssBaseline } from '@mui/material';
@@ -8,6 +9,7 @@ import { createEmotionCache } from '../utils/create-emotion-cache';
 import { theme } from '../theme';
 
 const clientSideEmotionCache = createEmotionCache();
+
 
 const App = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
@@ -18,7 +20,7 @@ const App = (props) => {
     <CacheProvider value={emotionCache}>
       <Head>
         <title>
-        KGXperience Pro
+          KGXperience Pro
         </title>
         <meta
           name="viewport"
@@ -28,8 +30,8 @@ const App = (props) => {
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          {getLayout(<Component nivu={"nivu"} 
-          {...pageProps} />)}
+          {getLayout(<Component nivu={"nivu"}
+            {...pageProps} />)}
         </ThemeProvider>
       </LocalizationProvider>
     </CacheProvider>
