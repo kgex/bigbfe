@@ -31,7 +31,7 @@ const Verify = () => {
 
             otp: Yup
                 .number()
-                .min(100000)
+                .min(10000)
                 .max(999999)
                 .required(
                     'OTP is required'),
@@ -45,11 +45,11 @@ const Verify = () => {
             }
             console.log(data);
             api.post(
-                `verify`, qs.stringify(data))
+                `verify`, data)
                 .then(res => {
                     console.log(res);
                     console.log(res.data);
-                    // router.push('/login');
+                    router.push('/login');
 
                 }).catch((error) => {
                     formik.resetForm();
