@@ -247,10 +247,10 @@ const Login = () => {
               {/* Don't have an account?
               {' '} */}
               <NextLink
-                href="/register"
+                href="/forgotPassword"
               >
                 <Link
-                  to="/register"
+                  to="/forgotPassword"
                   variant="subtitle2"
                   underline="hover"
                   sx={{
