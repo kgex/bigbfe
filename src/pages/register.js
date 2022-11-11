@@ -32,6 +32,7 @@ import IconButton from '@mui/material/IconButton';
 import ShowHidePassword from 'src/components/showHidePassword';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { cyan } from "@mui/material/colors";
+import CustomAlert from "src/components/custom-alert";
 
 const Register = () => {
 
@@ -228,6 +229,7 @@ const Register = () => {
 
   const [deptid, setDeptid] = useState('');
   const [cyear, setCyear] = useState('');
+  const [alertData, setAlertData] = useState({ 'open': false, 'message': '' });
 
   const handleCname = (e) => {
 
@@ -351,6 +353,10 @@ const Register = () => {
         .then(res => {
           console.log(res);
           router.push('/verify');
+        }).catch(error => {
+          console.log(error.response);
+          setAlertData({ 'open': true, 'message': error.response.data.detail })
+
         })
     }
   });
@@ -627,7 +633,7 @@ const Register = () => {
             <Box sx={{ py: 2 }}>
               <LoadingButton
 
-                loading={formik.isSubmitting}
+                loading={false}
                 loadingPosition="center"
                 fullWidth
                 color="primary"
@@ -664,7 +670,7 @@ const Register = () => {
           </form>
         </Container>
       </Box>
-
+      <CustomAlert data={alertData} />
 
     </>
   );
