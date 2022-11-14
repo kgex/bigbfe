@@ -234,26 +234,19 @@ const Register = () => {
   const handleCname = (e) => {
 
     const getclgID = e.target.value;
-    console.log(getclgID);
     const getDepatData = clgdata.find(clg => clg.clg_id === getclgID).Department;
     setDept(getDepatData);
     setClgid(getclgID);
-
-    //console.log(getclgID);
   }
 
   const handleDname = (e) => {
     const deptid = e.target.value;
     const getDeptName = clgdata.find(clg => clg.clg_id === clgid).Department.find(dept => dept.dep_id === deptid).d_name;
-    console.log(getDeptName);
     setDeptid(deptid);
-    setDeptName(getDeptName);
   }
 
   const handleYear = (e) => {
     const cyear = e.target.value;
-    console.log(cyear);
-    console.log(deptid);
 
     formik.values.join_year = cyear
     if (deptid === '201' | deptid === '202' | deptid === '203' | deptid === '204' | deptid === '205' | deptid === '206'
@@ -352,15 +345,15 @@ const Register = () => {
     }),
 
     onSubmit: values => {
-      console.log(JSON.stringify({ ...values, role: "student", dept: deptName }))
+      // console.log(JSON.stringify({ ...values, role: "student", dept: deptName }))
 
       api.post(
         `/users/`, { ...values, role: "student", dept: deptName })
         .then(res => {
-          console.log(res);
+          // console.log(res);
           router.push('/verify');
         }).catch(error => {
-          console.log(error.response);
+          // console.log(error.response);
           setAlertData({ 'open': true, 'message': error.response.data.detail })
 
         })
