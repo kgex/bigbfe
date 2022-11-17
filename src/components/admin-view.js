@@ -8,49 +8,59 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { ChartBar as ChartBarIcon } from '../icons/chart-bar';
 import { Cog as CogIcon } from '../icons/cog';
 import { Lock as LockIcon } from '../icons/lock';
+import InventoryIcon from '@mui/icons-material/Inventory';
 
 const adminitems = [
-    {
-      href: '/dashboard',
-      icon: (<ChartBarIcon fontSize="small" />),
-      title: 'Dashboard'
-    },
-    {
-      href: '/allreports',
-      icon: (<UsersIcon fontSize="small" />),
-      title: 'All Reports'
-    },
- 
-    {
-      href: '/customers',
-      icon: (<UsersIcon fontSize="small" />),
-      title: 'Customers'
-    },
-    {
-      href: '/products',
-      icon: (<ShoppingBagIcon fontSize="small" />),
-      title: 'Products'
-    },
-    {
-      href: '/account',
-      icon: (<UserIcon fontSize="small" />),
-      title: 'Account'
-    },
-    {
-      href: '/settings',
-      icon: (<CogIcon fontSize="small" />),
-      title: 'Settings'
-    },
-    {
-      href: '/logout',
-      icon: (<LockIcon fontSize="small" />),
-      title: 'Logout'
-    },
-    {
-      href: '/404',
-      icon: (<XCircleIcon fontSize="small" />),
-      title: 'Error'
-    },
-  ];
+  {
+    href: '/dashboard',
+    icon: (<ChartBarIcon fontSize="small" />),
+    title: 'Dashboard'
+  },
+  {
+    href: '/allreports',
+    icon: (<UsersIcon fontSize="small" />),
+    title: 'All Reports'
+  },
+  {
+    href: '/inventory',
+    icon: (<InventoryIcon fontSize="small" />),
+    title: 'Inventory'
+  },
+  {
+    href: '/attendance',
+    icon: (<UsersIcon fontSize="small" />),
+    title: 'Attendance'
+  },
+  {
+    href: '/customers',
+    icon: (<UsersIcon fontSize="small" />),
+    title: 'Customers'
+  },
+  {
+    href: '/products',
+    icon: (<ShoppingBagIcon fontSize="small" />),
+    title: 'Products'
+  },
+  {
+    href: '/account',
+    icon: (<UserIcon fontSize="small" />),
+    title: 'Account'
+  },
+  {
+    href: '/settings',
+    icon: (<CogIcon fontSize="small" />),
+    title: 'Settings'
+  },
+  {
+    href: '/logout',
+    icon: (<LockIcon fontSize="small" />),
+    title: 'Logout'
+  },
+  {
+    href: '/404',
+    icon: (<XCircleIcon fontSize="small" />),
+    title: 'Error'
+  },
+];
 
-  export {adminitems};
+export { adminitems };

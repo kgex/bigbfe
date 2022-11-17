@@ -59,7 +59,6 @@ const Login = () => {
         .required(
           'Email is required')
         .matches(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[kgkite]+(?:\.[ac.in]+)*$/, 'Use your college email only!'),
-
       password: Yup
         .string()
         .max(16)
@@ -71,7 +70,7 @@ const Login = () => {
     onSubmit: values => {
       console.log(JSON.stringify(values))
       api.post(
-        `token`, qs.stringify(values))
+        `/token`, qs.stringify(values))
         .then(res => {
           console.log(res);
           console.log(res.data);
@@ -238,7 +237,6 @@ const Login = () => {
             <Typography
               color="textSecondary"
               variant="body2"
-              center
               align='center'
               sx={{
                 paddingTop: .5

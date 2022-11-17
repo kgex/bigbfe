@@ -21,13 +21,14 @@ export const DashboardSidebar = (props) => {
     noSsr: false
   });
 
-  const [user, setUser] = useState({'full_name': ' ', 'email': ' ', 'role': 'student'});
+  const [user, setUser] = useState({ 'full_name': ' ', 'email': ' ', 'role': 'student' });
 
   useEffect(
     () => {
 
       const user = localStorage.getItem('user');
-      if (user != null){
+      console.log(user);
+      if (user != null) {
         setUser(JSON.parse(user));
       }
       if (!router.isReady) {
@@ -58,11 +59,11 @@ export const DashboardSidebar = (props) => {
               passHref
             >
               <a>
-              <img
-              alt="Go to pro"
-              src="/static/images/kgx.png"
-              width="170"
-            />
+                <img
+                  alt="Go to pro"
+                  src="/static/images/kgx.png"
+                  width="170"
+                />
               </a>
             </NextLink>
           </Box>
@@ -111,27 +112,27 @@ export const DashboardSidebar = (props) => {
           }}
         />
         <Box sx={{ flexGrow: 1 }}>
-          {/* { user.role === "student" ?  */}
-          {
-          items.map((item) => (
-            <NavItem
-              key={item.title}
-              icon={item.icon}
-              href={item.href}
-              title={item.title}
-            />
+          {user.role === "student" ?
 
-          ))}
+            items.map((item) => (
+              <NavItem
+                key={item.title}
+                icon={item.icon}
+                href={item.href}
+                title={item.title}
+              />
 
-          {/* // )) : adminitems.map((item) => (
-          //   <NavItem
-          //     key={item.title}
-          //     icon={item.icon}
-          //     href={item.href}
-          //     title={item.title}
-          //   />
-          // ))} */}
-          
+            ))
+
+            : adminitems.map((item) => (
+              <NavItem
+                key={item.title}
+                icon={item.icon}
+                href={item.href}
+                title={item.title}
+              />
+            ))}
+
         </Box>
       </Box>
     </>

@@ -298,7 +298,7 @@ const Register = () => {
         .max(50)
         .required('Email is required')
         .matches(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[kgkite | kgcas]+(?:\.[ac.in | com]+)*$/, 'Use your college email only!'),
-        
+
       full_name: Yup
         .string()
         .max(50)
@@ -354,7 +354,8 @@ const Register = () => {
           router.push('/verify');
         }).catch(error => {
           // console.log(error.response);
-          setAlertData({ 'open': true, 'message': error.response.data.detail })
+          setAlertData({ 'open': true, 'message': error.response.data.detail });
+          formik.isSubmitting = false;
 
         })
     }
