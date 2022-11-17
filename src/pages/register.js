@@ -69,16 +69,15 @@ const Register = () => {
     },
   }));
 
-
   const clgdata = [
     {
-      clg_id: '1',
+      clg_id: 'KITE',
       s_name: 'kg',
-      clg_name: 'KiTE',
+      clg_name: 'KITE',
       Department: [
         {
           dep_id: '101',
-          d_name: 'B tech IT',
+          d_name: 'BTech IT',
           clg_id: '1'
         }, {
           dep_id: '102',
@@ -97,12 +96,12 @@ const Register = () => {
         },
         {
           dep_id: '105',
-          d_name: 'B tech CSBS',
+          d_name: 'BTech CSBS',
           clg_id: '1'
         },
         {
           dep_id: '106',
-          d_name: 'B tech AIDS',
+          d_name: 'BTech AI&DS',
           clg_id: '1'
         }
         ,
@@ -125,7 +124,7 @@ const Register = () => {
       ]
     },
     {
-      clg_id: '2',
+      clg_id: 'KGCAS',
       s_name: 'cas',
       clg_name: 'KGCAS',
       Department: [
@@ -228,6 +227,7 @@ const Register = () => {
   const [dept, setDept] = useState([]);
 
   const [deptid, setDeptid] = useState('');
+  const [deptName, setDeptName] = useState('');
   const [cyear, setCyear] = useState('');
   const [alertData, setAlertData] = useState({ 'open': false, 'message': '' });
 
@@ -236,18 +236,12 @@ const Register = () => {
     const getclgID = e.target.value;
     const getDepatData = clgdata.find(clg => clg.clg_id === getclgID).Department;
     setDept(getDepatData);
-
-    //console.log(getclgID);
+    setClgid(getclgID);
   }
 
   const handleDname = (e) => {
     const deptid = e.target.value;
-
-
-    if (deptid === '201') {
-      alert("Tamil")
-    }
-
+    const getDeptName = clgdata.find(clg => clg.clg_id === clgid).Department.find(dept => dept.dep_id === deptid).d_name;
     setDeptid(deptid);
   }
 
@@ -328,12 +322,17 @@ const Register = () => {
       dept: Yup
         .string()
         .required('Department is required'),
+      gender: Yup
+        .string()
+        .required('Gender is required'),
+      stay: Yup
+        .string()
+        .required('Gender is required'),
       join_year: Yup
         .string()
         .required('Join year is required'),
       grad_year: Yup
         .string()
-
         .required('Pass out year is required'),
       password: Yup
         .string()
@@ -346,15 +345,15 @@ const Register = () => {
     }),
 
     onSubmit: values => {
-      console.log(JSON.stringify({ ...values, role: "student" }))
+      // console.log(JSON.stringify({ ...values, role: "student", dept: deptName }))
 
       api.post(
-        `/users/`, { ...values, role: "student" })
+        `/users/`, { ...values, role: "student", dept: deptName })
         .then(res => {
-          console.log(res);
+          // console.log(res);
           router.push('/verify');
         }).catch(error => {
-          console.log(error.response);
+          // console.log(error.response);
           setAlertData({ 'open': true, 'message': error.response.data.detail })
 
         })
@@ -407,12 +406,14 @@ const Register = () => {
                 Use your email to create a new account
               </Typography>
             </Box>
+
             <Grid
               container
               spacing={1}
               justifyContent="center"
               alignItems={'center'}
             >
+
               <Grid item xs={6}>
                 <TextField
                   error={Boolean(formik.touched.full_name && formik.errors.full_name)}
@@ -427,6 +428,7 @@ const Register = () => {
                   variant="outlined"
                 />
               </Grid>
+
               <Grid item xs={6}>
                 <TextField
                   error={Boolean(formik.touched.last_name && formik.errors.last_name)}
@@ -441,6 +443,7 @@ const Register = () => {
                   variant="outlined"
                 />
               </Grid>
+
               <Grid item xs={6}>
                 <TextField
                   error={Boolean(formik.touched.phone_no && formik.errors.phone_no)}
@@ -455,21 +458,22 @@ const Register = () => {
                   variant="outlined"
                 />
               </Grid>
+
               <Grid item xs={6}>
                 <TextField
                   error={Boolean(formik.touched.register_num && formik.errors.register_num)}
                   fullWidth
                   helperText={formik.touched.register_num && formik.errors.register_num}
-                  label="Register No."
+                  label="Roll No."
                   margin="normal"
                   name="register_num"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
-
                   value={formik.values.register_num}
                   variant="outlined"
                 />
               </Grid>
+
               <Grid item xs={6}>
                 <TextField
                   error={Boolean(formik.touched.email && formik.errors.email)}
@@ -485,6 +489,7 @@ const Register = () => {
                   variant="outlined"
                 />
               </Grid>
+
               <Grid item xs={6}>
                 <TextField
                   fullWidth
@@ -496,7 +501,6 @@ const Register = () => {
                     // marginBottom: 2,
                     marginTop: 1
                   }}
-
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
@@ -515,13 +519,12 @@ const Register = () => {
               <Grid item xs={6}>
                 <FormControl fullWidth
                   error={Boolean(formik.touched.college && formik.errors.college)}
-
                   // helperText={formik.touched.college && formik.errors.college}
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                   value={formik.values.college}
                 >
-                  <InputLabel variant="standard" htmlFor="uncontrolled-native"  >
+                  <InputLabel variant="standard" >
                     College
                   </InputLabel>
 
@@ -538,11 +541,10 @@ const Register = () => {
                     <option>Select</option>
                     {
                       clgdata.map((getClg, index) => (
-                        <option value={getClg.clg_id} key={index}>{getClg.clg_name}</option>
+                        <option value={getClg.clg_name}
+                          key={index}>{getClg.clg_name}</option>
                       ))
                     }
-
-
                   </NativeSelect>
                 </FormControl>
               </Grid>
@@ -556,7 +558,6 @@ const Register = () => {
                   value={formik.values.dept}
 
                 >
-
                   <InputLabel>
                     Department
                   </InputLabel>
@@ -573,21 +574,79 @@ const Register = () => {
                     <option>Select</option>
                     {
                       dept.map((getDept, index) => (
-                        <option value={getDept.dep_id} key={index}>{getDept.d_name}</option>
+                        <option value={getDept.dep_id}
+                          key={index}>{getDept.d_name}</option>
                       ))
                     }
-
                   </NativeSelect>
                 </FormControl>
               </Grid>
+
               <Grid item xs={6}>
-                <InputLabel variant="standard" htmlFor="uncontrolled-native" style={{ fontSize: 12 }}
-
-
+                <FormControl fullWidth
+                  error={Boolean(formik.touched.gender && formik.errors.gender)}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.gender}
                 >
+                  <InputLabel variant="standard">
+                    Gender
+                  </InputLabel>
+
+                  <NativeSelect
+                    label="Gender"
+                    // margin="normal"
+                    name="gender"
+                    input={<BootstrapInput />}
+                    onBlur={formik.handleBlur}
+                    variant="outlined"
+                    value={formik.values.gender}
+                  >
+                    <option>Select</option>
+                    {
+                      ['Male', 'Female'].map((gen) => (
+                        <option value={gen}
+                          key={gen}>{gen}</option>
+                      ))
+                    }
+                  </NativeSelect>
+                </FormControl>
+              </Grid>
+
+              <Grid item xs={6}>
+                <FormControl fullWidth
+                  error={Boolean(formik.touched.stay && formik.errors.stay)}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.stay}
+                >
+                  <InputLabel variant="standard">
+                    Stay
+                  </InputLabel>
+
+                  <NativeSelect
+                    label="Stay"
+                    name="stay"
+                    input={<BootstrapInput />}
+                    onBlur={formik.handleBlur}
+                    variant="outlined"
+                    value={formik.values.stay}
+                  >
+                    <option>Select</option>
+                    {
+                      ['Home', 'Outside Hostel', 'College Hostel'].map((sty) => (
+                        <option value={sty}
+                          key={sty}>{sty}</option>
+                      ))
+                    }
+                  </NativeSelect>
+                </FormControl>
+              </Grid>
+
+              <Grid item xs={6}>
+                <InputLabel variant="standard">
                   College Join Year
                 </InputLabel>
-
                 <TextField
                   error={Boolean(formik.touched.join_year && formik.errors.join_year)}
                   fullWidth
@@ -599,11 +658,11 @@ const Register = () => {
                   onChange={(e) => { handleYear(e) }}
                   value={formik.values.join_year}
                   variant="outlined"
-
                 />
               </Grid>
+
               <Grid item xs={6}>
-                <InputLabel style={{ fontSize: 12 }}>
+                <InputLabel variant="standard">
                   College Pass out Year
                 </InputLabel>
                 <TextField
@@ -632,8 +691,7 @@ const Register = () => {
 
             <Box sx={{ py: 2 }}>
               <LoadingButton
-
-                loading={false}
+                loading={formik.isSubmitting}
                 loadingPosition="center"
                 fullWidth
                 color="primary"
@@ -654,7 +712,6 @@ const Register = () => {
               variant="body2"
             >
               Have an account?
-              {' '}
               <NextLink
                 href="/login"
                 passHref
