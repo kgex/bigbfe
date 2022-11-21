@@ -56,6 +56,12 @@ const adminitems = [
     icon: (<LockIcon fontSize="small" />),
     title: 'Logout'
   },
+  ,
+  {
+    href: '/students',
+    icon: (<UserIcon fontSize="small" />),
+    title: 'Students'
+  },
   {
     href: '/404',
     icon: (<XCircleIcon fontSize="small" />),

@@ -42,9 +42,9 @@ const items = [
     title: 'Account'
   },
   {
-    href: '/student',
+    href: '/students',
     icon: (<UserIcon fontSize="small" />),
-    title: 'Student'
+    title: 'Students'
   }
 ];
 
