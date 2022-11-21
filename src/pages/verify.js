@@ -95,14 +95,14 @@ const Verify = () => {
             >
                 <Container maxWidth="sm">
                     <NextLink
-                        href="/register"
+                        href="/login"
                         passHref
                     >
                         <Button
                             component="a"
                             startIcon={<ArrowBackIcon fontSize="small" />}
                         >
-                            Signup
+                            Sign In
                         </Button>
                     </NextLink>
                     <form onSubmit={formik.handleSubmit}>
