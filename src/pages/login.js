@@ -242,8 +242,6 @@ const Login = () => {
                 paddingTop: .5
               }}
             >
-              {/* Don't have an account?
-              {' '} */}
               <NextLink
                 href="/forgotPassword"
               >
@@ -256,6 +254,27 @@ const Login = () => {
                   }}
                 >
                   Forgot Password?
+                </Link>
+              </NextLink>
+            </Typography>
+
+            <Typography
+              color="textSecondary"
+              variant="body2"
+              align='center'
+              sx={{
+                paddingTop: .5
+              }}
+            >
+              <NextLink
+                href="/verify"
+                passHref
+              >
+                <Link
+                  variant="subtitle2"
+                  underline="hover"
+                >
+                  Verify Account
                 </Link>
               </NextLink>
             </Typography>
