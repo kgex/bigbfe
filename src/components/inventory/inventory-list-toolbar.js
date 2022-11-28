@@ -63,7 +63,7 @@ export const InventoryListToolbar = (props) => {
 
       </Box>
     </Box>
-    <Box sx={{ mt: 3 }}>
+    <Box sx={{ mt: 3,mb:3 }}>
       <Card>
         <CardContent>
           <Box sx={{ maxWidth: 500 }}>
