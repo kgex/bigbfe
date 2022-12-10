@@ -9,7 +9,9 @@ import api from '../utils/api';
 import { useEffect } from 'react';
 
 const Inventory = (props) => {
-  
+  const user = localStorage.getItem('user');
+  user=JSON.parse(user)
+  console.log(user.role)
   const [userId, setUserId] = useState(null);
 
   const getData = (values) => {
@@ -46,7 +48,7 @@ const Inventory = (props) => {
       }}
     >
       <Container maxWidth={false}>
-        <InventoryListToolbar/>
+        <InventoryListToolbar role={user.role}/>
         <Grid container spacing={9} s={{justifyContent: "center"}}>
           <Grid item xs="auto">
             <InventoryCard Img="https://www.raspberrypi.org/app/uploads/2019/06/HERO-ALT.jpg" count={10} Name={"Raspberry Pi"} />

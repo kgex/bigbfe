@@ -21,7 +21,7 @@ export const DashboardSidebar = (props) => {
     noSsr: false
   });
 
-  const [user, setUser] = useState({'full_name': ' ', 'email': ' ', 'role': 'student'});
+  const [user, setUser] = useState({'full_name': ' ', 'email': ' ', 'role': ''});
 
   useEffect(
     () => {
@@ -111,8 +111,7 @@ export const DashboardSidebar = (props) => {
           }}
         />
         <Box sx={{ flexGrow: 1 }}>
-          {/* { user.role === "student" ?  */}
-          {
+        { user.role === "student" ? 
           items.map((item) => (
             <NavItem
               key={item.title}
@@ -121,16 +120,17 @@ export const DashboardSidebar = (props) => {
               title={item.title}
             />
 
-          ))}
+          ))
 
-          {/* // )) : adminitems.map((item) => (
-          //   <NavItem
-          //     key={item.title}
-          //     icon={item.icon}
-          //     href={item.href}
-          //     title={item.title}
-          //   />
-          // ))} */}
+          : adminitems.map((item) => (
+            
+             <NavItem
+               key={item.title}
+               icon={item.icon}
+               href={item.href}
+               title={item.title}
+             />
+           ))}
           
         </Box>
       </Box>
