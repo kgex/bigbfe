@@ -50,20 +50,22 @@ export const InventoryListToolbar = (props) => {
         >
           Export
         </Button>
+        { props.role === "admin" ? 
+           <Button
+           color="primary"
+           variant="contained"
+           onClick={onClickHandle}
+         >
+           Add Inventory
+         </Button>
 
-
-        <Button
-          color="primary"
-          variant="contained"
-          onClick={onClickHandle}
-        >
-          Add Inventory
-        </Button>
-
-
+          : 
+          <div>
+            
+            </div>}
       </Box>
     </Box>
-    <Box sx={{ mt: 3 }}>
+    <Box sx={{ mt: 3,mb:3 }}>
       <Card>
         <CardContent>
           <Box sx={{ maxWidth: 500 }}>

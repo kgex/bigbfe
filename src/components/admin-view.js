@@ -20,7 +20,11 @@ const adminitems = [
       icon: (<UsersIcon fontSize="small" />),
       title: 'All Reports'
     },
- 
+    {
+      href: '/inventory',
+      icon: (<UsersIcon fontSize="small" />),
+      title: 'Inventory'
+    },
     {
       href: '/customers',
       icon: (<UsersIcon fontSize="small" />),
