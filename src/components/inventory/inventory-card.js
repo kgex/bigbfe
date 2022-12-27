@@ -11,8 +11,7 @@ function InventoryCard(props) {
         component="img"
         height="180"
         image={props.Img}
-        alt="green iguana"
-      />
+        alt="green iguana"/>
       <CardContent sx={{padding: "28px 24px"}} >
         <Typography gutterBottom variant="h5" component="div" sx={{textAlign:"center"}}>
         {props.Name}

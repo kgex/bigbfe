@@ -12,10 +12,10 @@ import { Upload as UploadIcon } from '../../icons/upload';
 import { Download as DownloadIcon } from '../../icons/download';
 import router from 'next/router';
 
-export const InventoryListToolbar = (props) => {
+export const AllRequestListToolbar = (props) => {
 
   function onClickHandle(e) {
-    router.push('/addInventory');
+    router.push('/allrequest');
     console.log('You clicked');
   }
 
@@ -35,11 +35,9 @@ export const InventoryListToolbar = (props) => {
         sx={{ m: 1 }}
         variant="h4"
       >
-        Inventories
+        All Request
       </Typography>
       <Box sx={{ m: 1 }}>
-      { props.role === "admin" ? 
-      <>
         <Button
           startIcon={(<UploadIcon fontSize="small" />)}
           sx={{ mr: 1 }}
@@ -51,20 +49,10 @@ export const InventoryListToolbar = (props) => {
           sx={{ mr: 1 }}
         >
           Export
-        </Button>
-        <Button
-           color="primary"
-           variant="contained"
-           onClick={onClickHandle}
-         >
-           Add Inventory
-         </Button>
-         </>
-          : 
-          <></>}
+        </Button>  
       </Box>
     </Box>
-    <Box sx={{ mt: 3,mb:3 }}>
+    <Box sx={{ mt: 3 }}>
       <Card>
         <CardContent>
           <Box sx={{ maxWidth: 500 }}>
@@ -91,4 +79,4 @@ export const InventoryListToolbar = (props) => {
     </Box>
   </Box>
 );
-            }
+}

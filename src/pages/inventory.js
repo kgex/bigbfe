@@ -49,7 +49,7 @@ const Inventory = (props) => {
     >
       <Container maxWidth={false}>
         <InventoryListToolbar role={user.role}/>
-        <Grid container spacing={9} s={{justifyContent: "center"}}>
+        <Grid container spacing={9} sx={{justifyContent: "center"}}>
           <Grid item xs="auto">
             <InventoryCard Img="https://www.raspberrypi.org/app/uploads/2019/06/HERO-ALT.jpg" count={10} Name={"Raspberry Pi"} />
           </Grid>
@@ -60,11 +60,11 @@ const Inventory = (props) => {
             <InventoryCard Img="https://protosupplies.com/wp-content/uploads/2018/12/Solderless-Breadboard-830-Pro-Line-800x600.jpg" count={10} Name={"Breadboard"}/>
           </Grid>
           <Grid item xs="auto">
-          <InventoryCard Img="https://protosupplies.com/wp-content/uploads/2018/07/ESP8266-NodeMCU-V1.0-ESP-12E-WiFi-Module.jpg" count={10} Name={"Breadboard"}/>
+          <InventoryCard Img="https://protosupplies.com/wp-content/uploads/2018/07/ESP8266-NodeMCU-V1.0-ESP-12E-WiFi-Module.jpg" count={10} Name={"NodeMCU"}/>
           </Grid>
         </Grid>
         <Box sx={{ mt: 3 }}>
-          <InventoryListResults />
+          {/* <InventoryListResults /> */}
         </Box>
       </Container>
     </Box>

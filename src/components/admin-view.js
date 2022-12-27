@@ -31,6 +31,11 @@ const adminitems = [
       title: 'Customers'
     },
     {
+      href: '/allrequest',
+      icon: (<ChartBarIcon fontSize="small" />),
+      title: 'Inventory_Request'
+    },
+    {
       href: '/products',
       icon: (<ShoppingBagIcon fontSize="small" />),
       title: 'Products'
