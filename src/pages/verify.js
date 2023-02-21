@@ -9,15 +9,32 @@ import api from "../utils/api";
 import qs from 'qs';
 import { useState } from 'react';
 import LoadingButton from '@mui/lab/LoadingButton';
+// import CustomAlert from "src/components/custom-alert";
 
 const Verify = () => {
 
+
     const router = useRouter();
+
+    const resendOTP = (email) => {
+        console.log("calling")
+
+        api.post(`/resend-otp`, null, { params: { user_email: email } })
+            .then(res => {
+                console.log(res.data);
+                alert("OTP Sent Successfully")
+            }).catch(err => {
+                console.log("error log")
+                console.log(err);
+                alert("Error sending otp. contact admin")
+
+            })
+    }
 
     const formik = useFormik({
         initialValues: {
             email: "",
-            otp: 0
+            otp: undefined
         },
         validationSchema: Yup.object({
             email: Yup
@@ -78,14 +95,14 @@ const Verify = () => {
             >
                 <Container maxWidth="sm">
                     <NextLink
-                        href="/register"
+                        href="/login"
                         passHref
                     >
                         <Button
                             component="a"
                             startIcon={<ArrowBackIcon fontSize="small" />}
                         >
-                            Signup
+                            Sign In
                         </Button>
                     </NextLink>
                     <form onSubmit={formik.handleSubmit}>
@@ -118,6 +135,12 @@ const Verify = () => {
                             value={formik.values.email}
                             variant="outlined"
                         />
+
+                        <Button variant="contained"
+                            onClick={() => { resendOTP(formik.values.email) }}>
+                            Resend OTP
+
+                        </Button>
 
                         <TextField
                             error={Boolean(formik.touched.otp && formik.errors.otp)}
@@ -152,6 +175,7 @@ const Verify = () => {
                     </form>
                 </Container>
             </Box>
+
         </>
     );
 };

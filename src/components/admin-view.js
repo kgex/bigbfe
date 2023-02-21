@@ -8,6 +8,7 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { ChartBar as ChartBarIcon } from '../icons/chart-bar';
 import { Cog as CogIcon } from '../icons/cog';
 import { Lock as LockIcon } from '../icons/lock';
+import InventoryIcon from '@mui/icons-material/Inventory';
 
 const adminitems = [
     {
@@ -25,6 +26,11 @@ const adminitems = [
       icon: (<UsersIcon fontSize="small" />),
       title: 'Inventory'
     },
+      {
+    href: '/attendance',
+    icon: (<UsersIcon fontSize="small" />),
+    title: 'Attendance'
+  },
     {
       href: '/customers',
       icon: (<UsersIcon fontSize="small" />),
@@ -50,6 +56,11 @@ const adminitems = [
       icon: (<CogIcon fontSize="small" />),
       title: 'Settings'
     },
+      {
+    href: '/students',
+    icon: (<UserIcon fontSize="small" />),
+    title: 'Students'
+  },
     {
       href: '/logout',
       icon: (<LockIcon fontSize="small" />),
@@ -61,5 +72,10 @@ const adminitems = [
       title: 'Error'
     },
   ];
+  
 
-  export {adminitems};
+ 
+
+];
+
+export { adminitems };

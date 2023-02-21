@@ -21,13 +21,15 @@ export const DashboardSidebar = (props) => {
     noSsr: false
   });
 
-  const [user, setUser] = useState({'full_name': ' ', 'email': ' ', 'role': ''});
+
+  const [user, setUser] = useState({ 'full_name': ' ', 'email': ' ', 'role': 'student' });
 
   useEffect(
     () => {
 
       const user = localStorage.getItem('user');
-      if (user != null){
+      console.log(user);
+      if (user != null) {
         setUser(JSON.parse(user));
       }
       if (!router.isReady) {
@@ -58,11 +60,11 @@ export const DashboardSidebar = (props) => {
               passHref
             >
               <a>
-              <img
-              alt="Go to pro"
-              src="/static/images/kgx.png"
-              width="170"
-            />
+                <img
+                  alt="Go to pro"
+                  src="/static/images/kgx.png"
+                  width="170"
+                />
               </a>
             </NextLink>
           </Box>
