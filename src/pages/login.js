@@ -58,14 +58,13 @@ const Login = () => {
         .max(50)
         .required(
           'Email is required')
-        .matches(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[kgkite]+(?:\.[ac.in]+)*$/, 'Use your college email only!'),
+        .matches(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[kgkite | kgcas]+(?:\.[ac.in | com]+)*$/, 'Use your college email only!'),
       password: Yup
         .string()
         .max(16)
         .required(
           'Password is required'),
     }),
-
 
     onSubmit: values => {
       console.log(JSON.stringify(values))

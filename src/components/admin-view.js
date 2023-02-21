@@ -11,62 +11,71 @@ import { Lock as LockIcon } from '../icons/lock';
 import InventoryIcon from '@mui/icons-material/Inventory';
 
 const adminitems = [
-  {
-    href: '/dashboard',
-    icon: (<ChartBarIcon fontSize="small" />),
-    title: 'Dashboard'
-  },
-  {
-    href: '/allreports',
-    icon: (<UsersIcon fontSize="small" />),
-    title: 'All Reports'
-  },
-  {
-    href: '/inventory',
-    icon: (<InventoryIcon fontSize="small" />),
-    title: 'Inventory'
-  },
-  {
+    {
+      href: '/dashboard',
+      icon: (<ChartBarIcon fontSize="small" />),
+      title: 'Dashboard'
+    },
+    {
+      href: '/allreports',
+      icon: (<UsersIcon fontSize="small" />),
+      title: 'All Reports'
+    },
+    {
+      href: '/inventory',
+      icon: (<UsersIcon fontSize="small" />),
+      title: 'Inventory'
+    },
+      {
     href: '/attendance',
     icon: (<UsersIcon fontSize="small" />),
     title: 'Attendance'
   },
-  {
-    href: '/customers',
-    icon: (<UsersIcon fontSize="small" />),
-    title: 'Customers'
-  },
-  {
-    href: '/products',
-    icon: (<ShoppingBagIcon fontSize="small" />),
-    title: 'Products'
-  },
-  {
-    href: '/account',
-    icon: (<UserIcon fontSize="small" />),
-    title: 'Account'
-  },
-  {
-    href: '/settings',
-    icon: (<CogIcon fontSize="small" />),
-    title: 'Settings'
-  },
-  {
-    href: '/logout',
-    icon: (<LockIcon fontSize="small" />),
-    title: 'Logout'
-  },
-  ,
-  {
+    {
+      href: '/customers',
+      icon: (<UsersIcon fontSize="small" />),
+      title: 'Customers'
+    },
+    {
+      href: '/allrequest',
+      icon: (<ChartBarIcon fontSize="small" />),
+      title: 'Inventory_Request'
+    },
+    {
+      href: '/products',
+      icon: (<ShoppingBagIcon fontSize="small" />),
+      title: 'Products'
+    },
+    {
+      href: '/account',
+      icon: (<UserIcon fontSize="small" />),
+      title: 'Account'
+    },
+    {
+      href: '/settings',
+      icon: (<CogIcon fontSize="small" />),
+      title: 'Settings'
+    },
+      {
     href: '/students',
     icon: (<UserIcon fontSize="small" />),
     title: 'Students'
   },
-  {
-    href: '/404',
-    icon: (<XCircleIcon fontSize="small" />),
-    title: 'Error'
-  },
+    {
+      href: '/logout',
+      icon: (<LockIcon fontSize="small" />),
+      title: 'Logout'
+    },
+    {
+      href: '/404',
+      icon: (<XCircleIcon fontSize="small" />),
+      title: 'Error'
+    },
+  ];
+  
+
+ 
+
 ];
 
 export { adminitems };

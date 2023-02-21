@@ -149,11 +149,6 @@ const Register = () => {
           clg_id: '2'
         },
         {
-          dep_id: '204',
-          d_name: 'Commerce',
-          clg_id: '2'
-        },
-        {
           dep_id: '205',
           d_name: 'Commerce CA',
           clg_id: '2'
@@ -216,6 +211,20 @@ const Register = () => {
         {
           dep_id: '303',
           d_name: 'Msc Software System',
+          clg_id: '2'
+        },
+        {
+          dep_id: '304',
+          d_name: 'BCA ',
+          clg_id: '2'
+        },
+        {
+          dep_id: '305',
+          d_name: 'BSA ',
+          clg_id: '2'
+        },        {
+          dep_id: '306',
+          d_name: 'Commerce',
           clg_id: '2'
         }
       ]
