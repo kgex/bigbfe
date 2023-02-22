@@ -237,7 +237,6 @@ const Register = () => {
 
   const [deptid, setDeptid] = useState('');
   const [deptName, setDeptName] = useState('');
-  const [cyear, setCyear] = useState('');
   const [alertData, setAlertData] = useState({ 'open': false, 'message': '' });
 
   const handleCname = (e) => {
@@ -254,42 +253,12 @@ const Register = () => {
     setDeptid(deptid);
   }
 
-  const handleYear = (e) => {
-    const cyear = e.target.value;
-
-    formik.values.join_year = cyear
-    if (deptid === '201' | deptid === '202' | deptid === '203' | deptid === '204' | deptid === '205' | deptid === '206'
-      | deptid === '207' | deptid === '208' | deptid === '209' | deptid === '210' | deptid === '211' | deptid === '212' | deptid === '213' | deptid === '214'
-    ) {
-      let t = parseInt(cyear);
-      t = t + 3;
-
-      setCyear(t)
-    }
-    else if (deptid === '101' | deptid === '102' | deptid === '103' | deptid === '104' | deptid === '105' | deptid === '106') {
-      let t = parseInt(cyear);
-      t = t + 4;
-
-      setCyear(t)
-    }
-    else if (deptid === '301' | deptid === '302' | deptid === '303' | deptid === '401' | deptid === '402' | deptid === '403') {
-      let t = parseInt(cyear);
-      t = t + 2;
-
-      setCyear(t)
-    } else {
-      setCyear(t)
-    }
-
-
-  }
 
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
       email: '',
       full_name: '',
-      last_name: '',
       phone_no: '',
       register_num: '',
       college: '',
@@ -297,6 +266,7 @@ const Register = () => {
       join_year: '',
       grad_year: '',
       password: '',
+      category : ''
     },
     validationSchema: Yup.object({
 
@@ -312,10 +282,6 @@ const Register = () => {
         .string()
         .max(50)
         .required('First name is required'),
-      last_name: Yup
-        .string()
-        .max(50)
-        .required('Last name is required'),
       phone_no: Yup
         .string()
         .max(50)
@@ -337,6 +303,9 @@ const Register = () => {
       stay: Yup
         .string()
         .required('Gender is required'),
+      category: Yup
+      .string()
+      .required('Category is required'),
       join_year: Yup
         .string()
         .required('Join year is required'),
@@ -354,10 +323,10 @@ const Register = () => {
     }),
 
     onSubmit: values => {
-      // console.log(JSON.stringify({ ...values, role: "student", dept: deptName }))
+      console.log(JSON.stringify({ ...values, join_year: parseInt(formik.values.join_year), grad_year: parseInt(formik.values.grad_year) }))
 
       api.post(
-        `/users/`, { ...values, role: "student", dept: deptName })
+        `/users/`,{ ...values, join_year: parseInt(formik.values.join_year), grad_year: parseInt(formik.values.grad_year) })
         .then(res => {
           // console.log(res);
           router.push('/verify');
@@ -435,21 +404,6 @@ const Register = () => {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                   value={formik.values.full_name}
-                  variant="outlined"
-                />
-              </Grid>
-
-              <Grid item xs={6}>
-                <TextField
-                  error={Boolean(formik.touched.last_name && formik.errors.last_name)}
-                  fullWidth
-                  helperText={formik.touched.last_name && formik.errors.last_name}
-                  label="Last Name"
-                  margin="normal"
-                  name="last_name"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  value={formik.values.last_name}
                   variant="outlined"
                 />
               </Grid>
@@ -568,7 +522,7 @@ const Register = () => {
                   value={formik.values.dept}
 
                 >
-                  <InputLabel>
+                  <InputLabel variant="standard">
                     Department
                   </InputLabel>
 
@@ -631,7 +585,7 @@ const Register = () => {
                   value={formik.values.stay}
                 >
                   <InputLabel variant="standard">
-                    Stay
+                    Stay  
                   </InputLabel>
 
                   <NativeSelect
@@ -642,11 +596,43 @@ const Register = () => {
                     variant="outlined"
                     value={formik.values.stay}
                   >
-                    <option>Select</option>
+                    <option>Select </option>
                     {
                       ['Home', 'Outside Hostel', 'College Hostel'].map((sty) => (
                         <option value={sty}
                           key={sty}>{sty}</option>
+                      ))
+                    }
+                    
+                  </NativeSelect>
+                </FormControl>
+              </Grid>
+
+
+              <Grid item xs={6}>
+                <FormControl fullWidth
+                  error={Boolean(formik.touched.category && formik.errors.category)}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.category}
+                >
+                  <InputLabel variant="standard">
+                  Category
+                  </InputLabel>
+
+                  <NativeSelect
+                    label="Category"
+                    name="category"
+                    input={<BootstrapInput />}
+                    onBlur={formik.handleBlur}
+                    variant="outlined"
+                    value={formik.values.category}
+                  >
+                    <option>Select</option>
+                    {
+                      ['Cheif', 'Lead', 'pro'].map((item) => (
+                        <option value={item}
+                          key={item}>{item}</option>
                       ))
                     }
                   </NativeSelect>
@@ -654,9 +640,7 @@ const Register = () => {
               </Grid>
 
               <Grid item xs={6}>
-                <InputLabel variant="standard">
-                  College Join Year
-                </InputLabel>
+     
                 <TextField
                   error={Boolean(formik.touched.join_year && formik.errors.join_year)}
                   fullWidth
@@ -665,19 +649,20 @@ const Register = () => {
                   margin="normal"
                   name="join_year"
                   onBlur={formik.handleBlur}
-                  onChange={(e) => { handleYear(e) }}
+                  onChange={formik.handleChange}
                   value={formik.values.join_year}
                   variant="outlined"
+                  type={'number'}
+
                 />
               </Grid>
 
               <Grid item xs={6}>
-                <InputLabel variant="standard">
-                  College Pass out Year
-                </InputLabel>
+               
                 <TextField
                   error={Boolean(formik.touched.grad_year && formik.errors.grad_year)}
                   fullWidth
+                  type={'number'}
                   helperText={formik.touched.grad_year && formik.errors.grad_year}
                   margin="normal"
                   label="Pass year"
@@ -685,8 +670,7 @@ const Register = () => {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                   variant="outlined"
-                  disabled
-                  value={formik.values.grad_year = cyear}
+                  value={formik.values.grad_year}
                 />
               </Grid>
             </Grid>
