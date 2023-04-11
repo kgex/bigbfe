@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { IconButton } from "@mui/material";
 import React from "react";
-import PerfectScrollbar from 'react-perfect-scrollbar';
-import PropTypes from 'prop-types';
-import { format } from 'date-fns';
+import PerfectScrollbar from "react-perfect-scrollbar";
+import PropTypes from "prop-types";
+import { format } from "date-fns";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import {
@@ -19,19 +19,13 @@ import {
   TableRow,
   Typography,
   Collapse,
-  Paper
-} from '@mui/material';
-import {
-  Button,
-  CardContent,
-  TextField,
-  InputAdornment,
-  SvgIcon
-} from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AddIcon from '@mui/icons-material/Add';
-import { Search as SearchIcon } from '../../icons/search';
+  Paper,
+} from "@mui/material";
+import { Button, CardContent, TextField, InputAdornment, SvgIcon } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
+import { Search as SearchIcon } from "../../icons/search";
 
 function CustomRow(props) {
   const { row } = props;
@@ -39,21 +33,13 @@ function CustomRow(props) {
 
   return (
     <React.Fragment>
-
-
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-
-
+      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
         <TableCell align="center">{row.name}</TableCell>
         <TableCell align="center">{row.attendance.in_time}</TableCell>
         <TableCell align="center">{row.attendance.out_time}</TableCell>
         <TableCell align="center">{row.attendance.user_id}</TableCell>
         <TableCell align="center">
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => setOpen(!open)}
-          >
+          <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
@@ -66,16 +52,13 @@ function CustomRow(props) {
               <Typography variant="h6" gutterBottom component="div">
                 {row.description}
               </Typography>
-
             </Box>
           </Collapse>
         </TableCell>
       </TableRow>
-
     </React.Fragment>
   );
 }
-
 
 export const AttendanceListResults = ({ attendances, ...rest }) => {
   const [open, setOpen] = useState(false);
@@ -92,39 +75,30 @@ export const AttendanceListResults = ({ attendances, ...rest }) => {
     setPage(newPage);
   };
 
-
   const onClickHandle = (e) => {
-    router.push('/report');
-    console.log('You clicked');
-  }
-
+    router.push("/report");
+  };
 
   return (
-    <Card {...rest}
-      style={
-        {
-          overflowX: "auto"
-        }
-
-      }
+    <Card
+      {...rest}
+      style={{
+        overflowX: "auto",
+      }}
     >
-      <Box >
+      <Box>
         <Box
           sx={{
-            alignItems: 'center',
-            display: 'flex',
-            justifyContent: 'space-between',
-            flexWrap: 'wrap',
-            m: -1
+            alignItems: "center",
+            display: "flex",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            m: -1,
           }}
         >
-          <Typography
-            sx={{ m: 1 }}
-            variant="h4"
-          >
+          <Typography sx={{ m: 1 }} variant="h4">
             Attendance
           </Typography>
-
         </Box>
 
         <Box sx={{ mt: 3 }}>
@@ -136,14 +110,11 @@ export const AttendanceListResults = ({ attendances, ...rest }) => {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <SvgIcon
-                          color="action"
-                          fontSize="small"
-                        >
+                        <SvgIcon color="action" fontSize="small">
                           <SearchIcon />
                         </SvgIcon>
                       </InputAdornment>
-                    )
+                    ),
                   }}
                   placeholder="Search report"
                   variant="outlined"
@@ -156,7 +127,6 @@ export const AttendanceListResults = ({ attendances, ...rest }) => {
       <PerfectScrollbar>
         <Paper className={attendances.root}>
           <Box sx={{ minWidth: 1050 }}>
-
             <Table>
               <TableHead>
                 <TableRow>
@@ -171,39 +141,23 @@ export const AttendanceListResults = ({ attendances, ...rest }) => {
                     onChange={handleSelectAll}
                   />
                 </TableCell> */}
-                  <TableCell align="center">
-                    Type
-                  </TableCell>
-                  <TableCell align="center">
-                    Title
-                  </TableCell>
-                  <TableCell align="center">
-                    Start Time
-                  </TableCell>
-                  <TableCell align="center">
-                    Stop Time
-                  </TableCell>
-                  <TableCell align="center">
-                    Description
-                  </TableCell>
+                  <TableCell align="center">Type</TableCell>
+                  <TableCell align="center">Title</TableCell>
+                  <TableCell align="center">Start Time</TableCell>
+                  <TableCell align="center">Stop Time</TableCell>
+                  <TableCell align="center">Description</TableCell>
                 </TableRow>
               </TableHead>
 
               <TableBody>
                 {attendances.slice(0, limit).map((item, index) => (
-
-                  <CustomRow key={index}
-                    row={item} />
-
+                  <CustomRow key={index} row={item} />
                 ))}
-
               </TableBody>
             </Table>
 
             <TablePagination
-              style={{
-
-              }}
+              style={{}}
               component="div"
               count={attendances.length}
               onPageChange={handlePageChange}
@@ -214,7 +168,6 @@ export const AttendanceListResults = ({ attendances, ...rest }) => {
             />
           </Box>
         </Paper>
-
       </PerfectScrollbar>
     </Card>
   );
@@ -223,4 +176,3 @@ export const AttendanceListResults = ({ attendances, ...rest }) => {
 // CustomerListResults.propTypes = {
 //   customers: PropTypes.array.isRequired
 // };
-

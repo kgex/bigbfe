@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import { IconButton } from "@mui/material";
 import React from "react";
-import PerfectScrollbar from 'react-perfect-scrollbar';
-import PropTypes from 'prop-types';
-import { format } from 'date-fns';
+import PerfectScrollbar from "react-perfect-scrollbar";
+import PropTypes from "prop-types";
+import { format } from "date-fns";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { Search as SearchIcon } from '../../icons/search';
-import { Upload as UploadIcon } from '../../icons/upload';
-import { Download as DownloadIcon } from '../../icons/download';
-import router from 'next/router';
+import { Search as SearchIcon } from "../../icons/search";
+import { Upload as UploadIcon } from "../../icons/upload";
+import { Download as DownloadIcon } from "../../icons/download";
+import router from "next/router";
 
 import {
   Avatar,
@@ -29,9 +29,9 @@ import {
   CardContent,
   TextField,
   InputAdornment,
-  SvgIcon
-} from '@mui/material';
-import { SeverityPill } from '../severity-pill';
+  SvgIcon,
+} from "@mui/material";
+import { SeverityPill } from "../severity-pill";
 
 function Row(props) {
   const { row } = props;
@@ -39,10 +39,7 @@ function Row(props) {
 
   return (
     <React.Fragment>
-
-
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-
+      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
         <TableCell align="center">{row.id}</TableCell>
         <TableCell align="center">{row.full_name}</TableCell>
         <TableCell align="center">{row.register_num}</TableCell>
@@ -54,21 +51,13 @@ function Row(props) {
         <TableCell align="center">{row.grad_year}</TableCell>
         <TableCell align="center">{row.gender}</TableCell> */}
         <TableCell>
-          <SeverityPill
-            color={
-              row.is_active ? 'success' : 'error'
-            }
-          >
-            {row.is_active ? 'Active' : 'Not Activated'}
+          <SeverityPill color={row.is_active ? "success" : "error"}>
+            {row.is_active ? "Active" : "Not Activated"}
           </SeverityPill>
         </TableCell>
 
         <TableCell align="center">
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => setOpen(!open)}
-          >
+          <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
@@ -81,31 +70,25 @@ function Row(props) {
               <Typography variant="h6" gutterBottom component="div">
                 {row.description}
               </Typography>
-
             </Box>
           </Collapse>
         </TableCell>
       </TableRow>
-
     </React.Fragment>
   );
 }
 
-
 export const StudentListResults = ({ students, ...rest }) => {
-
   const [searched, setSearched] = useState("");
   const [rows, setRows] = useState(students);
   const [limit, setLimit] = useState(200);
   const [page, setPage] = useState(0);
 
   const onClickHandle = (e) => {
-    router.push('/student');
-    console.log('You clicked');
-  }
+    router.push("/student");
+  };
 
   const requestSearch = (searchedVal) => {
-    console.log(searchedVal);
     const filteredRows = students.filter((row) => {
       return row.full_name.toLowerCase().includes(searchedVal.toLowerCase());
     });
@@ -119,50 +102,34 @@ export const StudentListResults = ({ students, ...rest }) => {
 
   useEffect(() => {
     setRows(students);
-  }, [students])
+  }, [students]);
 
   return (
     <>
-      <Box >
+      <Box>
         <Box
           sx={{
-            alignItems: 'center',
-            display: 'flex',
-            justifyContent: 'space-between',
-            flexWrap: 'wrap',
-            m: -1
+            alignItems: "center",
+            display: "flex",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            m: -1,
           }}
         >
-          <Typography
-            sx={{ m: 1 }}
-            variant="h4"
-          >
+          <Typography sx={{ m: 1 }} variant="h4">
             Students
           </Typography>
           <Box sx={{ m: 1 }}>
-            <Button
-              startIcon={(<UploadIcon fontSize="small" />)}
-              sx={{ mr: 1 }}
-            >
+            <Button startIcon={<UploadIcon fontSize="small" />} sx={{ mr: 1 }}>
               Import
             </Button>
-            <Button
-              startIcon={(<DownloadIcon fontSize="small" />)}
-              sx={{ mr: 1 }}
-            >
+            <Button startIcon={<DownloadIcon fontSize="small" />} sx={{ mr: 1 }}>
               Export
             </Button>
 
-
-            <Button
-              color="primary"
-              variant="contained"
-              onClick={onClickHandle}
-            >
+            <Button color="primary" variant="contained" onClick={onClickHandle}>
               Add Students
             </Button>
-
-
           </Box>
         </Box>
         <Box sx={{ mt: 3 }}>
@@ -174,14 +141,11 @@ export const StudentListResults = ({ students, ...rest }) => {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <SvgIcon
-                          color="action"
-                          fontSize="small"
-                        >
+                        <SvgIcon color="action" fontSize="small">
                           <SearchIcon />
                         </SvgIcon>
                       </InputAdornment>
-                    )
+                    ),
                   }}
                   placeholder="Search student"
                   variant="outlined"
@@ -190,7 +154,6 @@ export const StudentListResults = ({ students, ...rest }) => {
                     setSearched(e.target.value);
                     requestSearch(e.target.value);
                   }}
-
                 />
               </Box>
             </CardContent>
@@ -198,42 +161,25 @@ export const StudentListResults = ({ students, ...rest }) => {
         </Box>
       </Box>
 
-      <Card {...rest}
-        style={
-          {
-            overflowX: "auto"
-          }
-
-        }
+      <Card
+        {...rest}
+        style={{
+          overflowX: "auto",
+        }}
       >
         <PerfectScrollbar>
           <Paper className={students.root}>
             <Box sx={{ minWidth: 1050 }}>
-
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell align="center">
-                      User Id
-                    </TableCell>
-                    <TableCell align="center">
-                      Full Name
-                    </TableCell>
-                    <TableCell align="center">
-                      Register Number
-                    </TableCell>
-                    <TableCell align="center">
-                      Email
-                    </TableCell>
-                    <TableCell align="center">
-                      RFID Key
-                    </TableCell>
-                    <TableCell align="center">
-                      College
-                    </TableCell>
-                    <TableCell align="center">
-                      Department
-                    </TableCell>
+                    <TableCell align="center">User Id</TableCell>
+                    <TableCell align="center">Full Name</TableCell>
+                    <TableCell align="center">Register Number</TableCell>
+                    <TableCell align="center">Email</TableCell>
+                    <TableCell align="center">RFID Key</TableCell>
+                    <TableCell align="center">College</TableCell>
+                    <TableCell align="center">Department</TableCell>
                     {/* <TableCell align="center">
                       Join Year
                     </TableCell>
@@ -243,31 +189,21 @@ export const StudentListResults = ({ students, ...rest }) => {
                     <TableCell align="center">
                       Gender
                     </TableCell> */}
-                    <TableCell align="center">
-                      Active
-                    </TableCell>
-                    <TableCell align="center">
-                      More
-                    </TableCell>
+                    <TableCell align="center">Active</TableCell>
+                    <TableCell align="center">More</TableCell>
                   </TableRow>
                 </TableHead>
 
                 <TableBody>
                   {rows.slice(0, limit).map((item, index) => (
-                    <Row key={index}
-                      row={item} />
+                    <Row key={index} row={item} />
                   ))}
-
                 </TableBody>
               </Table>
-
             </Box>
           </Paper>
-
         </PerfectScrollbar>
       </Card>
     </>
-
   );
 };
-

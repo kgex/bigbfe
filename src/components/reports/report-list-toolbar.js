@@ -5,43 +5,37 @@ import {
   CardContent,
   TextField,
   InputAdornment,
-  SvgIcon, Typography
-} from '@mui/material';
+  SvgIcon,
+  Typography,
+} from "@mui/material";
 
-import { Upload as UploadIcon } from '../../icons/upload';
-import { Download as DownloadIcon } from '../../icons/download';
-import { Search as SearchIcon } from '../../icons/search';
+import { Upload as UploadIcon } from "../../icons/upload";
+import { Download as DownloadIcon } from "../../icons/download";
+import { Search as SearchIcon } from "../../icons/search";
 
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AddIcon from '@mui/icons-material/Add';
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
 
-import router from 'next/router';
-
+import router from "next/router";
 
 export const ReportListToolbar = (props) => {
-
   function onClickHandle(e) {
-    router.push('/report');
-    console.log('You clicked');
+    router.push("/report");
   }
-
 
   return (
     <Box {...props}>
       <Box
         sx={{
-          alignItems: 'center',
-          display: 'flex',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          m: -1
+          alignItems: "center",
+          display: "flex",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+          m: -1,
         }}
       >
-        <Typography
-          sx={{ m: 1 }}
-          variant="h4"
-        >
+        <Typography sx={{ m: 1 }} variant="h4">
           Reports
         </Typography>
         <Box sx={{ m: 1 }}>
@@ -62,7 +56,7 @@ export const ReportListToolbar = (props) => {
             // color="primary"
             // variant="contained"
             onClick={onClickHandle}
-            startIcon={(<EditIcon fontSize='small' />)}
+            startIcon={<EditIcon fontSize="small" />}
             sx={{ mr: 1 }}
           >
             Edit
@@ -72,7 +66,7 @@ export const ReportListToolbar = (props) => {
             // color="primary"
             // variant="outlined"
             onClick={onClickHandle}
-            startIcon={(<DeleteIcon fontSize='small' />)}
+            startIcon={<DeleteIcon fontSize="small" />}
             sx={{ mr: 1 }}
           >
             Delete
@@ -82,12 +76,10 @@ export const ReportListToolbar = (props) => {
             color="primary"
             variant="contained"
             onClick={onClickHandle}
-            startIcon={(<AddIcon fontSize="small" />)}
+            startIcon={<AddIcon fontSize="small" />}
           >
             Add Reports
           </Button>
-
-
         </Box>
       </Box>
       <Box sx={{ mt: 3 }}>
@@ -99,14 +91,11 @@ export const ReportListToolbar = (props) => {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <SvgIcon
-                        color="action"
-                        fontSize="small"
-                      >
+                      <SvgIcon color="action" fontSize="small">
                         <SearchIcon />
                       </SvgIcon>
                     </InputAdornment>
-                  )
+                  ),
                 }}
                 placeholder="Search report"
                 variant="outlined"
@@ -117,4 +106,4 @@ export const ReportListToolbar = (props) => {
       </Box>
     </Box>
   );
-}
+};
