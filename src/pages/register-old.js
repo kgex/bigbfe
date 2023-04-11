@@ -54,7 +54,7 @@ const Register = () => {
     }),
 
     onSubmit: (values) => {
-      api.post(`users/`, { ...values, role: "student" }).then((res) => {
+      api.post("users/", { ...values, role: "student" }).then((res) => {
         router.push("/verify");
       });
     },

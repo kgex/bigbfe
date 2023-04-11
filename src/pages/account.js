@@ -16,7 +16,7 @@ const Account = () => {
     console.log(token);
 
     api
-      .get(`users/me/`, {
+      .get("users/me/", {
         headers: {
           Authorization: `bearer ${token}`,
         },

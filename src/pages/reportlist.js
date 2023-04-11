@@ -15,7 +15,7 @@ const ReportList = (props) => {
     const token = localStorage.getItem("token");
 
     api
-      .get(`users/1/reports`, {
+      .get("users/1/reports", {
         headers: {
           Authorization: `bearer ${token}`,
         },

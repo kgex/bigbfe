@@ -29,7 +29,7 @@ const Verify = () => {
 
   const resendOTP = (email) => {
     api
-      .post(`/resend-otp`, null, { params: { user_email: email } })
+      .post("/resend-otp", null, { params: { user_email: email } })
       .then((res) => {
         alert("OTP Sent Successfully");
       })
@@ -62,7 +62,7 @@ const Verify = () => {
         otp: parseInt(values.otp),
       };
       api
-        .post(`verify`, data)
+        .post("verify", data)
         .then((res) => {
           router.push("/login");
         })

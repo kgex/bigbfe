@@ -17,7 +17,7 @@ const StudentList = (props) => {
 
     if (userId != null) {
       api
-        .get(`/users/?skip=0&limit=200`, {
+        .get("/users/?skip=0&limit=200", {
           headers: {
             Authorization: `bearer ${token}`,
           },

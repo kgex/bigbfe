@@ -305,7 +305,7 @@ const Register = () => {
       );
 
       api
-        .post(`/users/`, {
+        .post("/users/", {
           ...values,
           join_year: parseInt(formik.values.join_year),
           grad_year: parseInt(formik.values.grad_year),

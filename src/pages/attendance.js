@@ -20,7 +20,7 @@ const Attendance = (props) => {
 
     if (userId != null) {
       api
-        .get(`/attendance`, {
+        .get("/attendance", {
           headers: {
             Authorization: `bearer ${token}`,
           },
