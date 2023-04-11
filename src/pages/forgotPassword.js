@@ -96,7 +96,7 @@ export default function ForgotPassword() {
 
   const passwordData = (values) => {
     api
-      .post(`enterotp`, { ...values, email: email.user_email })
+      .post("enterotp", { ...values, email: email.user_email })
       .then((res) => {
         if (res.data.status === "failure") {
           setStatus("failed");
@@ -140,13 +140,13 @@ export default function ForgotPassword() {
             <DialogContent>
               <DialogContentText id="alert-dialog-description">
                 {status === "success"
-                  ? `Your password was successfully changed`
-                  : `Sorry, something went wrong. Please try again`}
+                  ? "Your password was successfully changed"
+                  : "Sorry, something went wrong. Please try again"}
               </DialogContentText>
             </DialogContent>
             <DialogActions>
               <Button onClick={handleClose} autoFocus>
-                {status === "success" ? `Login again` : `Ok`}
+                {status === "success" ? "Login again" : "Ok"}
               </Button>
             </DialogActions>
           </Dialog>

@@ -23,7 +23,7 @@ const Account = () => {
     const user = localStorage.getItem("user");
     setUserId(JSON.parse(user).user_id);
 
-    api.get(`clients`).then((res) => {
+    api.get("clients").then((res) => {
       localStorage.setItem("client", JSON.stringify(res.data));
     });
 

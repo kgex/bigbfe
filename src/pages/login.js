@@ -78,7 +78,7 @@ const Login = () => {
 
     onSubmit: (values) => {
       api
-        .post(`/token`, qs.stringify(values))
+        .post("/token", qs.stringify(values))
         .then((res) => {
           localStorage.setItem("token", res.data.access_token);
           localStorage.setItem("user", parseJwt(res.data.access_token));
