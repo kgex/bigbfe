@@ -1,10 +1,10 @@
-import { useState } from "react"
-import Head from 'next/head';
-import NextLink from 'next/link';
-import { useRouter } from 'next/router';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import qs from 'qs';
+import { useState } from "react";
+import Head from "next/head";
+import NextLink from "next/link";
+import { useRouter } from "next/router";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import qs from "qs";
 import {
   Box,
   Button,
@@ -13,107 +13,81 @@ import {
   FormHelperText,
   Link,
   TextField,
-  Typography
-} from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import api from '../utils/api';
-import InputAdornment from '@mui/material/InputAdornment';
-import IconButton from '@mui/material/IconButton';
-import ShowHidePassword from 'src/components/showHidePassword';
-import LoadingButton from '@mui/lab/LoadingButton';
+  Typography,
+} from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import api from "../utils/api";
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
+import ShowHidePassword from "src/components/showHidePassword";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 const Register = () => {
-
   const [showPassword, setShowPassword] = useState(false);
 
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
-      email: '',
-      full_name: '',
-      password: '',
+      email: "",
+      full_name: "",
+      password: "",
     },
     validationSchema: Yup.object({
-
-      email: Yup
-        .string()
-        .email(
-          'Must be a valid email')
+      email: Yup.string()
+        .email("Must be a valid email")
         .max(50)
-        .required('Email is required')
-        .matches(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[kgkite]+(?:\.[ac.in]+)*$/, 'Use your college email only!'),
+        .required("Email is required")
+        .matches(
+          /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[kgkite]+(?:\.[ac.in]+)*$/,
+          "Use your college email only!"
+        ),
 
-      full_name: Yup
-        .string()
-        .max(50)
-        .required('First name is required'),
+      full_name: Yup.string().max(50).required("First name is required"),
 
-      password: Yup
-        .string()
+      password: Yup.string()
         .max(16)
-        .required('Password is required')
+        .required("Password is required")
         .matches(
           /^(?=.*[A-Za-z0-9])(?=.*\d)(?=.*[-_+=,.@$!%*#?&])[A-Za-z0-9\d-_+=,.@$!%*#?&]{8,}$/,
           "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
         ),
     }),
 
-    onSubmit: values => {
-      console.log(JSON.stringify({ ...values, role: "student" }))
-
-      api.post(
-        `users/`, { ...values, role: "student" })
-        .then(res => {
-          console.log(res);
-          console.log(res.data);
-          router.push('/verify');
-        })
-    }
+    onSubmit: (values) => {
+      api.post("users/", { ...values, role: "student" }).then((res) => {
+        router.push("/verify");
+      });
+    },
   });
 
   return (
     <>
       <Head>
-        <title>
-          Register | KGXperience
-        </title>
+        <title>Register | KGXperience</title>
       </Head>
 
       <Box
         component="main"
         sx={{
-          alignItems: 'center',
-          display: 'flex',
+          alignItems: "center",
+          display: "flex",
           flexGrow: 1,
-          minHeight: '100%'
+          minHeight: "100%",
         }}
       >
         <Container maxWidth="sm">
-          <NextLink
-            href="/"
-            passHref
-          >
-            <Button
-              component="a"
-              startIcon={<ArrowBackIcon fontSize="small" />}
-            >
+          <NextLink href="/" passHref>
+            <Button component="a" startIcon={<ArrowBackIcon fontSize="small" />}>
               Dashboard
             </Button>
           </NextLink>
 
           <form onSubmit={formik.handleSubmit}>
             <Box sx={{ my: 3 }}>
-              <Typography
-                color="textPrimary"
-                variant="h4"
-              >
+              <Typography color="textPrimary" variant="h4">
                 Create a new account
               </Typography>
-              <Typography
-                color="textSecondary"
-                gutterBottom
-                variant="body2"
-              >
+              <Typography color="textSecondary" gutterBottom variant="body2">
                 Use your email to create a new account
               </Typography>
             </Box>
@@ -148,19 +122,17 @@ const Register = () => {
             <TextField
               fullWidth
               // autoComplete="current-password"
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword ? "text" : "password"}
               label="Password"
-              {...formik.getFieldProps('password')}
+              {...formik.getFieldProps("password")}
               sx={{
                 // marginBottom: 2,
-                marginTop: 2
+                marginTop: 2,
               }}
-
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <IconButton edge="end"
-                      onClick={() => setShowPassword((prev) => !prev)}>
+                    <IconButton edge="end" onClick={() => setShowPassword((prev) => !prev)}>
                       <ShowHidePassword />
                     </IconButton>
                   </InputAdornment>
@@ -172,16 +144,14 @@ const Register = () => {
 
             <Box
               sx={{
-                alignItems: 'center',
-                display: 'flex',
-                ml: -1
+                alignItems: "center",
+                display: "flex",
+                ml: -1,
               }}
-            >
-            </Box>
+            ></Box>
 
             <Box sx={{ py: 2 }}>
               <LoadingButton
-
                 loading={formik.isSubmitting}
                 loadingPosition="center"
                 color="primary"
@@ -194,20 +164,10 @@ const Register = () => {
                 Sign Up Now
               </LoadingButton>
             </Box>
-            <Typography
-              color="textSecondary"
-              variant="body2"
-            >
-              Have an account?
-              {' '}
-              <NextLink
-                href="/login"
-                passHref
-              >
-                <Link
-                  variant="subtitle2"
-                  underline="hover"
-                >
+            <Typography color="textSecondary" variant="body2">
+              Have an account?{" "}
+              <NextLink href="/login" passHref>
+                <Link variant="subtitle2" underline="hover">
                   Sign In
                 </Link>
               </NextLink>
@@ -215,8 +175,6 @@ const Register = () => {
           </form>
         </Container>
       </Box>
-
-
     </>
   );
 };

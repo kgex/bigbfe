@@ -1,32 +1,32 @@
 import Head from "next/head";
 import { Box, Container } from "@mui/material";
-import { StudentListResults } from "../components/student/students-list-results";
+import { AttendanceListResults } from "../components/attendance/attendance-list";
+import { ReportListToolbar } from "../components/reports/report-list-toolbar";
 import { DashboardLayout } from "../components/dashboard-layout";
+import { reports } from "../__mocks__/reports";
 import React, { useReducer, useState } from "react";
 import api from "../utils/api";
 import { useEffect } from "react";
 
-const StudentList = (props) => {
-  const [userStudents, setUserStudents] = useState([]);
+const Attendance = (props) => {
+  const [userAttendance, setUserAttendance] = useState([]);
   const [userId, setUserId] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+
     const user = localStorage.getItem("user");
     setUserId(JSON.parse(user).user_id);
 
     if (userId != null) {
       api
-        .get("/users/?skip=0&limit=200", {
+        .get("/attendance", {
           headers: {
             Authorization: `bearer ${token}`,
           },
         })
         .then((res) => {
-          setUserStudents(res.data);
-        })
-        .catch((err) => {
-          console.log("Something went wrong");
+          setUserAttendance(res.data);
         });
     }
   }, [userId]);
@@ -34,7 +34,7 @@ const StudentList = (props) => {
   return (
     <>
       <Head>
-        <title>Students | KGXperience</title>
+        <title>Attendance | KGXperience</title>
       </Head>
       <Box
         component="main"
@@ -45,7 +45,7 @@ const StudentList = (props) => {
       >
         <Container maxWidth={false}>
           <Box sx={{ mt: 3 }}>
-            <StudentListResults students={userStudents} />
+            <AttendanceListResults attendances={userAttendance} />
           </Box>
         </Container>
       </Box>
@@ -53,6 +53,6 @@ const StudentList = (props) => {
   );
 };
 
-StudentList.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
+Attendance.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
 
-export default StudentList;
+export default Attendance;
