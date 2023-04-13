@@ -227,6 +227,33 @@ const Register = () => {
         },
       ],
     },
+    {
+      clg_id: " KGiSL IIM",
+      s_name: "cas",
+      clg_name: " KGiSL IIM",
+      Department: [
+        {
+          dep_id: "201",
+          d_name: "BA Tamil",
+          clg_id: "2",
+        },
+        {
+          dep_id: "202",
+          d_name: "BA English",
+          clg_id: "2",
+        },
+        {
+          dep_id: "203",
+          d_name: "Visual Communication",
+          clg_id: "2",
+        },
+        {
+          dep_id: "204",
+          d_name: "Accounting And Finance",
+          clg_id: "2",
+        },
+      ],
+    },
   ];
 
   const [showPassword, setShowPassword] = useState(false);
@@ -365,27 +392,12 @@ const Register = () => {
                   error={Boolean(formik.touched.full_name && formik.errors.full_name)}
                   fullWidth
                   helperText={formik.touched.full_name && formik.errors.full_name}
-                  label="First Name"
+                  label="Full Name"
                   margin="normal"
                   name="full_name"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                   value={formik.values.full_name}
-                  variant="outlined"
-                />
-              </Grid>
-
-              <Grid item xs={6}>
-                <TextField
-                  error={Boolean(formik.touched.phone_no && formik.errors.phone_no)}
-                  fullWidth
-                  helperText={formik.touched.phone_no && formik.errors.phone_no}
-                  label="Mobile No."
-                  margin="normal"
-                  name="phone_no"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  value={formik.values.phone_no}
                   variant="outlined"
                 />
               </Grid>
@@ -400,7 +412,21 @@ const Register = () => {
                   name="register_num"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
-                  value={formik.values.register_num}
+                  value={formik.values.register_num.toUpperCase()}
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  error={Boolean(formik.touched.phone_no && formik.errors.phone_no)}
+                  fullWidth
+                  helperText={formik.touched.phone_no && formik.errors.phone_no}
+                  label="Mobile No."
+                  margin="normal"
+                  name="phone_no"
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.phone_no}
                   variant="outlined"
                 />
               </Grid>
