@@ -365,7 +365,7 @@ const Register = () => {
                   error={Boolean(formik.touched.full_name && formik.errors.full_name)}
                   fullWidth
                   helperText={formik.touched.full_name && formik.errors.full_name}
-                  label="First Name"
+                  label="Full Name"
                   margin="normal"
                   name="full_name"
                   onBlur={formik.handleBlur}
@@ -386,21 +386,6 @@ const Register = () => {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                   value={formik.values.phone_no}
-                  variant="outlined"
-                />
-              </Grid>
-
-              <Grid item xs={6}>
-                <TextField
-                  error={Boolean(formik.touched.register_num && formik.errors.register_num)}
-                  fullWidth
-                  helperText={formik.touched.register_num && formik.errors.register_num}
-                  label="Roll No."
-                  margin="normal"
-                  name="register_num"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  value={formik.values.register_num}
                   variant="outlined"
                 />
               </Grid>
