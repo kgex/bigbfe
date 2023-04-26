@@ -227,6 +227,33 @@ const Register = () => {
         },
       ],
     },
+    {
+      clg_id: " KGiSL IIM",
+      s_name: "cas",
+      clg_name: " KGiSL IIM",
+      Department: [
+        {
+          dep_id: "201",
+          d_name: "BA Tamil",
+          clg_id: "2",
+        },
+        {
+          dep_id: "202",
+          d_name: "BA English",
+          clg_id: "2",
+        },
+        {
+          dep_id: "203",
+          d_name: "Visual Communication",
+          clg_id: "2",
+        },
+        {
+          dep_id: "204",
+          d_name: "Accounting And Finance",
+          clg_id: "2",
+        },
+      ],
+    },
   ];
 
   const [showPassword, setShowPassword] = useState(false);
@@ -375,6 +402,20 @@ const Register = () => {
                 />
               </Grid>
 
+              <Grid item xs={6}>
+                <TextField
+                  error={Boolean(formik.touched.register_num && formik.errors.register_num)}
+                  fullWidth
+                  helperText={formik.touched.register_num && formik.errors.register_num}
+                  label="Roll No."
+                  margin="normal"
+                  name="register_num"
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.register_num.toUpperCase()}
+                  variant="outlined"
+                />
+              </Grid>
               <Grid item xs={6}>
                 <TextField
                   error={Boolean(formik.touched.phone_no && formik.errors.phone_no)}
