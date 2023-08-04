@@ -12,64 +12,35 @@ import {
   InputLabel,
   Select,
   MenuItem,
+} from "@mui/material";
+import Stack from "@mui/material/Stack";
 
-} from '@mui/material';
-import Stack from '@mui/material/Stack';
-
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 export const UserProjects = (props) => {
-
   const [id, setId] = useState("");
-  // const [error, setError] = React.useState(false);
-  console.log(id)
 
   const formik = useFormik({
     initialValues: {
-      name: '',
-      domain_name: '',
-      project_status: '',
-      start_time: '',
-      stop_time: '',
-      description: '',
-
+      name: "",
+      domain_name: "",
+      project_status: "",
+      start_time: "",
+      stop_time: "",
+      description: "",
     },
     validationSchema: Yup.object({
-      name: Yup
-        .string()
-        .max(255)
-        .required(
-          'Name is required'),
-      project_status: Yup
-        .string()
-        .max(255)
-        .required(
-          'Project Status is required'),
-      start_time: Yup
-        .string()
-        .max(255)
-        .required(
-          'Start Time is required'),
-      stop_time: Yup
-        .string()
-        .max(255)
-        .required(
-          'Stop Time is required'),
-      description: Yup
-        .string()
-        .max(500)
-        .required(
-          'Description is required'),
+      name: Yup.string().max(255).required("Name is required"),
+      project_status: Yup.string().max(255).required("Project Status is required"),
+      start_time: Yup.string().max(255).required("Start Time is required"),
+      stop_time: Yup.string().max(255).required("Stop Time is required"),
+      description: Yup.string().max(500).required("Description is required"),
     }),
 
-
-    onSubmit: values => {
-      //console.log(JSON.stringify(values))
-      console.log(values)
+    onSubmit: (values) => {
       props.getData(values);
-
-    }
+    },
   });
 
   const domain_name = [
@@ -78,42 +49,31 @@ export const UserProjects = (props) => {
     //   label: 'Select Your Domain'
     // },
     {
-      value: 'android',
-      label: 'Android Development'
+      value: "android",
+      label: "Android Development",
     },
     {
-      value: 'ai',
-      label: 'Artificial Intelligence'
+      value: "ai",
+      label: "Artificial Intelligence",
     },
     {
-      value: 'webdevelopment',
-      label: 'Web Development'
+      value: "webdevelopment",
+      label: "Web Development",
     },
     {
-      value: 'iot',
-      label: 'IoT'
-    }
+      value: "iot",
+      label: "IoT",
+    },
   ];
   // <form onSubmit={formik.handleSubmit}>
   return (
-    <form
-      onSubmit={formik.handleSubmit}>
-
+    <form onSubmit={formik.handleSubmit}>
       <Card>
-        <CardHeader
-          title="Project"
-        />
+        <CardHeader title="Project" />
         <Divider />
         <CardContent>
-          <Grid
-            container
-            spacing={3}
-          >
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+          <Grid container spacing={3}>
+            <Grid item md={6} xs={12}>
               <TextField
                 error={Boolean(formik.touched.name && formik.errors.name)}
                 fullWidth
@@ -125,14 +85,9 @@ export const UserProjects = (props) => {
                 value={formik.values.name}
                 variant="outlined"
               />
-
             </Grid>
 
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <TextField
                 defaultValue="Select Your Domain"
                 error={Boolean(formik.touched.domain_name && formik.errors.domain_name)}
@@ -148,22 +103,14 @@ export const UserProjects = (props) => {
                 variant="outlined"
               >
                 {domain_name.map((option) => (
-                  <option
-                    key={option.value}
-                    value={option.value}
-                  >
+                  <option key={option.value} value={option.value}>
                     {option.label}
                   </option>
                 ))}
               </TextField>
-
             </Grid>
 
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <TextField
                 error={Boolean(formik.touched.project_status && formik.errors.project_status)}
                 fullWidth
@@ -175,16 +122,10 @@ export const UserProjects = (props) => {
                 value={formik.values.project_status}
                 variant="outlined"
               />
-
             </Grid>
 
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <Stack noValidate
-                spacing={3}>
+            <Grid item md={6} xs={12}>
+              <Stack noValidate spacing={3}>
                 <TextField
                   error={Boolean(formik.touched.start_time && formik.errors.start_time)}
                   fullWidth
@@ -201,15 +142,9 @@ export const UserProjects = (props) => {
                   }}
                 />
               </Stack>
-
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <Stack noValidate
-                spacing={3}>
+            <Grid item md={6} xs={12}>
+              <Stack noValidate spacing={3}>
                 <TextField
                   error={Boolean(formik.touched.stop_time && formik.errors.stop_time)}
                   fullWidth
@@ -226,23 +161,19 @@ export const UserProjects = (props) => {
                   }}
                 />
               </Stack>
-
             </Grid>
           </Grid>
-          <Grid
-            container
-            spacing={0}
-            item
-          >
+          <Grid container spacing={0} item>
             <Box
               sx={{
                 margin: 0,
                 marginTop: 3,
-                width: '100%',
-                maxWidth: '100%',
+                width: "100%",
+                maxWidth: "100%",
               }}
             >
-              <TextField style={{ width: "100%" }}
+              <TextField
+                style={{ width: "100%" }}
                 error={Boolean(formik.touched.description && formik.errors.description)}
                 fullWidth
                 helperText={formik.touched.description && formik.errors.description}
@@ -258,15 +189,14 @@ export const UserProjects = (props) => {
               />
             </Box>
           </Grid>
-
         </CardContent>
 
         <Divider />
         <Box
           sx={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            p: 2
+            display: "flex",
+            justifyContent: "flex-end",
+            p: 2,
           }}
         >
           <Button

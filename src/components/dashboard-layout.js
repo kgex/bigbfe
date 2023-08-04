@@ -24,7 +24,6 @@ export const DashboardLayout = (props) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     setToken(token);
-    console.log("im here")
 
     if (token == null) {
       router.push('/');

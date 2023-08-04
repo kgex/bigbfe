@@ -1,47 +1,82 @@
-import { useState } from "react";
 import Head from "next/head";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Box, Button, Container, Link, TextField, Typography, LoadingButton } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  Link,
+  TextField,
+  Typography,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import api from "../utils/api";
+import qs from "qs";
+import { useState } from "react";
+import LoadingButton from "@mui/lab/LoadingButton";
+// import CustomAlert from "src/components/custom-alert";
 
-const Register = () => {
+const Verify = () => {
   const router = useRouter();
+
+  const resendOTP = (email) => {
+    api
+      .post("/resend-otp", null, { params: { user_email: email } })
+      .then((res) => {
+        alert("OTP Sent Successfully");
+      })
+      .catch((err) => {
+        alert("Error sending otp. contact admin");
+      });
+  };
 
   const formik = useFormik({
     initialValues: {
       email: "",
-      otp: "",
+      otp: undefined,
     },
     validationSchema: Yup.object({
-      email: Yup.string().email("Must be a valid email").max(50).required("Email is required"),
-      otp: Yup.string()
-        .max(16)
-        .required("Otp is required")
+      email: Yup.string()
+        .email("Must be a valid email")
+        .max(50)
+        .required("Email is required")
         .matches(
-          /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[kgkite]+(?:\.[ac.in]+)*$/,
+          /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[kgkite | kgcas]+(?:\.[ac.in | com]+)*$/,
           "Use your college email only!"
         ),
-      // .matches(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, 'Must be a valid email')
+
+      otp: Yup.number().min(10000).max(999999).required("OTP is required"),
     }),
 
     onSubmit: (values) => {
-      api.post(`verify?${qs.stringify(values)}`, values).then((res) => {
-        router.push("/login");
-      });
-      getData(values);
+      const data = {
+        email: values.email,
+        otp: parseInt(values.otp),
+      };
+      api
+        .post("verify", data)
+        .then((res) => {
+          router.push("/login");
+        })
+        .catch((error) => {
+          formik.resetForm();
+        });
     },
   });
 
   return (
     <>
       <Head>
-        <title>Verify | KGXperience</title>
+        <title>Login | KGXperience</title>
       </Head>
-
       <Box
         component="main"
         sx={{
@@ -52,19 +87,18 @@ const Register = () => {
         }}
       >
         <Container maxWidth="sm">
-          <NextLink href="/register" passHref>
+          <NextLink href="/login" passHref>
             <Button component="a" startIcon={<ArrowBackIcon fontSize="small" />}>
-              Register
+              Sign In
             </Button>
           </NextLink>
-
           <form onSubmit={formik.handleSubmit}>
             <Box sx={{ my: 3 }}>
               <Typography color="textPrimary" variant="h4">
-                Verify
+                Verification
               </Typography>
               <Typography color="textSecondary" gutterBottom variant="body2">
-                Use your email to verify your account
+                Check your email for OTP
               </Typography>
             </Box>
 
@@ -82,11 +116,20 @@ const Register = () => {
               variant="outlined"
             />
 
+            <Button
+              variant="contained"
+              onClick={() => {
+                resendOTP(formik.values.email);
+              }}
+            >
+              Resend OTP
+            </Button>
+
             <TextField
               error={Boolean(formik.touched.otp && formik.errors.otp)}
               fullWidth
               helperText={formik.touched.otp && formik.errors.otp}
-              label="Otp"
+              label="OTP"
               margin="normal"
               name="otp"
               onBlur={formik.handleBlur}
@@ -95,14 +138,6 @@ const Register = () => {
               value={formik.values.otp}
               variant="outlined"
             />
-
-            <Box
-              sx={{
-                alignItems: "center",
-                display: "flex",
-                ml: -1,
-              }}
-            ></Box>
 
             <Box sx={{ py: 2 }}>
               <LoadingButton
@@ -115,18 +150,9 @@ const Register = () => {
                 loading={formik.isSubmitting}
                 loadingPosition="center"
               >
-                Submit
+                Verify
               </LoadingButton>
             </Box>
-
-            <Typography color="textSecondary" variant="body2">
-              Have an account?
-              <NextLink href="/login" passHref>
-                <Link variant="subtitle2" underline="hover">
-                  Sign In
-                </Link>
-              </NextLink>
-            </Typography>
           </form>
         </Container>
       </Box>
@@ -134,4 +160,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Verify;

@@ -1,14 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from "react";
 import { IconButton } from "@mui/material";
 import React from "react";
-import PerfectScrollbar from 'react-perfect-scrollbar';
-import PropTypes from 'prop-types';
-import { format } from 'date-fns';
+import PerfectScrollbar from "react-perfect-scrollbar";
+import PropTypes from "prop-types";
+import { format } from "date-fns";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { Search as SearchIcon } from "../../icons/search";
+import { Upload as UploadIcon } from "../../icons/upload";
+import { Download as DownloadIcon } from "../../icons/download";
+import router from "next/router";
+
 import {
   Avatar,
   Box,
+  Button,
   Card,
   Checkbox,
   Table,
@@ -19,8 +25,13 @@ import {
   TableRow,
   Typography,
   Collapse,
-  Paper
-} from '@mui/material';
+  Paper,
+  CardContent,
+  TextField,
+  InputAdornment,
+  SvgIcon,
+} from "@mui/material";
+import { SeverityPill } from "../severity-pill";
 
 function Row(props) {
   const { row } = props;
@@ -28,21 +39,25 @@ function Row(props) {
 
   return (
     <React.Fragment>
-
-
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-
-
+      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+        <TableCell align="center">{row.id}</TableCell>
         <TableCell align="center">{row.full_name}</TableCell>
-        <TableCell align="center">{row.title}</TableCell>
-        <TableCell align="center">{row.start_time}</TableCell>
-        <TableCell align="center">{row.stop_time}</TableCell>
+        <TableCell align="center">{row.register_num}</TableCell>
+        <TableCell align="center">{row.email}</TableCell>
+        <TableCell align="center">{row.rfid_key}</TableCell>
+        <TableCell align="center">{row.college}</TableCell>
+        <TableCell align="center">{row.dept}</TableCell>
+        {/* <TableCell align="center">{row.join_year}</TableCell>
+        <TableCell align="center">{row.grad_year}</TableCell>
+        <TableCell align="center">{row.gender}</TableCell> */}
+        <TableCell>
+          <SeverityPill color={row.is_active ? "success" : "error"}>
+            {row.is_active ? "Active" : "Not Activated"}
+          </SeverityPill>
+        </TableCell>
+
         <TableCell align="center">
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => setOpen(!open)}
-          >
+          <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
@@ -55,145 +70,140 @@ function Row(props) {
               <Typography variant="h6" gutterBottom component="div">
                 {row.description}
               </Typography>
-
             </Box>
           </Collapse>
         </TableCell>
       </TableRow>
-
     </React.Fragment>
   );
 }
 
-
 export const StudentListResults = ({ students, ...rest }) => {
-  const [open, setOpen] = useState(false);
-
-  students.map(item => {
-    console.log(item.title)
-  })
-
-  const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
-  const [limit, setLimit] = useState(10);
+  const [searched, setSearched] = useState("");
+  const [rows, setRows] = useState(students);
+  const [limit, setLimit] = useState(200);
   const [page, setPage] = useState(0);
 
-  // const handleSelectAll = (event) => {
-  //   let newSelectedCustomerIds;
-
-  //   if (event.target.checked) {
-  //     newSelectedCustomerIds = customers.map((customer) => customer.id);
-  //   } else {
-  //     newSelectedCustomerIds = [];
-  //   }
-
-  //   setSelectedCustomerIds(newSelectedCustomerIds);
-  // };
-
-  // const handleSelectOne = (event, id) => {
-  //   const selectedIndex = selectedCustomerIds.indexOf(id);
-  //   let newSelectedCustomerIds = [];
-
-  //   if (selectedIndex === -1) {
-  //     newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds, id);
-  //   } else if (selectedIndex === 0) {
-  //     newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds.slice(1));
-  //   } else if (selectedIndex === selectedCustomerIds.length - 1) {
-  //     newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds.slice(0, -1));
-  //   } else if (selectedIndex > 0) {
-  //     newSelectedCustomerIds = newSelectedCustomerIds.concat(
-  //       selectedCustomerIds.slice(0, selectedIndex),
-  //       selectedCustomerIds.slice(selectedIndex + 1)
-  //     );
-  //   }
-
-  //   setSelectedCustomerIds(newSelectedCustomerIds);
-  // };
-
-  const handleLimitChange = (event) => {
-    setLimit(event.target.value);
+  const onClickHandle = (e) => {
+    router.push("/student");
   };
 
-  const handlePageChange = (event, newPage) => {
-    setPage(newPage);
+  const requestSearch = (searchedVal) => {
+    const filteredRows = students.filter((row) => {
+      return row.full_name.toLowerCase().includes(searchedVal.toLowerCase());
+    });
+    setRows(filteredRows);
   };
 
+  const cancelSearch = () => {
+    setSearched("");
+    requestSearch(searched);
+  };
+
+  useEffect(() => {
+    setRows(students);
+  }, [students]);
 
   return (
-    <Card {...rest}
-      style={
-        {
-          overflowX: "auto"
-        }
+    <>
+      <Box>
+        <Box
+          sx={{
+            alignItems: "center",
+            display: "flex",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            m: -1,
+          }}
+        >
+          <Typography sx={{ m: 1 }} variant="h4">
+            Students
+          </Typography>
+          <Box sx={{ m: 1 }}>
+            <Button startIcon={<UploadIcon fontSize="small" />} sx={{ mr: 1 }}>
+              Import
+            </Button>
+            <Button startIcon={<DownloadIcon fontSize="small" />} sx={{ mr: 1 }}>
+              Export
+            </Button>
 
-      }
-    >
-      <PerfectScrollbar>
-        <Paper className={students.root}>
-          <Box sx={{ minWidth: 1050 }}>
-
-            <Table>
-              <TableHead>
-                <TableRow>
-                  {/* <TableCell padding="checkbox">
-                  <Checkbox
-                    checked={selectedCustomerIds.length === customers.length}
-                    color="primary"
-                    indeterminate={
-                      selectedCustomerIds.length > 0
-                      && selectedCustomerIds.length < customers.length
-                    }
-                    onChange={handleSelectAll}
-                  />
-                </TableCell> */}
-                  <TableCell align="center">
-                    Type
-                  </TableCell>
-                  <TableCell align="center">
-                    Title
-                  </TableCell>
-                  <TableCell align="center">
-                    Start Time
-                  </TableCell>
-                  <TableCell align="center">
-                    Stop Time
-                  </TableCell>
-                  <TableCell align="center">
-                    Description
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-
-              <TableBody>
-                {students.slice(0, limit).map((item, index) => (
-
-                  <Row key={index} row={item} />
-
-                ))}
-
-              </TableBody>
-            </Table>
-
-            <TablePagination
-              style={{
-
-              }}
-              component="div"
-              count={students.length}
-              onPageChange={handlePageChange}
-              onRowsPerPageChange={handleLimitChange}
-              page={page}
-              rowsPerPage={limit}
-              rowsPerPageOptions={[5, 10, 25]}
-            />
+            <Button color="primary" variant="contained" onClick={onClickHandle}>
+              Add Students
+            </Button>
           </Box>
-        </Paper>
+        </Box>
+        <Box sx={{ mt: 3 }}>
+          <Card>
+            <CardContent>
+              <Box sx={{ maxWidth: 500 }}>
+                <TextField
+                  fullWidth
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SvgIcon color="action" fontSize="small">
+                          <SearchIcon />
+                        </SvgIcon>
+                      </InputAdornment>
+                    ),
+                  }}
+                  placeholder="Search student"
+                  variant="outlined"
+                  value={searched}
+                  onChange={(e) => {
+                    setSearched(e.target.value);
+                    requestSearch(e.target.value);
+                  }}
+                />
+              </Box>
+            </CardContent>
+          </Card>
+        </Box>
+      </Box>
 
-      </PerfectScrollbar>
-    </Card>
+      <Card
+        {...rest}
+        style={{
+          overflowX: "auto",
+        }}
+      >
+        <PerfectScrollbar>
+          <Paper className={students.root}>
+            <Box sx={{ minWidth: 1050 }}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="center">User Id</TableCell>
+                    <TableCell align="center">Full Name</TableCell>
+                    <TableCell align="center">Register Number</TableCell>
+                    <TableCell align="center">Email</TableCell>
+                    <TableCell align="center">RFID Key</TableCell>
+                    <TableCell align="center">College</TableCell>
+                    <TableCell align="center">Department</TableCell>
+                    {/* <TableCell align="center">
+                      Join Year
+                    </TableCell>
+                    <TableCell align="center">
+                      Grad Year
+                    </TableCell>
+                    <TableCell align="center">
+                      Gender
+                    </TableCell> */}
+                    <TableCell align="center">Active</TableCell>
+                    <TableCell align="center">More</TableCell>
+                  </TableRow>
+                </TableHead>
+
+                <TableBody>
+                  {rows.slice(0, limit).map((item, index) => (
+                    <Row key={index} row={item} />
+                  ))}
+                </TableBody>
+              </Table>
+            </Box>
+          </Paper>
+        </PerfectScrollbar>
+      </Card>
+    </>
   );
 };
-
-// CustomerListResults.propTypes = {
-//   customers: PropTypes.array.isRequired
-// };
-

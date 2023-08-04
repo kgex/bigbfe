@@ -21,18 +21,23 @@ import {
   Collapse,
   Paper,
 } from "@mui/material";
+import { Button, CardContent, TextField, InputAdornment, SvgIcon } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
+import { Search as SearchIcon } from "../../icons/search";
 
-function Row(props) {
+function CustomRow(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
 
   return (
     <React.Fragment>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
-        <TableCell align="center">{row.task_type}</TableCell>
-        <TableCell align="center">{row.title}</TableCell>
-        <TableCell align="center">{row.start_time}</TableCell>
-        <TableCell align="center">{row.stop_time}</TableCell>
+        <TableCell align="center">{row.name}</TableCell>
+        <TableCell align="center">{row.attendance.in_time}</TableCell>
+        <TableCell align="center">{row.attendance.out_time}</TableCell>
+        <TableCell align="center">{row.attendance.user_id}</TableCell>
         <TableCell align="center">
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
@@ -55,44 +60,12 @@ function Row(props) {
   );
 }
 
-export const ReportListResults = ({ reports, ...rest }) => {
+export const AttendanceListResults = ({ attendances, ...rest }) => {
   const [open, setOpen] = useState(false);
 
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
-
-  // const handleSelectAll = (event) => {
-  //   let newSelectedCustomerIds;
-
-  //   if (event.target.checked) {
-  //     newSelectedCustomerIds = customers.map((customer) => customer.id);
-  //   } else {
-  //     newSelectedCustomerIds = [];
-  //   }
-
-  //   setSelectedCustomerIds(newSelectedCustomerIds);
-  // };
-
-  // const handleSelectOne = (event, id) => {
-  //   const selectedIndex = selectedCustomerIds.indexOf(id);
-  //   let newSelectedCustomerIds = [];
-
-  //   if (selectedIndex === -1) {
-  //     newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds, id);
-  //   } else if (selectedIndex === 0) {
-  //     newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds.slice(1));
-  //   } else if (selectedIndex === selectedCustomerIds.length - 1) {
-  //     newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds.slice(0, -1));
-  //   } else if (selectedIndex > 0) {
-  //     newSelectedCustomerIds = newSelectedCustomerIds.concat(
-  //       selectedCustomerIds.slice(0, selectedIndex),
-  //       selectedCustomerIds.slice(selectedIndex + 1)
-  //     );
-  //   }
-
-  //   setSelectedCustomerIds(newSelectedCustomerIds);
-  // };
 
   const handleLimitChange = (event) => {
     setLimit(event.target.value);
@@ -102,6 +75,10 @@ export const ReportListResults = ({ reports, ...rest }) => {
     setPage(newPage);
   };
 
+  const onClickHandle = (e) => {
+    router.push("/report");
+  };
+
   return (
     <Card
       {...rest}
@@ -109,8 +86,46 @@ export const ReportListResults = ({ reports, ...rest }) => {
         overflowX: "auto",
       }}
     >
+      <Box>
+        <Box
+          sx={{
+            alignItems: "center",
+            display: "flex",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            m: -1,
+          }}
+        >
+          <Typography sx={{ m: 1 }} variant="h4">
+            Attendance
+          </Typography>
+        </Box>
+
+        <Box sx={{ mt: 3 }}>
+          <Card>
+            <CardContent>
+              <Box sx={{ maxWidth: 500 }}>
+                <TextField
+                  fullWidth
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SvgIcon color="action" fontSize="small">
+                          <SearchIcon />
+                        </SvgIcon>
+                      </InputAdornment>
+                    ),
+                  }}
+                  placeholder="Search report"
+                  variant="outlined"
+                />
+              </Box>
+            </CardContent>
+          </Card>
+        </Box>
+      </Box>
       <PerfectScrollbar>
-        <Paper className={reports.root}>
+        <Paper className={attendances.root}>
           <Box sx={{ minWidth: 1050 }}>
             <Table>
               <TableHead>
@@ -135,8 +150,8 @@ export const ReportListResults = ({ reports, ...rest }) => {
               </TableHead>
 
               <TableBody>
-                {reports.slice(0, limit).map((item, index) => (
-                  <Row key={index} row={item} />
+                {attendances.slice(0, limit).map((item, index) => (
+                  <CustomRow key={index} row={item} />
                 ))}
               </TableBody>
             </Table>
@@ -144,7 +159,7 @@ export const ReportListResults = ({ reports, ...rest }) => {
             <TablePagination
               style={{}}
               component="div"
-              count={reports.length}
+              count={attendances.length}
               onPageChange={handlePageChange}
               onRowsPerPageChange={handleLimitChange}
               page={page}

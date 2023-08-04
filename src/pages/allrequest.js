@@ -1,15 +1,15 @@
 import Head from "next/head";
 import { Box, Container } from "@mui/material";
-import { AllReportListToolbar } from "../components/allreports/all-report-list-toolbar";
-import { AllReportList } from "../components/allreports/report-all-list";
+import { AllRequestListToolbar } from "../components/inventory/all-request-list-toolbar";
+import { AllRequestList } from "../components/inventory/request-all-list";
 import { DashboardLayout } from "../components/dashboard-layout";
-import { reports } from "../__mocks__/reports";
+import { request } from "../__mocks__/request";
 import React, { useReducer, useState } from "react";
 import api from "../utils/api";
 import { useEffect } from "react";
 
-const AllReports = (props) => {
-  const [userReports, setUserReports] = useState([]);
+const Allrequest = (props) => {
+  const [userrequest, setUserrequest] = useState([]);
   const [userId, setUserId] = useState(null);
 
   // useEffect (() => {
@@ -23,11 +23,11 @@ const AllReports = (props) => {
 
   //   if(userId != null){
   //     api.get(
-  //       `userprojects copys/${userId}/reports`, {headers: {
+  //       `userprojects copys/${userId}/request`, {headers: {
   //         'Authorization': `bearer ${token}`
   //       }})
   //         .then(res => {
-  //         setUserReports(res.data);
+  //         setUserrequest(res.data);
   //     })
   //   }
 
@@ -36,7 +36,7 @@ const AllReports = (props) => {
   return (
     <>
       <Head>
-        <title>Reports | KGXperience</title>
+        <title>Request | KGXperience</title>
       </Head>
       <Box
         component="main"
@@ -46,9 +46,9 @@ const AllReports = (props) => {
         }}
       >
         <Container maxWidth={false}>
-          <AllReportListToolbar />
+          <AllRequestListToolbar />
           <Box sx={{ mt: 3 }}>
-            <AllReportList reports={reports} />
+            <AllRequestList request={request} />
           </Box>
         </Container>
       </Box>
@@ -56,6 +56,6 @@ const AllReports = (props) => {
   );
 };
 
-AllReports.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
+Allrequest.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
 
-export default AllReports;
+export default Allrequest;

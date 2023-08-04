@@ -8,20 +8,14 @@ import {
   SvgIcon,
   Typography,
 } from "@mui/material";
-
+import { Search as SearchIcon } from "../../icons/search";
 import { Upload as UploadIcon } from "../../icons/upload";
 import { Download as DownloadIcon } from "../../icons/download";
-import { Search as SearchIcon } from "../../icons/search";
-
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import AddIcon from "@mui/icons-material/Add";
-
 import router from "next/router";
 
-export const ReportListToolbar = (props) => {
+export const AllRequestListToolbar = (props) => {
   function onClickHandle(e) {
-    router.push("/report");
+    router.push("/allrequest");
   }
 
   return (
@@ -36,49 +30,14 @@ export const ReportListToolbar = (props) => {
         }}
       >
         <Typography sx={{ m: 1 }} variant="h4">
-          Reports
+          All Request
         </Typography>
         <Box sx={{ m: 1 }}>
-          {/* <Button
-          startIcon={(<UploadIcon fontSize="small" />)}
-          sx={{ mr: 1 }}
-        >
-          Import
-        </Button>
-        <Button
-          startIcon={(<DownloadIcon fontSize="small" />)}
-          sx={{ mr: 1 }}
-        >
-          Export
-        </Button> */}
-
-          <Button
-            // color="primary"
-            // variant="contained"
-            onClick={onClickHandle}
-            startIcon={<EditIcon fontSize="small" />}
-            sx={{ mr: 1 }}
-          >
-            Edit
+          <Button startIcon={<UploadIcon fontSize="small" />} sx={{ mr: 1 }}>
+            Import
           </Button>
-
-          <Button
-            // color="primary"
-            // variant="outlined"
-            onClick={onClickHandle}
-            startIcon={<DeleteIcon fontSize="small" />}
-            sx={{ mr: 1 }}
-          >
-            Delete
-          </Button>
-
-          <Button
-            color="primary"
-            variant="contained"
-            onClick={onClickHandle}
-            startIcon={<AddIcon fontSize="small" />}
-          >
-            Add Reports
+          <Button startIcon={<DownloadIcon fontSize="small" />} sx={{ mr: 1 }}>
+            Export
           </Button>
         </Box>
       </Box>
