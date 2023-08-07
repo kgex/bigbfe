@@ -41,7 +41,7 @@ const Verify = () => {
   const formik = useFormik({
     initialValues: {
       email: "",
-      otp: undefined,
+      otp: "",
     },
     validationSchema: Yup.object({
       email: Yup.string()
