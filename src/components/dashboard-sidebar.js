@@ -53,9 +53,9 @@ export const DashboardSidebar = (props) => {
         <div>
           <Box sx={{ p: 3 }}>
             <NextLink href="/" passHref>
-              <a>
+              
                 <img alt="Go to pro" src="/static/images/kgx.png" width="170" />
-              </a>
+              
             </NextLink>
           </Box>
           <Box sx={{ px: 2 }}>

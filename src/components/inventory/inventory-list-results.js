@@ -1,154 +1,56 @@
-import { useState } from 'react';
-import {IconButton} from "@mui/material";
-import React from "react";
-import PerfectScrollbar from 'react-perfect-scrollbar';
-import PropTypes from 'prop-types';
-import { format } from 'date-fns';
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import {
-  Avatar,
-  Box,
-  Card,
-  Checkbox,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TablePagination,
-  TableRow,
-  Typography,
-  Collapse,
-  Paper
-} from '@mui/material';
+import React, { useState } from 'react';
+import { Table, TableHead, TableBody, TableRow, TableCell, Paper, Button, Collapse } from '@mui/material';
 
-function Row(props) {
-  const { row } = props;
-  const [open, setOpen] = React.useState(false);
+export const MyTable = () => {
+  const [showTableBody, setShowTableBody] = useState(true);
 
-  return (
-    <React.Fragment>
-       
-    
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-      
-      
-        <TableCell align="center">{}</TableCell>
-        <TableCell align="center">{}</TableCell>
-        <TableCell align="center">{}</TableCell>
-        <TableCell align="center">{}</TableCell>
-        <TableCell align="center">
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-        </TableCell>
-      </TableRow>
-
-      <TableRow> 
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1 }}>
-              <Typography variant="h6" gutterBottom component="div">
-              {row.description}
-              </Typography>
-           
-            </Box>
-          </Collapse>
-        </TableCell>
-      </TableRow>
-   
-    </React.Fragment>
-  );
-}
-
-
-export const InventoryListResults = () => {
-  const [open, setOpen] = useState(false);
-
-  const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
-  const [limit, setLimit] = useState(10);
-  const [page, setPage] = useState(0);
-
-
-
-  const handleLimitChange = (event) => {
-    setLimit(event.target.value);
+  const toggleTableBody = () => {
+    setShowTableBody(!showTableBody);
   };
 
-  const handlePageChange = (event, newPage) => {
-    setPage(newPage);
-  };
+  const data = [
+    { id: 1, name: 'John Doe', age: 25 },
+    { id: 2, name: 'Jane Smith', age: 30 },
+    { id: 3, name: 'Alice Johnson', age: 28 },
+  ];
 
-  
   return (
-    <Card  
-      style={
-        {
-          overflowX:"auto"
-        }
-
-      }
-    >
-      <PerfectScrollbar>
-      <Paper>
-      <Box sx={{ minWidth: 1050 }}>
-      
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell align="center">
-                  Type
-                </TableCell>
-                <TableCell align="center">
-                  Title
-                </TableCell>
-                <TableCell align="center">
-                  Start Time
-                </TableCell>
-                <TableCell align="center">
-                  Stop Time
-                </TableCell>
-                <TableCell align="center">
-                Description
-                </TableCell>
-              </TableRow>
-            </TableHead>
-
-            <TableBody>
-              {/* {reports.slice(0, limit).map((item, index) => (     
-
-                <Row key={index} row={item} />
-
-              ))} */}
-              
-            </TableBody>
-          </Table>
-           
-      <TablePagination
-        style={{
-         
-        }}
-        component="div"
-        // count={}
-        onPageChange={handlePageChange}
-        onRowsPerPageChange={handleLimitChange}
-        page={page}
-        rowsPerPage={limit}
-        rowsPerPageOptions={[5, 10, 25]}
-      />
-        </Box>
-        </Paper>
-    
-       </PerfectScrollbar>
-    </Card>
+    <Paper>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>ID</TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell>Age</TableCell>
+            <TableCell>
+              <Button variant="contained" color="primary" onClick={toggleTableBody}>
+                {showTableBody ? 'Hide' : 'Show'}
+              </Button>
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          <TableRow>
+            <TableCell colSpan={4}>
+              <Collapse in={showTableBody} timeout="auto" unmountOnExit>
+                <Table>
+                  <TableBody>
+                    {data.map((row) => (
+                      <TableRow key={row.id}>
+                        <TableCell>{row.id}</TableCell>
+                        <TableCell>{row.name}</TableCell>
+                        <TableCell>{row.age}</TableCell>
+                        <TableCell>{/* Content for the fourth column */}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </Collapse>
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </Paper>
   );
 };
-
-// CustomerListResults.propTypes = {
-//   customers: PropTypes.array.isRequired
-// };
 

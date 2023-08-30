@@ -1,0 +1,12 @@
+.table-body {
+    max-height: 1000px; /* Adjust this value as needed */
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+  }
+  
+  .table-body-hidden {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+  }
+  

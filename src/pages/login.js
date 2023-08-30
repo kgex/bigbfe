@@ -68,11 +68,11 @@ const Login = () => {
       username: Yup.string()
         .email("Must be a valid email")
         .max(50)
-        .required("Email is required")
-        .matches(
-          /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[kgkite | kgcas]+(?:\.[ac.in | com]+)*$/,
-          "Use your college email only!"
-        ),
+        .required("Email is required"),
+        // .matches(
+        //   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[kgkite | kgcas]+(?:\.[ac.in | com]+)*$/,
+        //   "Use your college email only!"
+        // ),
       password: Yup.string().max(16).required("Password is required"),
     }),
 

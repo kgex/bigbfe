@@ -6,6 +6,9 @@ import {
   ReportListResults,
 } from "../components/inventory/inventory-list-results";
 import {
+  MyTable,
+} from "../components/inventory/manoj-inventery-list-result";
+import {
   InventoryListToolbar,
   ReportListToolbar,
 } from "../components/inventory/inventory-list-toolbar";
@@ -15,11 +18,11 @@ import api from "../utils/api";
 import { useEffect } from "react";
 
 const Inventory = (props) => {
-  const user = localStorage.getItem("user");
+  let  user = localStorage.getItem("user");
   user = JSON.parse(user);
   const [userId, setUserId] = useState(null);
 
-  const getData = (values) => {
+const getData = (values) => {
     api.post(`users/${userId}/report`, values).then((res) => {
       router.push("/reports");
     });
@@ -41,6 +44,8 @@ const Inventory = (props) => {
       >
         <Container maxWidth={false}>
           <InventoryListToolbar role={user.role} />
+          {/* <InventoryListResults row = {user}/> */}
+          <MyTable/>
           <Grid container spacing={9} sx={{ justifyContent: "center" }}>
             <Grid item xs="auto">
               <InventoryCard

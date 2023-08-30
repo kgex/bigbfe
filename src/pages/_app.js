@@ -7,6 +7,8 @@ import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { createEmotionCache } from '../utils/create-emotion-cache';
 import { theme } from '../theme';
+import './style.css'; // Import the CSS file for styling
+
 
 const clientSideEmotionCache = createEmotionCache();
 

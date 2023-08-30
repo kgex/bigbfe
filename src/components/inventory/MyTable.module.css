@@ -1,0 +1,24 @@
+/* MyTable.module.css */
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #dddddd;
+  }
+  
+  /* Common style for header and body cells */
+  .table-cell {
+    border: 5px solid #000;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .table th {
+    background-color: #f2f2f2;
+  }
+  
+  /* Align table body content to the center */
+  .table-cell {
+    text-align: center;
+  }
+  

@@ -33,19 +33,31 @@
     "dayjs": "^1.11.6",
     "formik": "^2.1.5",
     "history": "^5.0.0",
-    "next": "^12.1.6",
+    "next": "^13.4.13",
     "nprogress": "^0.2.0",
     "prop-types": "^15.7.2",
     "qs": "^6.10.3",
-    "react": "^17.0.2",
+    "react": "^18.2.0",
     "react-chartjs-2": "^3.0.4",
-    "react-dom": "^17.0.2",
+    "react-dom": "^18.2.0",
     "react-perfect-scrollbar": "^1.5.8",
+    "styled-components": "^6.0.7",
     "uuid": "^8.3.0",
     "yup": "^0.32.9"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
     "eslint-config-next": "12.0.3-canary.7"
-  }
+  },
+  "description": "[![DeepSource](https://deepsource.io/gh/kgex/bigbfe.svg/?label=active+issues&show_trend=true&token=OEfFJWTGfwy1ZmZa_2DRKcxe)](https://deepsource.io/gh/kgex/bigbfe/?ref=repository-badge)",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kgex/bigbfe.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kgex/bigbfe/issues"
+  },
+  "homepage": "https://github.com/kgex/bigbfe#readme"
 }
